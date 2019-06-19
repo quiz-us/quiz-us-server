@@ -1,4 +1,4 @@
-class RegistrationsController < Devise::RegistrationsController
+class Teachers::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
   def create
