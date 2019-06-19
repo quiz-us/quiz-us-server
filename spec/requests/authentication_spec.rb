@@ -19,7 +19,10 @@ RSpec.describe 'GET /teachers/sign_in', type: :request do
 
   context 'when params are correct' do
     before do
-      post url, params: params
+      post url, params: params.to_json, headers: {
+        ACCEPT: 'application/json',
+        CONTENT_TYPE: 'application/json'
+      }
     end
 
     it 'returns 200' do
