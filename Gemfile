@@ -27,13 +27,17 @@ gem 'puma', '~> 3.0'
 
 gem 'devise-jwt', '~> 0.5.9'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+group :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
+  gem 'rswag'
 end
 
 group :development do
