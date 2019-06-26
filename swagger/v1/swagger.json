@@ -11,7 +11,6 @@
         "tags": [
           "Teacher Sign In"
         ],
-        "operationId": "teacherSignIn",
         "consumes": [
           "application/json"
         ],
@@ -41,10 +40,10 @@
         ],
         "responses": {
           "200": {
-            "description": "success"
+            "description": "Success: User signed in"
           },
           "401": {
-            "description": "unauthorized"
+            "description": "Unauthorized: invalid sign in credentials"
           }
         }
       }
