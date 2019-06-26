@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  teacher: one
+  standards_chart: one
+
+two:
+  name: MyString
+  teacher: two
+  standards_chart: two

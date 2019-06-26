@@ -10,10 +10,108 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190613153704) do
+ActiveRecord::Schema.define(version: 20190626184757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "teacher_id"
+    t.integer  "standards_chart_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["standards_chart_id"], name: "index_courses_on_standards_chart_id", using: :btree
+    t.index ["teacher_id"], name: "index_courses_on_teacher_id", using: :btree
+  end
+
+  create_table "decks", force: :cascade do |t|
+    t.date     "release_date"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "teacher_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["teacher_id"], name: "index_decks_on_teacher_id", using: :btree
+  end
+
+  create_table "decks_questions", id: false, force: :cascade do |t|
+    t.integer "deck_id",     null: false
+    t.integer "question_id", null: false
+    t.index ["deck_id", "question_id"], name: "index_decks_questions_on_deck_id_and_question_id", using: :btree
+    t.index ["question_id", "deck_id"], name: "index_decks_questions_on_question_id_and_deck_id", using: :btree
+  end
+
+  create_table "periods", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_periods_on_course_id", using: :btree
+  end
+
+  create_table "periods_students", id: false, force: :cascade do |t|
+    t.integer "period_id",  null: false
+    t.integer "student_id", null: false
+    t.index ["period_id", "student_id"], name: "index_periods_students_on_period_id_and_student_id", using: :btree
+    t.index ["student_id", "period_id"], name: "index_periods_students_on_student_id_and_period_id", using: :btree
+  end
+
+  create_table "question_options", force: :cascade do |t|
+    t.integer  "question_id"
+    t.string   "option_text"
+    t.boolean  "correct"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_question_options_on_question_id", using: :btree
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.text     "question_text"
+    t.string   "type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "questions_standards", id: false, force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "standard_id", null: false
+    t.index ["question_id", "standard_id"], name: "index_questions_standards_on_question_id_and_standard_id", using: :btree
+    t.index ["standard_id", "question_id"], name: "index_questions_standards_on_standard_id_and_question_id", using: :btree
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "question_option_id"
+    t.text     "response_text"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["question_option_id"], name: "index_responses_on_question_option_id", using: :btree
+    t.index ["student_id"], name: "index_responses_on_student_id", using: :btree
+  end
+
+  create_table "standards", force: :cascade do |t|
+    t.integer  "standards_chart_id"
+    t.string   "text"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["standards_chart_id"], name: "index_standards_on_standards_chart_id", using: :btree
+  end
+
+  create_table "standards_charts", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "teachers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -29,4 +127,12 @@ ActiveRecord::Schema.define(version: 20190613153704) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "courses", "standards_charts"
+  add_foreign_key "courses", "teachers"
+  add_foreign_key "decks", "teachers"
+  add_foreign_key "periods", "courses"
+  add_foreign_key "question_options", "questions"
+  add_foreign_key "responses", "question_options"
+  add_foreign_key "responses", "students"
+  add_foreign_key "standards", "standards_charts"
 end

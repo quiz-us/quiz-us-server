@@ -1,0 +1,2 @@
+class StandardsChart < ApplicationRecord
+end

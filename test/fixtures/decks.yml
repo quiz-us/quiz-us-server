@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  release_date: 2019-06-26
+  name: MyString
+  description: MyString
+  teacher: one
+
+two:
+  release_date: 2019-06-26
+  name: MyString
+  description: MyString
+  teacher: two
