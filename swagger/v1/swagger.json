@@ -47,6 +47,25 @@
           }
         }
       }
+    },
+    "/teachers/sign_out": {
+      "delete": {
+        "summary": "Signs teacher out",
+        "tags": [
+          "Teacher Sign Out"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "No content returned: Teacher has been signed out"
+          }
+        }
+      }
     }
   }
 }

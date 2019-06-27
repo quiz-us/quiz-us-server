@@ -1,6 +1,5 @@
 require 'swagger_helper'
 
-
 def decoded_jwt_token_from_response(response)
   token_from_request = response.headers['Authorization'].split(' ').last
   JWT.decode(token_from_request, ENV['DEVISE_JWT_SECRET_KEY'], true)
@@ -49,10 +48,17 @@ describe 'Sessions Tests API', type: :request, swagger_doc: 'v1/swagger.json' do
         run_test!
       end
     end
+  end
+
+  path '/teachers/sign_out' do
     delete 'Signs teacher out' do
       tags 'Teacher Sign Out'
       consumes 'application/json'
       produces 'application/json'
+
+      response '204', 'No content returned: Teacher has been signed out' do
+        run_test!
+      end
     end
   end
 end
