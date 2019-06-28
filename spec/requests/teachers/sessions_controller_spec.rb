@@ -5,7 +5,7 @@ def decoded_jwt_token_from_response(response)
   JWT.decode(token_from_request, ENV['DEVISE_JWT_SECRET_KEY'], true)
 end
 
-describe 'Sessions Tests API', type: :request, swagger_doc: 'v1/swagger.json' do
+describe 'Teacher Sessions API', type: :request, swagger_doc: 'v1/swagger.json' do
   path '/teachers/sign_in' do
     let(:email) { Faker::Internet.email }
     before do
@@ -15,22 +15,27 @@ describe 'Sessions Tests API', type: :request, swagger_doc: 'v1/swagger.json' do
       tags 'Teacher Sign In'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :teacher, in: :body, schema: {
+      parameter in: :body, schema: {
         type: :object,
         properties: {
-          email: { type: :string },
-          password: { type: :string }
+          teacher: {
+            type: :object,
+            properties: {
+              email: { type: :string },
+              password: { type: :string }
+            }
+          }
         },
         required: ['email', 'password']
       }
       response '200', 'Success: User signed in' do
-        let(:teacher) { { teacher: { email: email, password: 'password' } } }
-        before do |example|
-          submit_request(example.metadata)
+        let(:params) { { teacher: { email: email, password: 'password' } } }
+        before do
+          post '/teachers/sign_in', params: params
         end
 
-        it 'returns a valid 200 response' do |example|
-          assert_response_matches_metadata(example.metadata)
+        it 'returns a valid 200 response' do
+          expect(response.status).to eq 200
         end
 
         it 'returns JTW token in authorization header' do
@@ -55,9 +60,14 @@ describe 'Sessions Tests API', type: :request, swagger_doc: 'v1/swagger.json' do
       tags 'Teacher Sign Out'
       consumes 'application/json'
       produces 'application/json'
-
       response '204', 'No content returned: Teacher has been signed out' do
-        run_test!
+        before do
+          delete '/teachers/sign_out'
+        end
+
+        it 'returns a valid 204 response' do
+          expect(response.status).to eq 204
+        end
       end
     end
   end

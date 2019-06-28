@@ -5,6 +5,53 @@
     "version": "v1"
   },
   "paths": {
+    "/teachers": {
+      "post": {
+        "summary": "Registers a new teacher",
+        "tags": [
+          "Teacher Registration"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "teacher": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/teachers/sign_in": {
       "post": {
         "summary": "Signs teacher in",
@@ -19,16 +66,20 @@
         ],
         "parameters": [
           {
-            "name": "teacher",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
+                "teacher": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
                 }
               },
               "required": [
