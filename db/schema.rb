@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190626184757) do
+ActiveRecord::Schema.define(version: 20190706180445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,19 +42,19 @@ ActiveRecord::Schema.define(version: 20190626184757) do
     t.index ["question_id", "deck_id"], name: "index_decks_questions_on_question_id_and_deck_id", using: :btree
   end
 
+  create_table "enrollments", id: false, force: :cascade do |t|
+    t.integer "period_id",  null: false
+    t.integer "student_id", null: false
+    t.index ["period_id", "student_id"], name: "index_enrollments_on_period_id_and_student_id", using: :btree
+    t.index ["student_id", "period_id"], name: "index_enrollments_on_student_id_and_period_id", using: :btree
+  end
+
   create_table "periods", force: :cascade do |t|
     t.string   "name"
     t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_periods_on_course_id", using: :btree
-  end
-
-  create_table "periods_students", id: false, force: :cascade do |t|
-    t.integer "period_id",  null: false
-    t.integer "student_id", null: false
-    t.index ["period_id", "student_id"], name: "index_periods_students_on_period_id_and_student_id", using: :btree
-    t.index ["student_id", "period_id"], name: "index_periods_students_on_student_id_and_period_id", using: :btree
   end
 
   create_table "question_options", force: :cascade do |t|
