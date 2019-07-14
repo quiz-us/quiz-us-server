@@ -64,7 +64,7 @@ GEM
     dry-configurable (0.8.3)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.4, >= 0.4.7)
-    dry-container (0.7.1)
+    dry-container (0.7.2)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.1, >= 0.1.3)
     dry-core (0.4.8)
@@ -75,6 +75,10 @@ GEM
       thor (~> 0.14)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.9.7)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.3)
@@ -159,7 +163,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    rubocop-rails (2.2.0)
+    rubocop-rails (2.2.1)
       rack (>= 1.1)
       rubocop (>= 0.72.0)
     ruby-progressbar (1.10.1)
@@ -199,6 +203,8 @@ DEPENDENCIES
   byebug
   devise-jwt (~> 0.5.9)
   figaro
+  graphiql-rails
+  graphql
   listen (~> 3.0.5)
   pg (>= 0.18, < 2.0)
   pry-rails
