@@ -6,11 +6,12 @@ class CreateQuestion
   include Callable
 
   attr_reader :question, :type, :tags, :question_options
-  def initialize(question_params)
-    @question = question_params[:question]
-    @question_type = question_params[:question_type]
-    @tags = question_params[:tags].split(',').map(&:chomp)
-    @question_options_arr = JSON.parse(question_params[:question_options])
+  def initialize(params)
+
+    @question_node = JSON.parse(params[:question_node], symbolize_names: true)
+    @question_type = params[:question_type]
+    @tags = params[:tags].split(',').map(&:chomp)
+    # @question_options_arr = params[:answers] #array of SlateJS Objects
   end
 
   def call
@@ -19,7 +20,7 @@ class CreateQuestion
     ActiveRecord::Base.transaction do
       results[:question] = create_question!
       results[:tags] = create_tags!(results[:question])
-      results[:question_options] = create_question_options!(results[:question])
+      # results[:question_options] = create_question_options!(results[:question])
     end
     results
   end
@@ -28,15 +29,18 @@ class CreateQuestion
 
   def create_question!
     Question.create!(
-      question_text: @question,
+      question_node: @question_node,
+      # TODO: getting the question text is an naive approach. 
+        # need to finalize a way to get ALL of the question text 
+      # SUGGESTION: we either do this on the backend or frontend
+        # if we choose backend, we need to iterate through nodes to extract each node's text
+      question_text: @question_node[:nodes][0][:text],
       question_type: @question_type
     )
   end
 
   def create_question_options!(question)
-    @question_options_arr.each do |_, option|
-      # debugger
-      
+    @question_options_arr.each do |_, option|      
       QuestionOption.create!(
         question_id: question.id,
         option_text: option["text"],
