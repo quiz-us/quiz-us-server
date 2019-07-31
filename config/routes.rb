@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     # graphql_path: is the path to the GraphQL endpoint. GraphiQL will send queries to this path.
   end
 
+  namespace :api, defaults: { format: :json } do
+    resources :questions, only: [:create]
+  end
+
   #react components will use this endpt
   post "/graphql", to: "graphql#execute"
 end
