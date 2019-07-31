@@ -16,13 +16,3 @@ module Types
     # }
   end
 end
-
-# sample input/output
-# query TaggingShow{
-#   tagging(id: 1) {
-#     id,
-#     questionId,
-#     tagId
-
-#   } 
-# }
