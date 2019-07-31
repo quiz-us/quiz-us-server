@@ -7,16 +7,23 @@ module Queries
     type Types::QuestionType, null: false
 
     def resolve(id: )
-      Question.find(id)
+      Question.includes(:taggings, :tags).find(id)
     end
   end
 end
 
 # sample query
+
 # {
 #   question(id: 1) {
 #     id,
 #     questionNode
-
+# 		tags {
+#       id
+#       name
+#     }
+#     taggings {
+#       id
+#     }
 #   } 
 # }
