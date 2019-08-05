@@ -2,15 +2,16 @@
 
 # CreateQuestion processes a question and all of its associated objects (ie.
 # tags and question_options), and then creates them.
-class CreateQuestion
+class CreateQuestionTest
   include Callable
 
   attr_reader :question, :type, :tags, :question_options
   def initialize(params)
-
+    # debugger
+    params = params[:question]
     @question_node = JSON.parse(params[:question_node], symbolize_names: true)
     @question_type = params[:question_type]
-    @tags = params[:tags].split(',').map(&:chomp)
+    @tags = params[:question_tags].split(',').map(&:chomp)
     # @question_options_arr = params[:answers] #array of SlateJS Objects
   end
 

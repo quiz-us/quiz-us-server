@@ -12,15 +12,44 @@ module Mutations
     # return type from the mutation
     type Types::QuestionType
 
-    def resolve(id: , title: nil)
-      standardsChart = StandardsChart.find(id)
-      standardsChart.update!({
-        title: title
+    def resolve(question_node: , question_type:, question_tags: )
+      question = CreateQuestionTest.call({ 
+        question: {
+          question_node: question_node,
+          question_type: question_type,
+          question_tags: question_type
+        }
       })
-      standardsChart
+      question[:question]
     end
   end
 end
 
 # sample mutation
 
+# mutation {
+#   createQuestion(questionNode: """
+#     {      
+#         "object": "block",
+#         "type": "paragraph",
+#         "nodes": [
+#           {
+#             "object": "text",
+#             "text": "A line of text in a paragraph."
+#           }
+#         ]
+# 		}
+    
+    
+#     """, 
+#   	questionType: "mc",
+#   	questionTags: "sci, art"
+# ) {
+#     id
+#   	tags {
+#       id
+#       name
+#     }
+#   questionText
+#   } 
+# }

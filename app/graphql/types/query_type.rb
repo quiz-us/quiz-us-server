@@ -7,12 +7,5 @@ module Types
     field :question, resolver: Queries::QuestionShow
     field :tag, resolver: Queries::TagShow
     field :tagging, resolver: Queries::TaggingShow
-
-    # sample query @ url "/graphiql"
-    # query {
-    #   standardsCharts {
-    #     title
-    #   }
-    # }
   end
 end
