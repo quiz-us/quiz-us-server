@@ -14,10 +14,12 @@ module Mutations
       type Types::TeacherType
 
       def resolve(email:, password:)
-        Teacher.create(
+        Teacher.create!(
           email: email,
           password: password
         )
+      rescue ActiveRecord::RecordInvalid => e
+        GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
       end
 
       # sample mutation
