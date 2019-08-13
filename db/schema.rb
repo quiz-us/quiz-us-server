@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190722010949) do
+ActiveRecord::Schema.define(version: 20190813154207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,10 +93,22 @@ ActiveRecord::Schema.define(version: 20190722010949) do
 
   create_table "standards", force: :cascade do |t|
     t.integer  "standards_chart_id"
-    t.string   "text"
+    t.string   "description"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "standards_category_id", null: false
+    t.string   "title"
+    t.string   "meta"
+    t.index ["standards_chart_id"], name: "index_standards_on_standards_chart_id", using: :btree
+  end
+
+  create_table "standards_categories", force: :cascade do |t|
+    t.string   "title",              null: false
+    t.text     "description"
+    t.integer  "standards_chart_id", null: false
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["standards_chart_id"], name: "index_standards_on_standards_chart_id", using: :btree
+    t.index ["standards_chart_id"], name: "index_standards_categories_on_standards_chart_id", using: :btree
   end
 
   create_table "standards_charts", force: :cascade do |t|
