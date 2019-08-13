@@ -1,11 +1,34 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'
 
-standards_chart1 = StandardsChart.create!(title: 'Cali Chemistry')
+grade_8_teks = StandardsChart.create!(title: 'TEKS - 8th Grade Science')
+
+categories_map = {}
+
+CSV.foreach('./db/seeds/categories.csv') do |row|
+  key = row[0]
+  category_title = row[1]
+  category_description = row[2]
+
+  category = grade_8_teks.standards_categories.create!(
+    title: category_title,
+    description: category_description
+  )
+
+  categories_map[key] = category
+end
+
+CSV.foreach('./db/seeds/standards.csv') do |row|
+  title = row[0]
+  description = row[1]
+  meta = row[2]
+  key = row[3]
+
+  categories_map[key].standards.create!(
+    title: title,
+    description: description,
+    meta: meta,
+    standards_chart: grade_8_teks
+  )
+end
