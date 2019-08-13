@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20190813214235) do
     t.integer  "standards_category_id", null: false
     t.string   "title",                 null: false
     t.string   "meta"
+    t.index ["standards_category_id", "title"], name: "index_standards_on_standards_category_id_and_title", unique: true, using: :btree
     t.index ["standards_category_id"], name: "index_standards_on_standards_category_id", using: :btree
     t.index ["title"], name: "index_standards_on_title", using: :btree
   end
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 20190813214235) do
     t.integer  "standards_chart_id", null: false
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["standards_chart_id", "title"], name: "index_standards_categories_on_standards_chart_id_and_title", unique: true, using: :btree
     t.index ["standards_chart_id"], name: "index_standards_categories_on_standards_chart_id", using: :btree
     t.index ["title"], name: "index_standards_categories_on_title", using: :btree
   end

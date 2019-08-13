@@ -10,6 +10,8 @@ class FixStandardsRelationships < ActiveRecord::Migration[5.0]
     add_index :standards, :title
     add_index :standards, :standards_category_id
     add_index :standards_categories, :title
+    add_index :standards, %i[standards_category_id title], unique: true
+    add_index :standards_categories, %i[standards_chart_id title], unique: true
 
     change_column_null :standards, :title, false
     change_column_null :standards, :description, false
