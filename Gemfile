@@ -33,6 +33,7 @@ gem 'rack-cors'
 gem 'devise-jwt', '~> 0.5.9'
 
 group :test do
+  gem 'rspec_junit_formatter'
   gem 'shoulda-matchers'
 end
 
