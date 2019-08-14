@@ -79,7 +79,19 @@ QuestionsStandard.create!(
   standard_id: standard1.id
 )
 
-tag1 = Tag.create!(
+question_option1 = QuestionOption.create!({
+  question_id: q1.id,
+  option_text: "option 1",
+  correct: false
+})
+
+question_option1 = QuestionOption.create!({
+  question_id: q1.id,
+  option_text: "option 2",
+  correct: true
+})
+
+tag1 = Tag.create!({
   name: 'Chemistry'
 )
 

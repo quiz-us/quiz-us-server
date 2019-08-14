@@ -5,13 +5,13 @@
 class CreateQuestionService
   include Callable
 
-  attr_reader :question, :type, :tags, :question_options
   def initialize(params)
     params = params[:question]
     @question_type = params[:question_type]
     @question_standard_id = params[:standard_id]
     @question_node = JSON.parse(params[:question_node], symbolize_names: true)
     @tags = params[:tags]
+    @question_plaintext = params[:question_plaintext]
     # @question_options_arr = params[:answers] #array of SlateJS Objects
   end
 
@@ -44,7 +44,8 @@ class CreateQuestionService
       # SUGGESTION: we either do this on the backend or frontend
         # if we choose backend, we need to iterate through nodes to extract each node's text
       question_text: @question_node[:nodes][0][:text],
-      question_type: @question_type
+      question_type: @question_type,
+      question_text: @question_plaintext
     )
   end
 

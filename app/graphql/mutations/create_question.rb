@@ -9,17 +9,19 @@ module Mutations
     argument :standard_id, ID, required: false
     argument :tags, [String], required: false
     argument :question_node, String, required: true
+    argument :question_plaintext, String, required: true
 
     # return type from the mutation
     type Types::QuestionType
 
-    def resolve(question_node: , question_type:, tags:, standard_id: )
+    def resolve(question_node: , question_type:, tags:, standard_id:, question_plaintext: )
       question = CreateQuestionService.call({ 
         question: {
           question_node: question_node,
           question_type: question_type,
           tags: tags,
-          standard_id: standard_id
+          standard_id: standard_id,
+          question_plaintext: question_plaintext
         }
       })
       question[:question]

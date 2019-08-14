@@ -25,6 +25,11 @@ class Question < ApplicationRecord
            class_name: :QuestionsStandard
 
   has_many :standards,
-           through: :questions_standards,
-           source: :standard
+    through: :questions_standards,
+    source: :standard
+
+  has_many :question_options,
+    primary_key: :id,
+    foreign_key: :question_id,
+    class_name: :QuestionOption
 end
