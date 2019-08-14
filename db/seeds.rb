@@ -7,3 +7,37 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 standards_chart1 = StandardsChart.create!({ title: "Cali Chemistry"})
+
+standard1 = Standard.create!({
+  standards_chart_id: standards_chart1.id,
+  text: "standard 1",
+})
+
+q1 = Question.create({
+  question_type: 'multiple-choice',
+  question_text: 'What are you doing?',
+  question_node: '{      
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "text": "A line of text in a paragraph."
+          }
+        ]
+      }'
+});
+
+QuestionsStandard.create!({
+  question_id: q1.id,
+  standard_id: standard1.id,
+})
+
+tag1 = Tag.create!({
+  name: 'Chemistry'
+})
+
+tagging1 = Tagging.create!({
+  question_id: q1.id,
+  tag_id: tag1.id
+})

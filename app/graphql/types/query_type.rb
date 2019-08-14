@@ -4,12 +4,9 @@ module Types
   class QueryType < BaseObject
     # queries are just represented as fields
     field :standards_charts, resolver: Queries::StandardsChartIndex
-
-    # sample query @ url "/graphiql"
-    # query {
-    #   standardsCharts {
-    #     title
-    #   }
-    # }
+    field :question, resolver: Queries::QuestionShow
+    field :tag, resolver: Queries::TagShow
+    field :tagging, resolver: Queries::TaggingShow
+    field :standard, resolver: Queries::StandardShow
   end
 end

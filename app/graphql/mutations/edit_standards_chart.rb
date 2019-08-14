@@ -11,20 +11,20 @@ module Mutations
     # return type from the mutation
     type Types::StandardsChartType
 
-    def resolve(id: , title: )
+    def resolve(id: , title: nil)
       standardsChart = StandardsChart.find(id)
       standardsChart.update!({
         title: title
       })
       standardsChart
     end
-
-    # sample mutation
-    # mutation {
-    #   editStandardsChart(id: 1, title: "s") {
-    #     id
-    #     title
-    #   }
-    # }
   end
 end
+
+# sample mutation
+# mutation {
+#   editStandardsChart(id: 1, title: "s") {
+#     id
+#     title
+#   }
+# }

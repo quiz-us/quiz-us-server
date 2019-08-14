@@ -10,3 +10,11 @@ module Queries
     end
   end
 end
+
+# sample query
+# {
+#   standardsCharts {
+#     id
+#     title
+#   } 
+# }

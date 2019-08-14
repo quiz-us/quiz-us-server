@@ -2,15 +2,16 @@
 
 # CreateQuestion processes a question and all of its associated objects (ie.
 # tags and question_options), and then creates them.
-class CreateQuestion
+class CreateQuestionService
   include Callable
 
   attr_reader :question, :type, :tags, :question_options
   def initialize(params)
-
-    @question_node = JSON.parse(params[:question_node], symbolize_names: true)
+    params = params[:question]
     @question_type = params[:question_type]
-    @tags = params[:tags].split(',').map(&:chomp)
+    @question_standard_id = params[:standard_id]
+    @question_node = JSON.parse(params[:question_node], symbolize_names: true)
+    @tags = params[:tags]
     # @question_options_arr = params[:answers] #array of SlateJS Objects
   end
 
@@ -20,12 +21,20 @@ class CreateQuestion
     ActiveRecord::Base.transaction do
       results[:question] = create_question!
       results[:tags] = create_tags!(results[:question])
+      results[:standard_id] = map_question_to_standards!(results[:question])
       # results[:question_options] = create_question_options!(results[:question])
     end
     results
   end
 
   private
+
+  def map_question_to_standards!(question)
+    QuestionsStandard.create({
+      question_id: question.id,
+      standard_id: @question_standard_id
+    })
+  end
 
   def create_question!
     Question.create!(
@@ -52,9 +61,7 @@ class CreateQuestion
   def create_tags!(question)
     @tags.each do |tag_name|
       tag = Tag.find_or_create_by!(name: tag_name)
-      Tagging.create!(
-        question_id: question.id,
-        tag_id: tag.id)
+      Tagging.create!(question_id: question.id, tag_id: tag.id)
     end
   end
 end
