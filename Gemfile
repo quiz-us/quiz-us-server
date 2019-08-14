@@ -33,13 +33,13 @@ gem 'rack-cors'
 gem 'devise-jwt', '~> 0.5.9'
 
 group :test do
-  gem 'factory_bot_rails'
   gem 'shoulda-matchers'
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
 end
