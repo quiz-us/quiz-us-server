@@ -5,19 +5,21 @@ module Mutations
     description "Create Question"
 
     # arguments passed to the `resolved` method
-    argument :question_node, String, required: true
     argument :question_type, String, required: true
-    argument :question_tags, String, required: false
+    argument :standard_id, ID, required: false
+    argument :tags, [String], required: false
+    argument :question_node, String, required: true
 
     # return type from the mutation
     type Types::QuestionType
 
-    def resolve(question_node: , question_type:, question_tags: )
-      question = CreateQuestionTest.call({ 
+    def resolve(question_node: , question_type:, tags:, standard_id: )
+      question = CreateQuestionService.call({ 
         question: {
           question_node: question_node,
           question_type: question_type,
-          question_tags: question_type
+          tags: tags,
+          standard_id: standard_id
         }
       })
       question[:question]
@@ -53,3 +55,6 @@ end
 #   questionText
 #   } 
 # }
+
+
+

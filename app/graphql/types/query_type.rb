@@ -7,5 +7,6 @@ module Types
     field :question, resolver: Queries::QuestionShow
     field :tag, resolver: Queries::TagShow
     field :tagging, resolver: Queries::TaggingShow
+    field :standard, resolver: Queries::StandardShow
   end
 end
