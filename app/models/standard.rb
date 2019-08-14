@@ -4,11 +4,13 @@
 #
 # Table name: standards
 #
-#  id                 :integer          not null, primary key
-#  standards_chart_id :integer
-#  text               :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id                    :integer          not null, primary key
+#  description           :string           not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  standards_category_id :integer          not null
+#  title                 :string           not null
+#  meta                  :string
 #
 
 class Standard < ApplicationRecord
