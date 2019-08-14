@@ -34,6 +34,7 @@ gem 'devise-jwt', '~> 0.5.9'
 
 group :test do
   gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do
