@@ -8,11 +8,15 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.3-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+        environment:
+          PGHOST: localhost
+          PGUSER: quiz-us-server
+          RAILS_ENV: test
+      - image: circleci/postgres:10
+        environment:
+          POSTGRES_USER: quiz-us-server
+          POSTGRES_DB: uiz-us-server_test
+          POSTGRES_PASSWORD: ''
 
     working_directory: ~/repo
 
