@@ -29,17 +29,6 @@ module QuizUsServer
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.middleware.insert_before 0, 'Rack::Cors' do
-      allow do
-        origins '*'
-        resource(
-          '*',
-          headers: :any,
-          methods: %i[get patch put delete post options]
-        )
-      end
-    end
-
     config.generators do |g|
       g.test_framework :rspec, fixture: false
       g.view_specs      false
