@@ -2,15 +2,13 @@
 
 require 'active_support/concern'
 
-module GraphQL
-  module Authenticable
-    extend ActiveSupport::Concern
+module GraphQL::Authenticable
+  extend ActiveSupport::Concern
 
-    included do
-      def teacher_signed_in?
-        teacher = context[:current_teacher]
-        raise GraphQL::ExecutionError, 'Unauthenticated' unless teacher
-      end
+  included do
+    def teacher_signed_in?
+      teacher = context[:current_teacher]
+      raise GraphQL::ExecutionError, 'Unauthenticated' unless teacher
     end
   end
 end
