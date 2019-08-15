@@ -2,7 +2,7 @@
 
 module Queries
   class BaseQuery < GraphQL::Schema::Resolver
-    include GraphQL::Authenticable
+    include Authenticable
     null false
   end
 end
