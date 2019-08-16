@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: courses
@@ -13,4 +15,5 @@
 class Course < ApplicationRecord
   belongs_to :teacher
   belongs_to :standards_chart
+  has_many :standards, through: :standards_chart
 end
