@@ -181,6 +181,10 @@ GEM
       rack (>= 1.1)
       rubocop (>= 0.72.0)
     ruby-progressbar (1.10.1)
+    search_object (1.2.2)
+    search_object_graphql (0.2)
+      graphql (~> 1.8)
+      search_object (~> 1.2.2)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     spring (2.0.2)
@@ -232,6 +236,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop-rails
+  search_object_graphql
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)

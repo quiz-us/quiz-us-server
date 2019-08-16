@@ -60,6 +60,11 @@ question1 = Question.create!(
   }'
 )
 
+QuestionsStandard.create!(
+  question: question1,
+  standard: Standard.find_by(title: '6.6A')
+)
+
 question1.question_options.create!(
   option_text: 'lustrous, good conductor, malleable, ductile',
   option_node: '{

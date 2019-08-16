@@ -23,6 +23,7 @@ gem 'puma', '~> 3.0'
 
 gem 'graphql'
 gem 'rack-cors'
+gem 'search_object_graphql'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
