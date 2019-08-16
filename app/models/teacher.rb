@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: teachers
@@ -21,4 +23,9 @@ class Teacher < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
+
+  has_many :courses, dependent: :destroy
+  has_many :standards_charts, through: :courses
+  has_many :standards_categories, through: :standards_charts
+  has_many :standards, through: :standards_categories
 end

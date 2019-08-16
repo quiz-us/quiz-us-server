@@ -30,17 +30,26 @@ CSV.foreach('./db/seeds/standards.csv') do |row|
   categories_map[key].standards.create!(
     title: title,
     description: description,
-    meta: meta,
-    standards_chart: grade_8_teks
+    meta: meta
   )
 end
+
+question1 = Question.create!(
+  question_text: 'What are the physical characteristics of metals?',
+  question_type: 'free_response',
+  question_node: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"What are the physical characteristics of metals?","marks":[]}]}]}}'
+)
+
+question1.question_options.create!(
+  option_text: 'lustrous, good conductor, malleable, ductile'
+)
 
 ################################################################################
 # CALIFORNIA CHEMISTRY:
 
 standards_chart1 = StandardsChart.create!(title: 'Cali Chemistry')
 
-standards_category1 = standards_chart1.standards_categores.create!(
+standards_category1 = standards_chart1.standards_categories.create!(
   title: 'Periodic Table',
   description: 'Students will be able to understand the periodic table'
 )
@@ -77,4 +86,15 @@ tag1 = Tag.create!(
 tagging1 = Tagging.create!(
   question_id: q1.id,
   tag_id: tag1.id
+)
+
+chris = Teacher.create!(
+  email: 'chris.d.hua@gmail.com',
+  password: 'chrischrischris'
+)
+
+Course.create!(
+  name: 'Texas 8th Grade Science',
+  teacher: chris,
+  standards_chart: grade_8_teks
 )
