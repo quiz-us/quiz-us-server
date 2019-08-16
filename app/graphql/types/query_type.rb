@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # query resolvers
 
 module Types
@@ -8,5 +10,6 @@ module Types
     field :tag, resolver: Queries::TagShow
     field :tagging, resolver: Queries::TaggingShow
     field :standard, resolver: Queries::StandardShow
+    field :all_standards, resolver: Queries::StandardIndex
   end
 end

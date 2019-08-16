@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
-require "rails"
+require 'rails'
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "action_cable/engine"
-require "sprockets/railtie"
-require "rails/test_unit/railtie"
+require 'active_model/railtie'
+require 'active_job/railtie'
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'action_cable/engine'
+require 'sprockets/railtie'
+require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,9 +30,10 @@ module QuizUsServer
     config.api_only = true
 
     config.generators do |g|
-    g.test_framework  :rspec, :fixture => false
-    g.view_specs      false
-    g.helper_specs    false
-end
+      g.test_framework :rspec, fixture: true
+      g.view_specs      false
+      g.helper_specs    false
+      g.fixture_replacement :factory_bot
+    end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: questions
@@ -11,18 +13,18 @@
 #
 
 class Question < ApplicationRecord
+  has_many :question_options, dependent: :destroy
   has_many :taggings
-
   has_many :tags,
-    through: :taggings,
-    source: :tag
-  
+           through: :taggings,
+           source: :tag
+
   has_many :questions_standards,
-    primary_key: :id,
-    foreign_key: :question_id,
-    class_name: :QuestionsStandard
+           primary_key: :id,
+           foreign_key: :question_id,
+           class_name: :QuestionsStandard
 
   has_many :standards,
-    through: :questions_standards,
-    source: :standard
+           through: :questions_standards,
+           source: :standard
 end

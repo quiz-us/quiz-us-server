@@ -10,8 +10,8 @@
 #  updated_at :datetime         not null
 #
 
-class StandardsChart < ApplicationRecord
-  has_many :courses, dependent: :destroy
-  has_many :standards_categories, dependent: :destroy
-  has_many :standards, through: :standards_categories
+FactoryBot.define do
+  factory :standards_chart do
+    title { Faker::Educator.secondary_school + ' ' + Faker::Educator.subject }
+  end
 end

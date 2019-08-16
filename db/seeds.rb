@@ -1,22 +1,68 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# frozen_string_literal: true
 
-standards_chart1 = StandardsChart.create!({ title: "Cali Chemistry"})
+require 'csv'
 
-standard1 = Standard.create!({
-  standards_chart_id: standards_chart1.id,
-  text: "standard 1",
-})
+# Texas 8th GRADE SCIENCE:
 
-q1 = Question.create({
+grade_8_teks = StandardsChart.create!(title: 'TEKS - 8th Grade Science')
+
+categories_map = {}
+
+CSV.foreach('./db/seeds/categories.csv') do |row|
+  key = row[0]
+  category_title = row[1]
+  category_description = row[2]
+
+  category = grade_8_teks.standards_categories.create!(
+    title: category_title,
+    description: category_description
+  )
+
+  categories_map[key] = category
+end
+
+CSV.foreach('./db/seeds/standards.csv') do |row|
+  title = row[0]
+  description = row[1]
+  meta = row[2]
+  key = row[3]
+
+  categories_map[key].standards.create!(
+    title: title,
+    description: description,
+    meta: meta
+  )
+end
+
+question1 = Question.create!(
+  question_text: 'What are the physical characteristics of metals?',
+  question_type: 'free_response',
+  question_node: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"What are the physical characteristics of metals?","marks":[]}]}]}}'
+)
+
+question1.question_options.create!(
+  option_text: 'lustrous, good conductor, malleable, ductile'
+)
+
+################################################################################
+# CALIFORNIA CHEMISTRY:
+
+standards_chart1 = StandardsChart.create!(title: 'Cali Chemistry')
+
+standards_category1 = standards_chart1.standards_categories.create!(
+  title: 'Periodic Table',
+  description: 'Students will be able to understand the periodic table'
+)
+
+standard1 = standards_category1.standards.create!(
+  title: 'standard 1',
+  description: 'Standard 1 is awesome'
+)
+
+q1 = Question.create(
   question_type: 'multiple-choice',
   question_text: 'What are you doing?',
-  question_node: '{      
+  question_node: '{
         "object": "block",
         "type": "paragraph",
         "nodes": [
@@ -26,18 +72,29 @@ q1 = Question.create({
           }
         ]
       }'
-});
+)
 
-QuestionsStandard.create!({
+QuestionsStandard.create!(
   question_id: q1.id,
-  standard_id: standard1.id,
-})
+  standard_id: standard1.id
+)
 
-tag1 = Tag.create!({
+tag1 = Tag.create!(
   name: 'Chemistry'
-})
+)
 
-tagging1 = Tagging.create!({
+tagging1 = Tagging.create!(
   question_id: q1.id,
   tag_id: tag1.id
-})
+)
+
+chris = Teacher.create!(
+  email: 'chris.d.hua@gmail.com',
+  password: 'chrischrischris'
+)
+
+Course.create!(
+  name: 'Texas 8th Grade Science',
+  teacher: chris,
+  standards_chart: grade_8_teks
+)

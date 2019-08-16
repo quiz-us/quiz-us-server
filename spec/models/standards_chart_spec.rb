@@ -10,8 +10,11 @@
 #  updated_at :datetime         not null
 #
 
-class StandardsChart < ApplicationRecord
-  has_many :courses, dependent: :destroy
-  has_many :standards_categories, dependent: :destroy
-  has_many :standards, through: :standards_categories
+require 'rails_helper'
+
+RSpec.describe StandardsChart, type: :model do
+  describe 'associations' do
+    it { should have_many(:standards_categories).dependent(:destroy) }
+    it { should have_many(:standards).through(:standards_categories) }
+  end
 end
