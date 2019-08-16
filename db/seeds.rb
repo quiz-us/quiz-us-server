@@ -37,12 +37,60 @@ end
 question1 = Question.create!(
   question_text: 'What are the physical characteristics of metals?',
   question_type: 'free_response',
-  question_node: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"What are the physical characteristics of metals?","marks":[]}]}]}}'
+  question_node: '{
+    "object": "value",
+    "document": {
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes": [
+            {
+              "object": "text",
+              "text": "What are the physical characteristics of metals?",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }'
 )
 
 question1.question_options.create!(
-  option_text: 'lustrous, good conductor, malleable, ductile'
+  option_text: 'lustrous, good conductor, malleable, ductile',
+  option_node: '{
+    "value":{
+      "object": "value",
+      "document":{
+        "object": "document",
+        "data": {},
+        "nodes":[
+          {
+            "object": "block",
+            "type": "line",
+            "data": {},
+            "nodes":[
+              {
+                "object": "text",
+                "text": "lustrous, good conductor, malleable, ductile",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }',
+  correct: true
 )
+
+metal_tag = Tag.create!(name: 'metal')
+
+Tagging.create!(tag: metal_tag, question: question1)
 
 ################################################################################
 # CALIFORNIA CHEMISTRY:
