@@ -7,7 +7,7 @@ module Types
     # queries are just represented as fields
     field :standards_charts, resolver: Queries::StandardsChartIndex
     field :question, resolver: Queries::QuestionShow
-    field :questions, resolver: Queries::Question::Search
+    field :questions, resolver: Queries::QuestionSearch
     field :tag, resolver: Queries::TagShow
     field :tagging, resolver: Queries::TaggingShow
     field :standard, resolver: Queries::StandardShow

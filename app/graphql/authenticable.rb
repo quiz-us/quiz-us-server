@@ -7,7 +7,7 @@ module Authenticable
 
   included do
     def teacher_signed_in?
-      raise GraphQL::ExecutionError, 'Unauthenticated' unless current_teacher
+      raise GraphQL::ExecutionError, 'Unauthenticated' unless context[:current_teacher]
     end
 
     def current_course
@@ -19,6 +19,7 @@ module Authenticable
     end
 
     def current_teacher
+      teacher_signed_in?
       context[:current_teacher]
     end
   end
