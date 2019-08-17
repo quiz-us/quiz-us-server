@@ -37,17 +37,50 @@ end
 question1 = Question.create!(
   question_text: 'What are the physical characteristics of metals?',
   question_type: 'free_response',
-  question_node: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"What are the physical characteristics of metals?","marks":[]}]}]}}'
+  question_node: '{
+    "object":"value",
+    "document":{
+      "object": {
+        "document",
+        "data":{},
+        "nodes":[
+          {
+            "object":"block",
+            "type":"line",
+            "data":{},
+            "nodes":[
+              {
+                "object":"text",
+                "text":"What are the physical characteristics of metals?",
+                "marks":[]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }'
 )
 
 question1.question_options.create!(
-  option_text: 'lustrous, good conductor, malleable, ductile'
+  correct: true,
+  option_text: 'lustrous, good conductor, malleable, ductile',
+  option_node: '{
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "text": "lustrous, good conductor, malleable, ductile."
+          }
+        ]
+      }'
 )
 
 ################################################################################
 # CALIFORNIA CHEMISTRY:
 
-standards_chart1 = StandardsChart.create!(title: 'Cali Chemistry')
+standards_chart1 = StandardsChart.create!(title: 'California Highschool Chemistry')
 
 standards_category1 = standards_chart1.standards_categories.create!(
   title: 'Periodic Table',
@@ -55,20 +88,20 @@ standards_category1 = standards_chart1.standards_categories.create!(
 )
 
 standard1 = standards_category1.standards.create!(
-  title: 'standard 1',
-  description: 'Standard 1 is awesome'
+  title: 'HS-PS1-1',
+  description: 'Use the periodic table as a model to predict the relative properties of elements based on the patterns of electrons in the outermost energy level of atoms'
 )
 
 q1 = Question.create(
-  question_type: 'multiple-choice',
-  question_text: 'What are you doing?',
+  question_type: 'multiple_choice',
+  question_text: 'Which periodic table contains the most reactive elements?',
   question_node: '{
         "object": "block",
         "type": "paragraph",
         "nodes": [
           {
             "object": "text",
-            "text": "A line of text in a paragraph."
+            "text": "Which periodic table contains the most reactive elements?"
           }
         ]
       }'
@@ -81,7 +114,7 @@ QuestionsStandard.create!(
 
 question_option1 = QuestionOption.create!({
   question_id: q1.id,
-  option_text: "option 1",
+  option_text: "Halogens",
   correct: false,
   option_node: '{      
         "object": "block",
@@ -89,7 +122,7 @@ question_option1 = QuestionOption.create!({
         "nodes": [
           {
             "object": "text",
-            "text": "A line of text in a paragraph."
+            "text": "Halogens"
           }
         ]
       }'
@@ -97,7 +130,7 @@ question_option1 = QuestionOption.create!({
 
 question_option2 = QuestionOption.create!({
   question_id: q1.id,
-  option_text: "option 2",
+  option_text: "Noble Gases",
   correct: true,
   option_node: '{      
         "object": "block",
@@ -105,19 +138,28 @@ question_option2 = QuestionOption.create!({
         "nodes": [
           {
             "object": "text",
-            "text": "A line of text in a paragraph."
+            "text": "Noble Gases"
           }
         ]
       }'
 })
 
-tag1 = Tag.create!({
-  name: 'Chemistry'
+tag1 = Tag.create!(
+  name: 'Common Core Chemistry'
+)
+
+tag2 = Tag.create!(
+  name: 'Common Core Chemistry'
 )
 
 tagging1 = Tagging.create!(
   question_id: q1.id,
   tag_id: tag1.id
+)
+
+tagging1 = Tagging.create!(
+  question_id: q1.id,
+  tag_id: tag2.id
 )
 
 chris = Teacher.create!(
