@@ -82,13 +82,33 @@ QuestionsStandard.create!(
 question_option1 = QuestionOption.create!({
   question_id: q1.id,
   option_text: "option 1",
-  correct: false
+  correct: false,
+  option_node: '{      
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "text": "A line of text in a paragraph."
+          }
+        ]
+      }'
 })
 
-question_option1 = QuestionOption.create!({
+question_option2 = QuestionOption.create!({
   question_id: q1.id,
   option_text: "option 2",
-  correct: true
+  correct: true,
+  option_node: '{      
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "text": "A line of text in a paragraph."
+          }
+        ]
+      }'
 })
 
 tag1 = Tag.create!({

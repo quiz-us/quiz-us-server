@@ -12,5 +12,6 @@ module Types
     field :standard, resolver: Queries::StandardShow
     field :all_standards, resolver: Queries::StandardIndex
     field :question_option, resolver: Queries::QuestionOptionShow
+    field :question_option_before_save, resolver: Queries::QuestionOptionBeforeSaveShow
   end
 end

@@ -12,7 +12,8 @@ class CreateQuestionService
     @question_node = JSON.parse(params[:question_node], symbolize_names: true)
     @tags = params[:tags]
     @question_plaintext = params[:question_plaintext]
-    # @question_options_arr = params[:answers] #array of SlateJS Objects
+    debugger
+    @question_options_arr = params[:question_options]
   end
 
   def call

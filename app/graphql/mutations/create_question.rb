@@ -10,6 +10,11 @@ module Mutations
     argument :tags, [String], required: false
     argument :question_node, String, required: true
     argument :question_plaintext, String, required: true
+    # argument :answers, [Types::QuestionOptionType], required: false
+    # argument :tags_test, [Types::TagType], required: false
+    field :answers, [Types::QuestionOptionType], null: false do
+      argument :attributes, Types::QuestionOptionType, required: true
+    end
 
     # return type from the mutation
     type Types::QuestionType
@@ -22,6 +27,7 @@ module Mutations
           tags: tags,
           standard_id: standard_id,
           question_plaintext: question_plaintext
+          # answers: answers
         }
       })
       question[:question]
