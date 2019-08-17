@@ -20,7 +20,9 @@ module Mutations
         is_valid_for_auth = teacher.valid_for_authentication? do
           teacher.valid_password?(password)
         end
-        is_valid_for_auth ? teacher : nil
+        is_valid_for_auth ? teacher : GraphQL::ExecutionError.new(
+          'Incorrect username and/or password. Please try again.'
+        )
       rescue ActiveRecord::RecordInvalid => e
         GraphQL::ExecutionError.new(
           "Invalid input: #{e.record.errors.full_messages.join(', ')}"
