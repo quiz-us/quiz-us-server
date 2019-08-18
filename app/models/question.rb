@@ -19,7 +19,6 @@ class Question < ApplicationRecord
                   against: %i[question_text],
                   using: { tsearch: { any_word: true, prefix: true } }
 
-  has_many :question_options, dependent: :destroy
   has_many :taggings
   has_many :tags,
            through: :taggings,
@@ -31,11 +30,12 @@ class Question < ApplicationRecord
            class_name: :QuestionsStandard
 
   has_many :standards,
-    through: :questions_standards,
-    source: :standard
+           through: :questions_standards,
+           source: :standard
 
   has_many :question_options,
-    primary_key: :id,
-    foreign_key: :question_id,
-    class_name: :QuestionOption
+           primary_key: :id,
+           foreign_key: :question_id,
+           class_name: :QuestionOption,
+           depedent: :destroy
 end
