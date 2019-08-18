@@ -13,6 +13,12 @@
 #
 
 class Question < ApplicationRecord
+  include PgSearch
+
+  pg_search_scope :search_for,
+                  against: %i[question_text],
+                  using: { tsearch: { any_word: true, prefix: true } }
+
   has_many :question_options, dependent: :destroy
   has_many :taggings
   has_many :tags,

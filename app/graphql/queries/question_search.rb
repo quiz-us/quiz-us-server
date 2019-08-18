@@ -15,8 +15,20 @@ module Queries
     scope { current_course.questions }
 
     option(:standard_id, type: ID) do |scope, value|
-      scope.joins(:questions_standards)
-           .where(questions_standards: { standard_id: value })
+      if value.empty?
+        scope
+      else
+        scope.joins(:questions_standards)
+             .where(questions_standards: { standard_id: value })
+      end
+    end
+
+    option(:key_words, type: String) do |scope, value|
+      if value.empty?
+        scope
+      else
+        scope.search_for(value)
+      end
     end
   end
 end

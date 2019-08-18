@@ -23,6 +23,7 @@ gem 'puma', '~> 3.0'
 
 gem 'bootsnap'
 gem 'graphql'
+gem 'pg_search'
 gem 'rack-cors'
 gem 'search_object_graphql'
 
