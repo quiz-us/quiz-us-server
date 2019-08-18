@@ -14,21 +14,21 @@ module Queries
 
     scope { current_course.questions }
 
+    option(:empty_query, type: Boolean) do |scope, value|
+      # return empty object if all other query parameters
+      # are empty
+      scope.none if value
+    end
+
     option(:standard_id, type: ID) do |scope, value|
-      if value.empty?
-        scope
-      else
+      unless value.empty?
         scope.joins(:questions_standards)
              .where(questions_standards: { standard_id: value })
       end
     end
 
     option(:key_words, type: String) do |scope, value|
-      if value.empty?
-        scope
-      else
-        scope.search_for(value)
-      end
+      scope.search_for(value) unless value.empty?
     end
   end
 end
