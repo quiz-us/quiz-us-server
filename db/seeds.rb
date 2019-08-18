@@ -157,7 +157,7 @@ tagging1 = Tagging.create!(
   tag_id: tag1.id
 )
 
-tagging1 = Tagging.create!(
+tagging2 = Tagging.create!(
   question_id: q1.id,
   tag_id: tag2.id
 )
