@@ -7,5 +7,7 @@ module Types
     field :question_node, String, null: false
     field :tags, [Types::TagType], null: true
     field :taggings, [Types::TaggingType], null: true
+    field :question_plaintext, String, null: true
+    field :question_options, [Types::QuestionOptionType], null: true
   end
 end
