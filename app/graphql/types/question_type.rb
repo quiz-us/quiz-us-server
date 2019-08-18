@@ -10,5 +10,7 @@ module Types
     field :standards, [Types::StandardType], null: true
     field :tags, [Types::TagType], null: true
     field :taggings, [Types::TaggingType], null: true
+    field :question_plaintext, String, null: true
+    field :question_options, [Types::QuestionOptionType], null: true
   end
 end
