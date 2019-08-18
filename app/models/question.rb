@@ -13,7 +13,7 @@
 #
 
 class Question < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
 
   pg_search_scope :search_for,
                   against: %i[question_text],
@@ -37,5 +37,5 @@ class Question < ApplicationRecord
            primary_key: :id,
            foreign_key: :question_id,
            class_name: :QuestionOption,
-           depedent: :destroy
+           dependent: :destroy
 end
