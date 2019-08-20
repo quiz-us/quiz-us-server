@@ -13,8 +13,9 @@
 #  updated_at   :datetime         not null
 #
 
-
 class Assignment < ApplicationRecord
   belongs_to :student
   belongs_to :deck
+
+  validates :student_id, uniqueness: { scope: :deck_id }
 end

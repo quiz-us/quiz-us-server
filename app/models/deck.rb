@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: decks
@@ -12,4 +14,6 @@
 
 class Deck < ApplicationRecord
   belongs_to :teacher
+  has_many :decks_questions, dependent: :destroy
+  has_many :questions, through: :decks_questions
 end

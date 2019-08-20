@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_163212) do
+ActiveRecord::Schema.define(version: 2019_08_20_221415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_163212) do
     t.text "instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deck_id", "student_id"], name: "by_deck_and_student", unique: true
     t.index ["deck_id"], name: "index_assignments_on_deck_id"
     t.index ["due"], name: "index_assignments_on_due"
     t.index ["student_id"], name: "index_assignments_on_student_id"
@@ -46,16 +47,18 @@ ActiveRecord::Schema.define(version: 2019_08_20_163212) do
     t.index ["teacher_id"], name: "index_decks_on_teacher_id"
   end
 
-  create_table "decks_questions", id: false, force: :cascade do |t|
+  create_table "decks_questions", force: :cascade do |t|
     t.integer "deck_id", null: false
     t.integer "question_id", null: false
+    t.index ["deck_id", "question_id"], name: "by_deck_and_question", unique: true
     t.index ["deck_id", "question_id"], name: "index_decks_questions_on_deck_id_and_question_id"
     t.index ["question_id", "deck_id"], name: "index_decks_questions_on_question_id_and_deck_id"
   end
 
-  create_table "enrollments", id: false, force: :cascade do |t|
+  create_table "enrollments", force: :cascade do |t|
     t.integer "period_id", null: false
     t.integer "student_id", null: false
+    t.index ["period_id", "student_id"], name: "by_period_and_student", unique: true
     t.index ["period_id", "student_id"], name: "index_enrollments_on_period_id_and_student_id"
     t.index ["student_id", "period_id"], name: "index_enrollments_on_student_id_and_period_id"
   end
@@ -86,9 +89,10 @@ ActiveRecord::Schema.define(version: 2019_08_20_163212) do
     t.string "question_node", null: false
   end
 
-  create_table "questions_standards", id: false, force: :cascade do |t|
+  create_table "questions_standards", force: :cascade do |t|
     t.integer "question_id", null: false
     t.integer "standard_id", null: false
+    t.index ["question_id", "standard_id"], name: "by_question_and_standard", unique: true
     t.index ["question_id", "standard_id"], name: "index_questions_standards_on_question_id_and_standard_id"
     t.index ["standard_id", "question_id"], name: "index_questions_standards_on_standard_id_and_question_id"
   end
@@ -146,6 +150,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_163212) do
     t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["tag_id", "question_id"], name: "by_tag_and_question", unique: true
   end
 
   create_table "tags", id: :serial, force: :cascade do |t|
