@@ -21,10 +21,6 @@ module Mutations
           teacher.valid_password?(password)
         end
         is_valid_for_auth ? teacher : invalid_login
-      rescue ActiveRecord::RecordInvalid => e
-        GraphQL::ExecutionError.new(
-          "Invalid input: #{e.record.errors.full_messages.join(', ')}"
-        )
       end
 
       def invalid_login
