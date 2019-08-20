@@ -6,7 +6,7 @@ module Mutations
     description 'Create Deck'
 
     # arguments passed to the `resolved` method
-    argument :question_ids, ID, required: true
+    argument :question_ids, [ID], required: true
     argument :name, String, required: true
     argument :description, String, required: false
 
@@ -14,7 +14,7 @@ module Mutations
     type Types::DeckType
 
     def resolve(question_ids:, name:, description:)
-      deck = Deck.create!(
+      deck = current_teacher.decks.create!(
         name: name,
         description: description
       )
