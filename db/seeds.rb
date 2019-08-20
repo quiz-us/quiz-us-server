@@ -68,26 +68,24 @@ QuestionsStandard.create!(
 question1.question_options.create!(
   option_text: 'lustrous, good conductor, malleable, ductile',
   option_node: '{
-    "value":{
-      "object": "value",
-      "document":{
-        "object": "document",
-        "data": {},
-        "nodes":[
-          {
-            "object": "block",
-            "type": "line",
-            "data": {},
-            "nodes":[
-              {
-                "object": "text",
-                "text": "lustrous, good conductor, malleable, ductile",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      }
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "lustrous, good conductor, malleable, ductile",
+              "marks": []
+            }
+          ]
+        }
+      ]
     }
   }',
   correct: true
