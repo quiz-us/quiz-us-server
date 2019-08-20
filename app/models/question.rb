@@ -27,7 +27,8 @@ class Question < ApplicationRecord
   has_many :questions_standards,
            primary_key: :id,
            foreign_key: :question_id,
-           class_name: :QuestionsStandard
+           class_name: :QuestionsStandard,
+           dependent: :destroy
 
   has_many :standards,
            through: :questions_standards,

@@ -2,6 +2,13 @@
 
 require 'csv'
 
+# drop all existing data:
+ActiveRecord::Base.connection.tables.each do |table|
+  next if %w[schema_migrations ar_internal_metadata].include?(table)
+
+  table.classify.constantize.delete_all
+end
+
 # Texas 8th GRADE SCIENCE:
 
 grade_8_teks = StandardsChart.create!(title: 'TEKS - 8th Grade Science')
@@ -94,6 +101,122 @@ question1.question_options.create!(
 metal_tag = Tag.create!(name: 'metal')
 
 Tagging.create!(tag: metal_tag, question: question1)
+
+question2 = Question.create!(
+  question_text: 'A mystery element is dull, yellow, and powdery. Which of the following best fits the description?',
+  question_type: 'multiple_choice',
+  question_node: '{
+    "object": "value",
+    "document": {
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes": [
+            {
+              "object": "text",
+              "text": "A mystery element is dull, yellow, and powdery. Which of the following best fits the description?",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }'
+)
+
+QuestionsStandard.create!(
+  question: question2,
+  standard: Standard.find_by(title: '6.6A')
+)
+
+question2.question_options.create!(
+  option_text: 'nonmetal',
+  option_node: '{
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "nonmetal",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }',
+  correct: true
+)
+
+question2.question_options.create!(
+  option_text: 'metal',
+  option_node: '{
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "metal",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }',
+  correct: false
+)
+
+question2.question_options.create!(
+  option_text: 'metalloid',
+  option_node: '{
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "metalloid",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }',
+  correct: false
+)
+
+nonmetal_tag = Tag.create!(name: 'nonmetal')
+metalloid_tag = Tag.create!(name: 'metalloid')
+
+Tagging.create!(tag: metal_tag, question: question2)
+Tagging.create!(tag: nonmetal_tag, question: question2)
+Tagging.create!(tag: metalloid_tag, question: question2)
 
 ################################################################################
 # CALIFORNIA CHEMISTRY:

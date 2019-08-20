@@ -20,7 +20,8 @@ class Standard < ApplicationRecord
   has_many :questions_standards,
            primary_key: :id,
            foreign_key: :standard_id,
-           class_name: :QuestionsStandard
+           class_name: :QuestionsStandard,
+           dependent: :destroy
 
   has_many :questions,
            through: :questions_standards,
