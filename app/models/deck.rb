@@ -16,4 +16,6 @@ class Deck < ApplicationRecord
   belongs_to :teacher
   has_many :decks_questions, dependent: :destroy
   has_many :questions, through: :decks_questions
+
+  validates :name, uniqueness: { scope: :teacher_id }
 end
