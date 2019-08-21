@@ -7,5 +7,6 @@ module Types
     field :edit_standards_chart, mutation: Mutations::EditStandardsChart
     field :log_in_teacher, mutation: Mutations::Auth::LogInTeacher
     field :sign_up_teacher, mutation: Mutations::Auth::SignUpTeacher
+    field :update_deck, mutation: Mutations::UpdateDeck
   end
 end
