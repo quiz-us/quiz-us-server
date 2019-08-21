@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tags
@@ -9,9 +11,10 @@
 #
 
 class Tag < ApplicationRecord
-  has_many :taggings
+  validates :name, uniqueness: true
+
+  has_many :taggings, dependent: :destroy
   has_many :questions,
-    through: :taggings,
-    source: :question
-  
+           through: :taggings,
+           source: :question
 end
