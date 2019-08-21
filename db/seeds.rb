@@ -2,6 +2,13 @@
 
 require 'csv'
 
+# drop all existing data:
+ActiveRecord::Base.connection.tables.each do |table|
+  next if %w[schema_migrations ar_internal_metadata].include?(table)
+
+  table.classify.constantize.delete_all
+end
+
 # Texas 8th GRADE SCIENCE:
 
 grade_8_teks = StandardsChart.create!(title: 'TEKS - 8th Grade Science')
@@ -38,44 +45,178 @@ question1 = Question.create!(
   question_text: 'What are the physical characteristics of metals?',
   question_type: 'free_response',
   question_node: '{
-    "object":"value",
-    "document":{
-      "object": {
-        "document",
-        "data":{},
-        "nodes":[
-          {
-            "object":"block",
-            "type":"line",
-            "data":{},
-            "nodes":[
-              {
-                "object":"text",
-                "text":"What are the physical characteristics of metals?",
-                "marks":[]
-              }
-            ]
-          }
-        ]
-      }
+    "object": "value",
+    "document": {
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes": [
+            {
+              "object": "text",
+              "text": "What are the physical characteristics of metals?",
+              "marks": []
+            }
+          ]
+        }
+      ]
     }
   }'
 )
 
+QuestionsStandard.create!(
+  question: question1,
+  standard: Standard.find_by(title: '6.6A')
+)
+
 question1.question_options.create!(
-  correct: true,
   option_text: 'lustrous, good conductor, malleable, ductile',
   option_node: '{
-        "object": "block",
-        "type": "paragraph",
-        "nodes": [
-          {
-            "object": "text",
-            "text": "lustrous, good conductor, malleable, ductile."
-          }
-        ]
-      }'
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "lustrous, good conductor, malleable, ductile",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }',
+  correct: true
 )
+
+metal_tag = Tag.create!(name: 'metal')
+
+Tagging.create!(tag: metal_tag, question: question1)
+
+question2 = Question.create!(
+  question_text: 'A mystery element is dull, yellow, and powdery. Which of the following best fits the description?',
+  question_type: 'multiple_choice',
+  question_node: '{
+    "object": "value",
+    "document": {
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes": [
+            {
+              "object": "text",
+              "text": "A mystery element is dull, yellow, and powdery. Which of the following best fits the description?",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }'
+)
+
+QuestionsStandard.create!(
+  question: question2,
+  standard: Standard.find_by(title: '6.6A')
+)
+
+question2.question_options.create!(
+  option_text: 'nonmetal',
+  option_node: '{
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "nonmetal",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }',
+  correct: true
+)
+
+question2.question_options.create!(
+  option_text: 'metal',
+  option_node: '{
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "metal",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }',
+  correct: false
+)
+
+question2.question_options.create!(
+  option_text: 'metalloid',
+  option_node: '{
+    "object": "value",
+    "document":{
+      "object": "document",
+      "data": {},
+      "nodes":[
+        {
+          "object": "block",
+          "type": "line",
+          "data": {},
+          "nodes":[
+            {
+              "object": "text",
+              "text": "metalloid",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  }',
+  correct: false
+)
+
+nonmetal_tag = Tag.create!(name: 'nonmetal')
+metalloid_tag = Tag.create!(name: 'metalloid')
+
+Tagging.create!(tag: metal_tag, question: question2)
+Tagging.create!(tag: nonmetal_tag, question: question2)
+Tagging.create!(tag: metalloid_tag, question: question2)
 
 ################################################################################
 # CALIFORNIA CHEMISTRY:
@@ -112,11 +253,11 @@ QuestionsStandard.create!(
   standard_id: standard1.id
 )
 
-question_option1 = QuestionOption.create!({
+question_option1 = QuestionOption.create!(
   question_id: q1.id,
-  option_text: "Halogens",
+  option_text: 'Halogens',
   correct: false,
-  option_node: '{      
+  option_node: '{
         "object": "block",
         "type": "paragraph",
         "nodes": [
@@ -126,13 +267,13 @@ question_option1 = QuestionOption.create!({
           }
         ]
       }'
-})
+)
 
-question_option2 = QuestionOption.create!({
+question_option2 = QuestionOption.create!(
   question_id: q1.id,
-  option_text: "Noble Gases",
+  option_text: 'Noble Gases',
   correct: true,
-  option_node: '{      
+  option_node: '{
         "object": "block",
         "type": "paragraph",
         "nodes": [
@@ -142,7 +283,7 @@ question_option2 = QuestionOption.create!({
           }
         ]
       }'
-})
+)
 
 tag1 = Tag.create!(
   name: 'Common Core Chemistry'

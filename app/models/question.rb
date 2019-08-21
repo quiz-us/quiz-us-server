@@ -13,7 +13,12 @@
 #
 
 class Question < ApplicationRecord
-  has_many :question_options, dependent: :destroy
+  include PgSearch::Model
+
+  pg_search_scope :search_for,
+                  against: %i[question_text],
+                  using: { tsearch: { any_word: true, prefix: true } }
+
   has_many :taggings
   has_many :tags,
            through: :taggings,
@@ -22,14 +27,16 @@ class Question < ApplicationRecord
   has_many :questions_standards,
            primary_key: :id,
            foreign_key: :question_id,
-           class_name: :QuestionsStandard
+           class_name: :QuestionsStandard,
+           dependent: :destroy
 
   has_many :standards,
-    through: :questions_standards,
-    source: :standard
+           through: :questions_standards,
+           source: :standard
 
   has_many :question_options,
-    primary_key: :id,
-    foreign_key: :question_id,
-    class_name: :QuestionOption
+           primary_key: :id,
+           foreign_key: :question_id,
+           class_name: :QuestionOption,
+           dependent: :destroy
 end

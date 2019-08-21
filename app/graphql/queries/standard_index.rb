@@ -7,8 +7,7 @@ module Queries
     type [Types::StandardType], null: false
 
     def resolve
-      teacher_signed_in?
-      current_teacher.standards
+      current_course.standards
     end
   end
 end

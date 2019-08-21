@@ -15,15 +15,17 @@ module Mutations
 
       def resolve(email:, password:)
         teacher = Teacher.find_for_authentication(email: email)
-        return nil unless teacher
+        return invalid_login unless teacher
 
         is_valid_for_auth = teacher.valid_for_authentication? do
           teacher.valid_password?(password)
         end
-        is_valid_for_auth ? teacher : nil
-      rescue ActiveRecord::RecordInvalid => e
-        GraphQL::ExecutionError.new(
-          "Invalid input: #{e.record.errors.full_messages.join(', ')}"
+        is_valid_for_auth ? teacher : invalid_login
+      end
+
+      def invalid_login
+        @invalid_login ||= GraphQL::ExecutionError.new(
+          'Incorrect username and/or password. Please try again.'
         )
       end
     end
