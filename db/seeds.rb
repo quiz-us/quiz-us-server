@@ -290,7 +290,7 @@ tag1 = Tag.create!(
 )
 
 tag2 = Tag.create!(
-  name: 'Common Core Chemistry'
+  name: 'Periodic Table'
 )
 
 tagging1 = Tagging.create!(
@@ -302,6 +302,17 @@ tagging2 = Tagging.create!(
   question_id: q1.id,
   tag_id: tag2.id
 )
+
+cynthia = Teacher.create!({
+  email: 'cyn@gmail.com',
+  password: 'cyn@gmail.com'
+})
+
+Course.create!({
+  name: 'SY19 S1 Chemistry P2',
+  teacher: cynthia,
+  standards_chart: standards_chart1
+})
 
 chris = Teacher.create!(
   email: 'chris.d.hua@gmail.com',

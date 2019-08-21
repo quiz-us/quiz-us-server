@@ -35,6 +35,8 @@ gem 'search_object_graphql'
 
 gem 'devise-jwt', '~> 0.5.9'
 
+gem 'nokogiri', '>= 1.10.4'
+
 group :test do
   gem 'rspec_junit_formatter'
   gem 'shoulda-matchers'
