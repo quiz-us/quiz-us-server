@@ -6,7 +6,7 @@ class CreateQuestionService
   include Callable
 
   def initialize(params)
-    @question_node = JSON.parse(params[:question_node], symbolize_names: true)
+    @question_node = params[:question_node]
     @question_options = params[:question_options]
     @question_plaintext = params[:question_plaintext]
     @question_standard_id = params[:standard_id]
@@ -43,18 +43,18 @@ class CreateQuestionService
   end
 
   def map_question_to_standards!
-    @question.questions_standards.create({
+    @question.questions_standards.create(
       standard_id: @question_standard_id
-    })
+    )
   end
 
   def create_question_options!
     @question_options.each do |option|
-      option_test = JSON.parse(option, symbolize_names: true)
+      option_obj = JSON.parse(option)
       @question.question_options.create!(
-        correct: option_test[:isCorrect],
-        option_node: option_test[:value], # TODO rename these variables on the frontend so they match our backend convention
-        option_text: option_test[:answerText]
+        correct: option_obj['isCorrect'],
+        option_node: option_obj['value'].to_json, # TODO: rename these variables on the frontend so they match our backend convention
+        option_text: option_obj['answerText']
       )
     end
   end
