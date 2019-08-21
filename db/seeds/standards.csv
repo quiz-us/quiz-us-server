@@ -1,10 +1,43 @@
-8.5A,"describe the structure of atoms, including the masses, electrical charges, and locations, of protons and neutrons in the nucleus nad electrons in the electron cloud",RS,1
-8.5B,"identify that protons determine an element's identity and valence electrons determine its chemical properties, including reactivity",RS,1
-8.5C,"interpret the arrangement of teh Periodic Table, including groups and periods, to explain how properties are used to classify elements",RS,1
-8.5D,recognize that chemical formulas are used to identify substances and determine the number of atoms of each element in chemical formulas containing subscripts,RS,1
-8.5E,investigate how evidence of chemical reactions indicates that new substances with different properties are formed and how that relates to the law of conservation of mass,RS,1
-7.5B,"diagram the flow of energy through living systems, including food chains, food webs, and energy pyramids",SS,1
-7.6A,distinguish betweeh physical and chemical changes in matter,SS,1
-6.6A,"compare metals, nonmetals, and metalloids using physical properties such as luster, conductivity, or malleability",SS,1
-6.6B,calculate density to identify an unknown susbstance,SS,1
-8.6A,demonstrate and calcualte how unbalanced forces change the speed or direction of an object's motion,RS,2
+8.5(A),"describe the structure of atoms, including the masses, electrical charges, and locations, of protons and neutrons in the nucleus nad electrons in the electron cloud",RS,1,15
+8.5(B),"identify that protons determine an element's identity and valence electrons determine its chemical properties, including reactivity",RS,1,13
+8.5(C),"interpret the arrangement of teh Periodic Table, including groups and periods, to explain how properties are used to classify elements",RS,1,14
+8.5(D),recognize that chemical formulas are used to identify substances and determine the number of atoms of each element in chemical formulas containing subscripts,RS,1,16
+8.5(E),investigate how evidence of chemical reactions indicates that new substances with different properties are formed and how that relates to the law of conservation of mass,RS,1,14
+7.5(B),"diagram the flow of energy through living systems, including food chains, food webs, and energy pyramids",SS,1,4
+7.6(A),distinguish betweeh physical and chemical changes in matter,SS,1,4
+6.6(A),"compare metals, nonmetals, and metalloids using physical properties such as luster, conductivity, or malleability",SS,1,4
+6.6(B),calculate density to identify an unknown susbstance,SS,1,5
+8.6(A),demonstrate and calcualte how unbalanced forces change the speed or direction of an object's motion,RS,2,23
+8.6(C),"Investigate and describe applications of newton's three laws of motion such as in vehicle restraints, sports activities, amusement park rides, Earths tectonic activities, and rocket launches",RS,2,20
+8.6(B),"differentiate between speed, velocity, and acceleration",SS,2,6
+6.8(A),compare and contrast potential and kinetic energy,SS,2,8
+6.8(C),calculate average speed using distance and time measurements,SS,2,8
+6.8(D),measure and graph changes in motion,SS,2,8
+6.9(C),demonstrate energy transformation such as energy in a flashlight battery changes from chemical energy to electrical energy to light energy,SS,2,8
+8.7(A),"model and illustrate how the titlted Earth rotates on its axis, causing day and night, and revolves around the Sun causing changes in seasons",RS,3,13
+8.7(B),demonstrate and predict the sequence of events in the lunar cycle,RS,3,15
+8.8(A),"describe components of the universe, including stars, nebulae, and galaxies, and use models such as the Hertzsprung-Russell diagram for classification",RS,3,16
+8.9(B),Relate plate tectonics to the formation of crustal features,RS,3,15
+8.9(C),Interpret topographic maps and satellite views to identify land and erosional features and predict how these features may be reshaped by weathering,RS,3,13
+8.7(C),Relate the positions of the Moon and Sun to their effect on ocean tides,SS,3,2
+8.8(B),Recognize that the Sun is a medium-sized star located in a star located in a spiral arm of the Milky Way galazy and the Sun is many thousands of times closer to Earth than any other star,SS,3,3
+8.8(C),identify how different wavelengths of the electromagnetic spectrum such as visible light and radio waves are used to gain information about components in the universe,SS,3,2
+8.9(A),Describe the historical development of evidence that supports plate tectonic theory,SS,3,2
+8.10(A),"Recognize that the Sun provides the energy that drives convection within the atmosphere and oceans, producing winds",SS,3,2
+8.10(B),Identify how global patterns of atmospheric movement influence local weather using weather maps that show high and low pressures and fronts,SS,3,3
+8.10(C),Identify the role of the oceans in the formation of weather systems such as hurricanes,SS,3,4
+7.8(C),Model the effects of human activity on groundwater and surface water in a watershed,SS,3,5
+6.11(B),undestand that gravity is the force that governs the motion of our solar system ,SS,3,5
+8.11(A),"investigate how organisms and populations in an ecosystem depend on and may compete for biotic factors such as food and abiotiv factors such as quantity of light, water, range of tempratures, or soil composition",RS,4,21
+8.11(B),Explore how short-and long-term environmental changes affect organisms and traits in subsequent populations,RS,4,20
+8.11(C),"Recognize human dependence on ocean systems and explain how human activities such as runoff, artifical reefs, or use of resources have modified these systems",SS,4,3
+7.10(B),Descrive how biodiversity contributes to the substainability of an ecosystem ,SS,4,5
+7.10(C),"Oberve, record, and describe the role of  ecological succession such as in a microhabitat of a garden with weeds",SS,4,3
+7.11(A),Examine organisms or their structures such as insects and use dichotomous keys for identification,SS,4,3
+7.11(C),Identify some changes in genetic traits that have occured over several generations through natural selection and selevtive breeding such as the Galapagos Medium Ground Finch (Geospiza fortis) or domestic animals and hybrid plants,SS,4,3
+7.12(B),"Identify the main fucntions of the systems of the human organism, including the circulatory, respiratory, skeletal, muscular, digestive, excretory, reproductive, integumentary, nervous, and endocrine systems",SS,4,7
+7.12(D),"Differentiate between structure and function in plant and animal cell organelles, including cell membrane, cell wall, nucleus, cytoplasm, mitochondrion, chlorplast, and vacuole",SS,4,3
+7.12(F),Recgonize the components of cell theory,SS,4,3
+7.14(B),Compare the results of uniform or diverse offspring from asexual or sexual reproduction,SS,4,3
+7.14(C),Recgonize that inherited traits of individuals are governed in the genetic material found in the genes within chromosomes in the nucleus,SS,4,3
+6.12(D),"Identify the basic of characteristics of organisms, including prokaryotic or eukaryotic, unicellular or multicellular, autotrophic or hetertrophpic, and mode of reproduction, that further classify them in the currently recognized kingdoms",SS,4,4

@@ -3,11 +3,11 @@
 require 'csv'
 
 # drop all existing data:
-ActiveRecord::Base.connection.tables.each do |table|
-  next if %w[schema_migrations ar_internal_metadata].include?(table)
+# ActiveRecord::Base.connection.tables.each do |table|
+#   next if %w[schema_migrations ar_internal_metadata].include?(table)
 
-  table.classify.constantize.delete_all
-end
+#   table.classify.constantize.delete_all
+# end
 
 # Texas 8th GRADE SCIENCE:
 
@@ -303,16 +303,16 @@ tagging2 = Tagging.create!(
   tag_id: tag2.id
 )
 
-cynthia = Teacher.create!({
+cynthia = Teacher.create!(
   email: 'cyn@gmail.com',
   password: 'cyn@gmail.com'
-})
+)
 
-Course.create!({
+Course.create!(
   name: 'SY19 S1 Chemistry P2',
   teacher: cynthia,
   standards_chart: standards_chart1
-})
+)
 
 chris = Teacher.create!(
   email: 'chris.d.hua@gmail.com',
