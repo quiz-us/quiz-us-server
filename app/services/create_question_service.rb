@@ -52,9 +52,9 @@ class CreateQuestionService
     @question_options.each do |option|
       option_test = JSON.parse(option, symbolize_names: true)
       @question.question_options.create!(
-        correct: option_test[:correct],
-        option_node: option_test[:optionNode],
-        option_text: option_test[:optionText]
+        correct: option_test[:isCorrect],
+        option_node: option_test[:value], # TODO rename these variables on the frontend so they match our backend convention
+        option_text: option_test[:answerText]
       )
     end
   end
