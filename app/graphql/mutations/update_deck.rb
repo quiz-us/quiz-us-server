@@ -2,8 +2,8 @@
 
 module Mutations
   class UpdateDeck < BaseMutation
-    graphql_name 'Create Deck'
-    description 'Create Deck'
+    graphql_name 'Update Deck'
+    description 'Update Deck'
 
     # arguments passed to the `resolved` method
     argument :deck_id, ID, required: true
