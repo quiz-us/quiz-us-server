@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: students
@@ -12,4 +14,10 @@
 #
 
 class Student < ApplicationRecord
+  include Devise::JWT::RevocationStrategies::JTIMatcher
+  include Tokenizable
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
 end
