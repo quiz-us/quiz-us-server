@@ -11,212 +11,212 @@ require 'csv'
 
 # Texas 8th GRADE SCIENCE:
 
-grade_8_teks = StandardsChart.create!(title: 'TEKS - 8th Grade Science')
+# grade_8_teks = StandardsChart.create!(title: 'TEKS - 8th Grade Science')
 
-categories_map = {}
+# categories_map = {}
 
-CSV.foreach('./db/seeds/categories.csv') do |row|
-  key = row[0]
-  category_title = row[1]
-  category_description = row[2]
+# CSV.foreach('./db/seeds/categories.csv') do |row|
+#   key = row[0]
+#   category_title = row[1]
+#   category_description = row[2]
 
-  category = grade_8_teks.standards_categories.create!(
-    title: category_title,
-    description: category_description
-  )
+#   category = grade_8_teks.standards_categories.create!(
+#     title: category_title,
+#     description: category_description
+#   )
 
-  categories_map[key] = category
-end
+#   categories_map[key] = category
+# end
 
-CSV.foreach('./db/seeds/standards.csv') do |row|
-  title = row[0]
-  description = row[1]
-  meta = row[2]
-  key = row[3]
+# CSV.foreach('./db/seeds/standards.csv') do |row|
+#   title = row[0]
+#   description = row[1]
+#   meta = row[2]
+#   key = row[3]
 
-  categories_map[key].standards.create!(
-    title: title,
-    description: description,
-    meta: meta
-  )
-end
+#   categories_map[key].standards.create!(
+#     title: title,
+#     description: description,
+#     meta: meta
+#   )
+# end
 
-question1 = Question.create!(
-  question_text: 'What are the physical characteristics of metals?',
-  question_type: 'free_response',
-  question_node: '{
-    "object": "value",
-    "document": {
-      "object": "document",
-      "data": {},
-      "nodes":[
-        {
-          "object": "block",
-          "type": "line",
-          "data": {},
-          "nodes": [
-            {
-              "object": "text",
-              "text": "What are the physical characteristics of metals?",
-              "marks": []
-            }
-          ]
-        }
-      ]
-    }
-  }'
-)
+# question1 = Question.create!(
+#   question_text: 'What are the physical characteristics of metals?',
+#   question_type: 'free_response',
+#   question_node: '{
+#     "object": "value",
+#     "document": {
+#       "object": "document",
+#       "data": {},
+#       "nodes":[
+#         {
+#           "object": "block",
+#           "type": "line",
+#           "data": {},
+#           "nodes": [
+#             {
+#               "object": "text",
+#               "text": "What are the physical characteristics of metals?",
+#               "marks": []
+#             }
+#           ]
+#         }
+#       ]
+#     }
+#   }'
+# )
 
-QuestionsStandard.create!(
-  question: question1,
-  standard: Standard.find_by(title: '6.6A')
-)
+# QuestionsStandard.create!(
+#   question: question1,
+#   standard: Standard.find_by(title: '6.6A')
+# )
 
-question1.question_options.create!(
-  option_text: 'lustrous, good conductor, malleable, ductile',
-  option_node: '{
-    "object": "value",
-    "document":{
-      "object": "document",
-      "data": {},
-      "nodes":[
-        {
-          "object": "block",
-          "type": "line",
-          "data": {},
-          "nodes":[
-            {
-              "object": "text",
-              "text": "lustrous, good conductor, malleable, ductile",
-              "marks": []
-            }
-          ]
-        }
-      ]
-    }
-  }',
-  correct: true
-)
+# question1.question_options.create!(
+#   option_text: 'lustrous, good conductor, malleable, ductile',
+#   option_node: '{
+#     "object": "value",
+#     "document":{
+#       "object": "document",
+#       "data": {},
+#       "nodes":[
+#         {
+#           "object": "block",
+#           "type": "line",
+#           "data": {},
+#           "nodes":[
+#             {
+#               "object": "text",
+#               "text": "lustrous, good conductor, malleable, ductile",
+#               "marks": []
+#             }
+#           ]
+#         }
+#       ]
+#     }
+#   }',
+#   correct: true
+# )
 
-metal_tag = Tag.create!(name: 'metal')
+# metal_tag = Tag.create!(name: 'metal')
 
-Tagging.create!(tag: metal_tag, question: question1)
+# Tagging.create!(tag: metal_tag, question: question1)
 
-question2 = Question.create!(
-  question_text: 'A mystery element is dull, yellow, and powdery. Which of the following best fits the description?',
-  question_type: 'multiple_choice',
-  question_node: '{
-    "object": "value",
-    "document": {
-      "object": "document",
-      "data": {},
-      "nodes":[
-        {
-          "object": "block",
-          "type": "line",
-          "data": {},
-          "nodes": [
-            {
-              "object": "text",
-              "text": "A mystery element is dull, yellow, and powdery. Which of the following best fits the description?",
-              "marks": []
-            }
-          ]
-        }
-      ]
-    }
-  }'
-)
+# question2 = Question.create!(
+#   question_text: 'A mystery element is dull, yellow, and powdery. Which of the following best fits the description?',
+#   question_type: 'multiple_choice',
+#   question_node: '{
+#     "object": "value",
+#     "document": {
+#       "object": "document",
+#       "data": {},
+#       "nodes":[
+#         {
+#           "object": "block",
+#           "type": "line",
+#           "data": {},
+#           "nodes": [
+#             {
+#               "object": "text",
+#               "text": "A mystery element is dull, yellow, and powdery. Which of the following best fits the description?",
+#               "marks": []
+#             }
+#           ]
+#         }
+#       ]
+#     }
+#   }'
+# )
 
-QuestionsStandard.create!(
-  question: question2,
-  standard: Standard.find_by(title: '6.6A')
-)
+# QuestionsStandard.create!(
+#   question: question2,
+#   standard: Standard.find_by(title: '6.6A')
+# )
 
-question2.question_options.create!(
-  option_text: 'nonmetal',
-  option_node: '{
-    "object": "value",
-    "document":{
-      "object": "document",
-      "data": {},
-      "nodes":[
-        {
-          "object": "block",
-          "type": "line",
-          "data": {},
-          "nodes":[
-            {
-              "object": "text",
-              "text": "nonmetal",
-              "marks": []
-            }
-          ]
-        }
-      ]
-    }
-  }',
-  correct: true
-)
+# question2.question_options.create!(
+#   option_text: 'nonmetal',
+#   option_node: '{
+#     "object": "value",
+#     "document":{
+#       "object": "document",
+#       "data": {},
+#       "nodes":[
+#         {
+#           "object": "block",
+#           "type": "line",
+#           "data": {},
+#           "nodes":[
+#             {
+#               "object": "text",
+#               "text": "nonmetal",
+#               "marks": []
+#             }
+#           ]
+#         }
+#       ]
+#     }
+#   }',
+#   correct: true
+# )
 
-question2.question_options.create!(
-  option_text: 'metal',
-  option_node: '{
-    "object": "value",
-    "document":{
-      "object": "document",
-      "data": {},
-      "nodes":[
-        {
-          "object": "block",
-          "type": "line",
-          "data": {},
-          "nodes":[
-            {
-              "object": "text",
-              "text": "metal",
-              "marks": []
-            }
-          ]
-        }
-      ]
-    }
-  }',
-  correct: false
-)
+# question2.question_options.create!(
+#   option_text: 'metal',
+#   option_node: '{
+#     "object": "value",
+#     "document":{
+#       "object": "document",
+#       "data": {},
+#       "nodes":[
+#         {
+#           "object": "block",
+#           "type": "line",
+#           "data": {},
+#           "nodes":[
+#             {
+#               "object": "text",
+#               "text": "metal",
+#               "marks": []
+#             }
+#           ]
+#         }
+#       ]
+#     }
+#   }',
+#   correct: false
+# )
 
-question2.question_options.create!(
-  option_text: 'metalloid',
-  option_node: '{
-    "object": "value",
-    "document":{
-      "object": "document",
-      "data": {},
-      "nodes":[
-        {
-          "object": "block",
-          "type": "line",
-          "data": {},
-          "nodes":[
-            {
-              "object": "text",
-              "text": "metalloid",
-              "marks": []
-            }
-          ]
-        }
-      ]
-    }
-  }',
-  correct: false
-)
+# question2.question_options.create!(
+#   option_text: 'metalloid',
+#   option_node: '{
+#     "object": "value",
+#     "document":{
+#       "object": "document",
+#       "data": {},
+#       "nodes":[
+#         {
+#           "object": "block",
+#           "type": "line",
+#           "data": {},
+#           "nodes":[
+#             {
+#               "object": "text",
+#               "text": "metalloid",
+#               "marks": []
+#             }
+#           ]
+#         }
+#       ]
+#     }
+#   }',
+#   correct: false
+# )
 
-nonmetal_tag = Tag.create!(name: 'nonmetal')
-metalloid_tag = Tag.create!(name: 'metalloid')
+# nonmetal_tag = Tag.create!(name: 'nonmetal')
+# metalloid_tag = Tag.create!(name: 'metalloid')
 
-Tagging.create!(tag: metal_tag, question: question2)
-Tagging.create!(tag: nonmetal_tag, question: question2)
-Tagging.create!(tag: metalloid_tag, question: question2)
+# Tagging.create!(tag: metal_tag, question: question2)
+# Tagging.create!(tag: nonmetal_tag, question: question2)
+# Tagging.create!(tag: metalloid_tag, question: question2)
 
 ################################################################################
 # CALIFORNIA CHEMISTRY:
@@ -253,7 +253,7 @@ QuestionsStandard.create!(
   standard_id: standard1.id
 )
 
-question_option1 = QuestionOption.create!(
+QuestionOption.create!(
   question_id: q1.id,
   option_text: 'Halogens',
   correct: false,
@@ -269,7 +269,7 @@ question_option1 = QuestionOption.create!(
       }'
 )
 
-question_option2 = QuestionOption.create!(
+QuestionOption.create!(
   question_id: q1.id,
   option_text: 'Noble Gases',
   correct: true,
@@ -293,12 +293,12 @@ tag2 = Tag.create!(
   name: 'Periodic Table'
 )
 
-tagging1 = Tagging.create!(
+Tagging.create!(
   question_id: q1.id,
   tag_id: tag1.id
 )
 
-tagging2 = Tagging.create!(
+Tagging.create!(
   question_id: q1.id,
   tag_id: tag2.id
 )
@@ -314,13 +314,13 @@ Course.create!(
   standards_chart: standards_chart1
 )
 
-chris = Teacher.create!(
-  email: 'chris.d.hua@gmail.com',
-  password: 'chrischrischris'
+josh = Teacher.create!(
+  email: 'joshling1919@gmail.com',
+  password: 'joshjoshjosh'
 )
 
 Course.create!(
-  name: 'Texas 8th Grade Science',
-  teacher: chris,
-  standards_chart: grade_8_teks
+  name: 'Texas 8th Grade Science 2',
+  teacher: josh,
+  standards_chart: StandardsChart.find_by(title: 'TEKS - 8th Grade Science')
 )
