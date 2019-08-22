@@ -25,6 +25,7 @@ gem 'bootsnap'
 gem 'graphql'
 gem 'pg_search'
 gem 'rack-cors'
+gem 'rollbar'
 gem 'search_object_graphql'
 
 # Use Capistrano for deployment
