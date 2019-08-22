@@ -10,7 +10,7 @@ module Mutations
       argument :token, String, required: true
 
       # return type from the mutation
-      type Types.StudentType
+      type Types::StudentType
 
       def resolve(token:)
         student = Token.authenticate(token)
