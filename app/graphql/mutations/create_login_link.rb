@@ -14,7 +14,7 @@ module Mutations
     def resolve(email:)
       student = Student.find_by!(email: email)
       token = student.tokens.create!
-      log_in_base = Rails.env.production? ? 'https://quizus.fun' : 'https://localhost:8080'
+      log_in_base = Rails.env.production? ? 'https://quizus.fun' : 'http://localhost:8080'
       SendgridMailer.send(
         to: email,
         substitutions: {
