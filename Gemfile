@@ -27,6 +27,7 @@ gem 'pg_search'
 gem 'rack-cors'
 gem 'rollbar'
 gem 'search_object_graphql'
+gem 'sendgrid-ruby'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
