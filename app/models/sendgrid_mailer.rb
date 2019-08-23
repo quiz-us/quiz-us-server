@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 class SendgridMailer
   def self.send(to:, substitutions:, template_name:)
     if Rails.env.development?
@@ -40,9 +42,30 @@ class SendgridMailer
 
   def self.stub_development(to, substitutions, template_name)
     File.open(Rails.root.join('tmp', 'mailer.html'), 'w') do |f|
-      f.write(to)
-      f.write(substitutions)
-      f.write(template_name)
+      f.write(
+        <<-HTML
+        <div>
+          <strong>To: </strong>#{to}
+        </div>
+        HTML
+      )
+      f.write(
+        <<-HTML
+        <div>
+          <strong>Substitutions: </strong>
+          <pre>
+            #{JSON.pretty_generate(substitutions)}
+          </pre>
+        </div>
+        HTML
+      )
+      f.write(
+        <<-HTML
+        <div>
+          <strong>Template Name: </strong>#{template_name}
+        </div>
+        HTML
+      )
     end
     Launchy.open(Rails.root.join('tmp', 'mailer.html').to_s)
   end
