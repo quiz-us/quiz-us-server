@@ -31,7 +31,7 @@ class Token < ApplicationRecord
   def expired?
     return true if expired
 
-    is_expired = Time.current.utc > (created_at + 2.hours)
+    is_expired = Time.current.utc > (created_at + 24.hours)
     expire! if is_expired
     is_expired
   end

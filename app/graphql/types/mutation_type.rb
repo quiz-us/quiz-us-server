@@ -3,6 +3,7 @@
 module Types
   class MutationType < BaseObject
     field :create_deck, mutation: Mutations::CreateDeck
+    field :create_login_link, Mutation::CreateLoginLink
     field :create_question, mutation: Mutations::CreateQuestion
     field :delete_deck, mutation: Mutations::DeleteDeck
     field :edit_standards_chart, mutation: Mutations::EditStandardsChart

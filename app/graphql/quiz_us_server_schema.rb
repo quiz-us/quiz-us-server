@@ -3,7 +3,9 @@
 class QuizUsServerSchema < GraphQL::Schema
   #########################################
   # ERROR HANDLING:
-  rescue_from(ActiveRecord::RecordNotFound) { nil }
+  rescue_from(ActiveRecord::RecordNotFound) do
+    Graphql::ExecutionError.new('Not Found')
+  end
 
   rescue_from(ActiveRecord::RecordInvalid) do |exception|
     GraphQL::ExecutionError.new(exception.record.errors.full_messages.join("\n"))

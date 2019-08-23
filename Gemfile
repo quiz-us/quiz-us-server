@@ -49,6 +49,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'launchy'
   gem 'rspec-rails'
 end
 

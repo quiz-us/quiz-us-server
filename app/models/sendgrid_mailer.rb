@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class SendgridMailer
-  def self.send(to, subsitutions, template_name)
+  def self.send(to:, substitutions:, template_name:)
+    if Rails.env.development?
+      stub_development(to, substitutions, template_name)
+      return
+    end
     template_id = TEMPLATES[template_name.to_sym]
     unless template_id
       raise StandardError(
@@ -26,11 +30,21 @@ class SendgridMailer
     }
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
     begin
-      response = sg.client.mail._('send').post(request_body: data)
-      return response.status_code
+      sg.client.mail._('send').post(request_body: data)
+      true
     rescue StandardError => e
       Rollbar.log("Error occured while sending #{template_name} to #{to}", e)
+      false
     end
+  end
+
+  def self.stub_development(to, substitutions, template_name)
+    File.open(Rails.root.join('tmp', 'mailer.html'), 'w') do |f|
+      f.write(to)
+      f.write(substitutions)
+      f.write(template_name)
+    end
+    Launchy.open(Rails.root.join('tmp', 'mailer.html').to_s)
   end
 
   TEMPLATES = {
