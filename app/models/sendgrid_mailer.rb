@@ -4,15 +4,15 @@ require 'json'
 
 class SendgridMailer
   def self.send(to:, substitutions:, template_name:)
-    if Rails.env.development?
-      stub_development(to, substitutions, template_name)
-      return
-    end
     template_id = TEMPLATES[template_name.to_sym]
     unless template_id
       raise StandardError(
         "Sendgrid #{template_name} does not exist. Check the sendgrid_mailer's template map."
       )
+    end
+    if Rails.env.development?
+      stub_development(to, substitutions, template_name)
+      return true
     end
     data = {
       "personalizations": [
