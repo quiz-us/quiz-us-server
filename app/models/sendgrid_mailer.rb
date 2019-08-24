@@ -22,7 +22,7 @@ class SendgridMailer
               "email": to
             }
           ],
-          "dynamic_template_data": subsitutions
+          "dynamic_template_data": substitutions
         }
       ],
       "from": {
