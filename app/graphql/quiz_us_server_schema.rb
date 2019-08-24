@@ -14,5 +14,6 @@ class QuizUsServerSchema < GraphQL::Schema
   #########################################
   # Definition of QueryType and MutationType
   query(Types::QueryType)
+  query(Types::StudentQueryType)
   mutation(Types::MutationType)
 end
