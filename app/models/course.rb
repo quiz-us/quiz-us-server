@@ -18,4 +18,5 @@ class Course < ApplicationRecord
   has_many :standards, through: :standards_chart
   has_many :questions_standards, through: :standards
   has_many :questions, through: :questions_standards
+  has_many :periods, dependent: :destroy
 end

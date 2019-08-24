@@ -29,4 +29,6 @@ class Teacher < ApplicationRecord
   has_many :standards_categories, through: :standards_charts
   has_many :standards, through: :standards_categories
   has_many :decks, dependent: :destroy
+  has_many :periods, through: :courses
+  has_many :students, through: :periods
 end
