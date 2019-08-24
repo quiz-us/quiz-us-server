@@ -27,6 +27,7 @@ gem 'pg_search'
 gem 'rack-cors'
 gem 'rollbar'
 gem 'search_object_graphql'
+gem 'sendgrid-ruby'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -48,6 +49,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'launchy'
   gem 'rspec-rails'
 end
 

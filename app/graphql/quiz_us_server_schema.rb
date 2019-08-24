@@ -3,7 +3,9 @@
 class QuizUsServerSchema < GraphQL::Schema
   #########################################
   # ERROR HANDLING:
-  rescue_from(ActiveRecord::RecordNotFound) { nil }
+  rescue_from(ActiveRecord::RecordNotFound) do
+    GraphQL::ExecutionError.new('Not Found')
+  end
 
   rescue_from(ActiveRecord::RecordInvalid) do |exception|
     GraphQL::ExecutionError.new(exception.record.errors.full_messages.join("\n"))
@@ -12,5 +14,6 @@ class QuizUsServerSchema < GraphQL::Schema
   #########################################
   # Definition of QueryType and MutationType
   query(Types::QueryType)
+  query(Types::StudentQueryType)
   mutation(Types::MutationType)
 end

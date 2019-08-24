@@ -4,7 +4,6 @@
 
 module Types
   class QueryType < BaseObject
-    # queries are just represented as fields
     field :deck, resolver: Queries::DeckShow
     field :decks, resolver: Queries::DeckIndex
     field :standards_charts, resolver: Queries::StandardsChartIndex

@@ -6,7 +6,8 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
+      # Query context goes here:
+      current_student: current_student,
       current_teacher: current_teacher
     }
     result = QuizUsServerSchema.execute(
