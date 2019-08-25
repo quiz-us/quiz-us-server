@@ -2,6 +2,7 @@
 
 module Types
   class MutationType < BaseObject
+    field :create_assignments, mutation: Mutations::CreateAssignments
     field :create_deck, mutation: Mutations::CreateDeck
     field :create_login_link, mutation: Mutations::CreateLoginLink
     field :create_period, mutation: Mutations::CreatePeriod

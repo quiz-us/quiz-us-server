@@ -14,8 +14,6 @@
 #
 
 class Assignment < ApplicationRecord
-  belongs_to :student
+  belongs_to :period
   belongs_to :deck
-
-  validates :student_id, uniqueness: { scope: :deck_id }
 end

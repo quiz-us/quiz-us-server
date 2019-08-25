@@ -10,22 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_181814) do
+ActiveRecord::Schema.define(version: 2019_08_25_033818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
     t.bigint "deck_id", null: false
-    t.bigint "student_id", null: false
     t.datetime "due"
     t.text "instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["deck_id", "student_id"], name: "by_deck_and_student", unique: true
+    t.bigint "period_id", null: false
     t.index ["deck_id"], name: "index_assignments_on_deck_id"
     t.index ["due"], name: "index_assignments_on_due"
-    t.index ["student_id"], name: "index_assignments_on_student_id"
+    t.index ["period_id"], name: "index_assignments_on_period_id"
   end
 
   create_table "courses", id: :serial, force: :cascade do |t|
