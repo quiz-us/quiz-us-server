@@ -22,5 +22,9 @@ module Authenticable
       teacher_signed_in?
       context[:current_teacher]
     end
+
+    def current_student
+      context[:current_student]
+    end
   end
 end

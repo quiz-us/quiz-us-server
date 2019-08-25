@@ -28,4 +28,7 @@ class Student < ApplicationRecord
   has_many :tokens, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :periods, through: :enrollments
+
+  has_many :assignments, through: :periods
+  has_many :decks, through: :assignments
 end

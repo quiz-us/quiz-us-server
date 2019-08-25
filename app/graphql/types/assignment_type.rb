@@ -4,6 +4,7 @@ module Types
   class AssignmentType < BaseObject
     description 'Assignment'
     field :id, ID, null: false
+    field :instructions, String, null: true
     field :deck, Types::DeckType, null: false
     field :period, Types::PeriodType, null: false
   end
