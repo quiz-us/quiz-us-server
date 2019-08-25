@@ -2,8 +2,8 @@
 
 module Queries
   module Students
-    class DeckIndex < BaseQuery
-      description 'Display all decks for current student'
+    class AssignmentIndex < BaseQuery
+      description 'Display all assignments for current student'
 
       type [Types::AssignmentType], null: false
 
