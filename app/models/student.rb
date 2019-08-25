@@ -26,4 +26,6 @@ class Student < ApplicationRecord
          :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_many :tokens, dependent: :destroy
+  has_many :enrollments, dependent: :destroy
+  has_many :periods, through: :enrollments
 end

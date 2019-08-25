@@ -16,6 +16,7 @@ module Types
     field :standard, resolver: Queries::StandardShow
     field :all_standards, resolver: Queries::StandardIndex
     field :question_option, resolver: Queries::QuestionOptionShow
+    field :students, resolver: Queries::StudentIndex
     field :tags, resolver: Queries::TagIndex
     field :tag_search, resolver: Queries::TagSearch
 

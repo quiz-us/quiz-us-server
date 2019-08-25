@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: periods
@@ -11,4 +13,6 @@
 
 class Period < ApplicationRecord
   belongs_to :course
+  has_many :enrollments, dependent: :destroy
+  has_many :students, through: :enrollments
 end
