@@ -7,15 +7,17 @@
 #  id          :integer          not null, primary key
 #  name        :string
 #  description :text
-#  teacher_id  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  owner_type  :string
+#  owner_id    :bigint
 #
 
 class Deck < ApplicationRecord
-  belongs_to :teacher
+  belongs_to :owner, polymorphic: true
+
   has_many :decks_questions, dependent: :destroy
   has_many :questions, through: :decks_questions
 
-  validates :name, uniqueness: { scope: :teacher_id }
+  validates :name, uniqueness: { scope: %i[owner_id owner_type] }
 end

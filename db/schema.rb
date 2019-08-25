@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_25_033818) do
+ActiveRecord::Schema.define(version: 2019_08_25_230156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,11 +40,11 @@ ActiveRecord::Schema.define(version: 2019_08_25_033818) do
   create_table "decks", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name", "teacher_id"], name: "by_name_and_teacher_id", unique: true
-    t.index ["teacher_id"], name: "index_decks_on_teacher_id"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.index ["owner_type", "owner_id"], name: "index_decks_on_owner_type_and_owner_id"
   end
 
   create_table "decks_questions", force: :cascade do |t|
@@ -193,7 +193,6 @@ ActiveRecord::Schema.define(version: 2019_08_25_033818) do
 
   add_foreign_key "courses", "standards_charts"
   add_foreign_key "courses", "teachers"
-  add_foreign_key "decks", "teachers"
   add_foreign_key "periods", "courses"
   add_foreign_key "question_options", "questions"
   add_foreign_key "responses", "question_options"

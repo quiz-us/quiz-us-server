@@ -30,5 +30,7 @@ class Student < ApplicationRecord
   has_many :periods, through: :enrollments
 
   has_many :assignments, through: :periods
-  has_many :decks, through: :assignments
+  has_many :assigned_decks, through: :assignments, source: :deck
+
+  has_many :personal_decks, as: :owner, dependent: :destroy, class_name: 'Deck'
 end
