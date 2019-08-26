@@ -4,9 +4,14 @@
 #
 # Table name: decks_questions
 #
-#  deck_id     :integer          not null
-#  question_id :integer          not null
-#  id          :bigint           not null, primary key
+#  deck_id                 :integer          not null
+#  question_id             :integer          not null
+#  id                      :bigint           not null, primary key
+#  num_consecutive_correct :integer
+#  total_correct           :integer
+#  total_attempts          :integer
+#  e_factor                :float
+#  next_due                :datetime
 #
 
 class DecksQuestion < ApplicationRecord

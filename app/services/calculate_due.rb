@@ -19,10 +19,14 @@ class CalculateDue
     updated_e_factor = calculate_e_factor
     next_due = calculate_next_due_date(updated_e_factor)
     consecutive_correct = calculate_consecutive_correct
+    num_correct = card.total_correct
+    updated_total_correct = score >= 3 ? num_correct + 1 : num_correct
     card.update!(
       e_factor: updated_e_factor,
-      due: next_due,
-      consecutive_correct: consecutive_correct
+      next_due: next_due,
+      num_consecutive_correct: consecutive_correct,
+      total_correct: updated_total_correct,
+      total_attempts: card.total_attempts + 1
     )
   end
 
@@ -34,12 +38,12 @@ class CalculateDue
   end
 
   def calculate_next_due_date(updated_e_factor)
-    if num_consecutive_correct.zero? || score < 3
+    if current_consecutive_correct.zero? || score < 3
       1.day.from_now
     else
       # a card is considered to have been answered "correctly" if
       # score is greater than 3
-      num = 6 * updated_e_factor**num_consecutive_correct
+      num = 6 * updated_e_factor**current_consecutive_correct
       num = num.round
       num.days.from_now
     end

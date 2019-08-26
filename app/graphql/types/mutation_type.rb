@@ -2,6 +2,7 @@
 
 module Types
   class MutationType < BaseObject
+    # TEACHER MUTATIONS:
     field :create_assignments, mutation: Mutations::CreateAssignments
     field :create_deck, mutation: Mutations::CreateDeck
     field :create_login_link, mutation: Mutations::CreateLoginLink
@@ -14,5 +15,8 @@ module Types
     field :log_in_teacher, mutation: Mutations::Auth::LogInTeacher
     field :sign_up_teacher, mutation: Mutations::Auth::SignUpTeacher
     field :update_deck, mutation: Mutations::UpdateDeck
+
+    # STUDENT MUTATIONS:
+    field :create_response, mutation: Mutations::Students::CreateResponse
   end
 end

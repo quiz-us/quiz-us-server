@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_26_142522) do
+ActiveRecord::Schema.define(version: 2019_08_26_230502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,11 @@ ActiveRecord::Schema.define(version: 2019_08_26_142522) do
   create_table "decks_questions", force: :cascade do |t|
     t.integer "deck_id", null: false
     t.integer "question_id", null: false
+    t.integer "num_consecutive_correct", default: 0
+    t.integer "total_correct", default: 0
+    t.integer "total_attempts", default: 0
+    t.float "e_factor", default: 2.5
+    t.datetime "next_due"
     t.index ["deck_id", "question_id"], name: "by_deck_and_question", unique: true
     t.index ["deck_id", "question_id"], name: "index_decks_questions_on_deck_id_and_question_id"
     t.index ["question_id", "deck_id"], name: "index_decks_questions_on_question_id_and_deck_id"
@@ -105,6 +110,8 @@ ActiveRecord::Schema.define(version: 2019_08_26_142522) do
     t.datetime "updated_at", null: false
     t.integer "assignment_id"
     t.integer "question_id", null: false
+    t.integer "self_grade"
+    t.boolean "mc_correct"
     t.index ["question_option_id"], name: "index_responses_on_question_option_id"
     t.index ["student_id"], name: "index_responses_on_student_id"
   end

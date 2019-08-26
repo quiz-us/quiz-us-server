@@ -33,4 +33,6 @@ class Student < ApplicationRecord
   has_many :assigned_decks, through: :assignments, source: :deck
 
   has_many :personal_decks, as: :owner, dependent: :destroy, class_name: 'Deck'
+
+  has_many :responses, dependent: :destroy
 end

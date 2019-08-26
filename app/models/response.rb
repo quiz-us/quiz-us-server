@@ -3,11 +3,15 @@
 # Table name: responses
 #
 #  id                 :integer          not null, primary key
-#  student_id         :integer
+#  student_id         :integer          not null
 #  question_option_id :integer
 #  response_text      :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  assignment_id      :integer
+#  question_id        :integer          not null
+#  self_grade         :integer
+#  mc_correct         :boolean
 #
 
 class Response < ApplicationRecord
