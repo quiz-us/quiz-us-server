@@ -22,6 +22,7 @@ module Types
 
     # STUDENT TYPES
     field :current_student, resolver: Queries::Students::CurrentStudent
+    field :assignment, resolver: Queries::Students::AssignmentShow
     field :student_assignments, resolver: Queries::Students::AssignmentIndex
   end
 end
