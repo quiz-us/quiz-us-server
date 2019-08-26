@@ -7,6 +7,6 @@ module Types
     field :instructions, String, null: true
     field :deck, Types::DeckType, null: false
     field :period, Types::PeriodType, null: false
-    field :questions, [Types::QuestionType], null: true
+    field :responses, [Types::ResponseType], null: true
   end
 end

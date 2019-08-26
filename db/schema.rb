@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_25_230156) do
+ActiveRecord::Schema.define(version: 2019_08_26_142522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,11 +98,13 @@ ActiveRecord::Schema.define(version: 2019_08_25_230156) do
   end
 
   create_table "responses", id: :serial, force: :cascade do |t|
-    t.integer "student_id"
+    t.integer "student_id", null: false
     t.integer "question_option_id"
     t.text "response_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assignment_id"
+    t.integer "question_id", null: false
     t.index ["question_option_id"], name: "index_responses_on_question_option_id"
     t.index ["student_id"], name: "index_responses_on_student_id"
   end

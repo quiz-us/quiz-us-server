@@ -16,4 +16,6 @@
 class Assignment < ApplicationRecord
   belongs_to :period
   belongs_to :deck
+
+  has_many :responses
 end

@@ -11,6 +11,9 @@
 #
 
 class Response < ApplicationRecord
+  validates :student, :question, presence: true
   belongs_to :student
+  belongs_to :question
   belongs_to :question_option
+  belongs_to :assignment, optional: true
 end
