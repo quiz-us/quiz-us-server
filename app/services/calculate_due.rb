@@ -12,7 +12,7 @@ class CalculateDue
     @score = score
     @card = card
     @current_e_factor = card.e_factor
-    @current_consecutive_correct = card.consecutive_correct
+    @current_consecutive_correct = card.num_consecutive_correct
   end
 
   def call
@@ -33,8 +33,8 @@ class CalculateDue
   private
 
   def calculate_e_factor
-    current_e_factor - 0.8 + (0.28 * score) - (0.02 * score * score)
-    current_e_factor < 1.3 ? 1.3 : current_e_factor
+    updated_e_factor = current_e_factor - 0.8 + (0.28 * score) - (0.02 * score * score)
+    updated_e_factor < 1.3 ? 1.3 : updated_e_factor
   end
 
   def calculate_next_due_date(updated_e_factor)

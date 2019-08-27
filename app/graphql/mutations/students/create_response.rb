@@ -11,7 +11,7 @@ module Mutations
       argument :question_option_id, ID, required: false
       argument :response_text, String, required: false
       argument :self_grade, Integer, required: false
-      argument :question_type, Integer, required: false
+      argument :question_type, String, required: true
 
       type Types::ResponseType
 
