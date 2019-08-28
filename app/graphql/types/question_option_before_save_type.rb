@@ -6,7 +6,7 @@ module Types
     # field :id, ID, null: true
     # field :question_id, ID, null: true
     field :option_text, String, null: false
-    field :option_node, String, null: false
+    field :rich_text, String, null: false
     field :correct, Boolean, null: false
 
   end

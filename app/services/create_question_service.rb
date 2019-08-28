@@ -6,7 +6,7 @@ class CreateQuestionService
   include Callable
 
   def initialize(params)
-    @question_node = params[:question_node]
+    @rich_text = params[:rich_text]
     @question_options = params[:question_options]
     @question_plaintext = params[:question_plaintext]
     @question_standard_id = params[:standard_id]
@@ -29,7 +29,7 @@ class CreateQuestionService
 
   def create_question!
     Question.create!(
-      question_node: @question_node,
+      rich_text: @rich_text,
       question_text: @question_plaintext,
       question_type: @question_type
     )
@@ -53,7 +53,7 @@ class CreateQuestionService
       option_obj = JSON.parse(option)
       @question.question_options.create!(
         correct: option_obj['isCorrect'],
-        option_node: option_obj['value'].to_json, # TODO: rename these variables on the frontend so they match our backend convention
+        rich_text: option_obj['value'].to_json, # TODO: rename these variables on the frontend so they match our backend convention
         option_text: option_obj['answerText']
       )
     end

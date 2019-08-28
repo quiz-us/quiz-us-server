@@ -4,7 +4,7 @@ module Types
     field :id, ID, null: false
     field :question_id, ID, null: false
     field :option_text, String, null: false
-    field :option_node, String, null: false
+    field :rich_text, String, null: false
     field :correct, Boolean, null: false
     field :question, Types::QuestionType, null: true
   end

@@ -8,7 +8,7 @@
 #  correct     :boolean
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  option_node :string           default(""), not null
+#  rich_text   :jsonb
 #
 
 class QuestionOption < ApplicationRecord

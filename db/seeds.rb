@@ -44,7 +44,7 @@ require 'csv'
 # question1 = Question.create!(
 #   question_text: 'What are the physical characteristics of metals?',
 #   question_type: 'free_response',
-#   question_node: '{
+#   rich_text: '{
 #     "object": "value",
 #     "document": {
 #       "object": "document",
@@ -74,7 +74,7 @@ require 'csv'
 
 # question1.question_options.create!(
 #   option_text: 'lustrous, good conductor, malleable, ductile',
-#   option_node: '{
+#   rich_text: '{
 #     "object": "value",
 #     "document":{
 #       "object": "document",
@@ -105,7 +105,7 @@ require 'csv'
 # question2 = Question.create!(
 #   question_text: 'A mystery element is dull, yellow, and powdery. Which of the following best fits the description?',
 #   question_type: 'multiple_choice',
-#   question_node: '{
+#   rich_text: '{
 #     "object": "value",
 #     "document": {
 #       "object": "document",
@@ -135,7 +135,7 @@ require 'csv'
 
 # question2.question_options.create!(
 #   option_text: 'nonmetal',
-#   option_node: '{
+#   rich_text: '{
 #     "object": "value",
 #     "document":{
 #       "object": "document",
@@ -161,7 +161,7 @@ require 'csv'
 
 # question2.question_options.create!(
 #   option_text: 'metal',
-#   option_node: '{
+#   rich_text: '{
 #     "object": "value",
 #     "document":{
 #       "object": "document",
@@ -187,7 +187,7 @@ require 'csv'
 
 # question2.question_options.create!(
 #   option_text: 'metalloid',
-#   option_node: '{
+#   rich_text: '{
 #     "object": "value",
 #     "document":{
 #       "object": "document",
@@ -236,7 +236,7 @@ standard1 = standards_category1.standards.create!(
 q1 = Question.create(
   question_type: 'multiple_choice',
   question_text: 'Which periodic table contains the most reactive elements?',
-  question_node: '{
+  rich_text: '{
         "object": "block",
         "type": "paragraph",
         "nodes": [
@@ -257,7 +257,7 @@ QuestionOption.create!(
   question_id: q1.id,
   option_text: 'Halogens',
   correct: false,
-  option_node: '{
+  rich_text: '{
         "object": "block",
         "type": "paragraph",
         "nodes": [
@@ -273,7 +273,7 @@ QuestionOption.create!(
   question_id: q1.id,
   option_text: 'Noble Gases',
   correct: true,
-  option_node: '{
+  rich_text: '{
         "object": "block",
         "type": "paragraph",
         "nodes": [

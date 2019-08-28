@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_26_230502) do
+ActiveRecord::Schema.define(version: 2019_08_27_235134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_230502) do
     t.boolean "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "option_node", default: "", null: false
+    t.jsonb "rich_text", default: {}
     t.index ["question_id"], name: "index_question_options_on_question_id"
   end
 
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_230502) do
     t.string "question_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "question_node", null: false
+    t.jsonb "rich_text", default: {}
   end
 
   create_table "questions_standards", force: :cascade do |t|

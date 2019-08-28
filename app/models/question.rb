@@ -7,9 +7,9 @@
 #  id            :integer          not null, primary key
 #  question_text :text
 #  question_type :string
-#  question_node :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  rich_text     :jsonb
 #
 
 class Question < ApplicationRecord
