@@ -16,8 +16,8 @@
 class Deck < ApplicationRecord
   belongs_to :owner, polymorphic: true
 
-  has_many :decks_questions, dependent: :destroy
-  has_many :questions, through: :decks_questions
+  has_many :cards, class_name: 'DecksQuestion', dependent: :destroy
+  has_many :questions, through: :cards
 
   validates :name, uniqueness: { scope: %i[owner_id owner_type] }
 end

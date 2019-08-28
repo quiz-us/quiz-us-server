@@ -21,15 +21,15 @@ module Mutations
       # diff the deck's current question_ids with the newly passed in
       # question_ids. Destroy the joins that are not in the new question_ids
       # create the ones that don't exist yet but are in the new question_ids
-      existing_questions = deck.decks_questions.pluck(:question_id)
+      existing_questions = deck.cards.pluck(:question_id)
       destroy_questions = existing_questions - question_ids
       add_questions = question_ids - existing_questions
 
       destroy_questions.each do |question_id|
-        deck.decks_questions.find_by(question_id: question_id).destroy
+        deck.cards.find_by(question_id: question_id).destroy
       end
       add_questions.each do |question_id|
-        deck.decks_questions.create!(question_id: question_id)
+        deck.cards.create!(question_id: question_id)
       end
 
       deck

@@ -19,7 +19,7 @@ module Mutations
         description: description
       )
       question_ids.each do |question_id|
-        deck.decks_questions.create!(question_id: question_id)
+        deck.cards.create!(question_id: question_id)
       end
       deck
     end

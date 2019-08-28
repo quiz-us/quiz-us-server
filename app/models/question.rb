@@ -39,4 +39,6 @@ class Question < ApplicationRecord
            foreign_key: :question_id,
            class_name: :QuestionOption,
            dependent: :destroy
+
+  has_many :cards, class_name: 'DecksQuestion', dependent: :destroy
 end

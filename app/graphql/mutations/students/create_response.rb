@@ -25,8 +25,8 @@ module Mutations
         )
         # TODO: delegate following logic to an async job:
         personal_deck = current_student.personal_decks.first
-        card = personal_deck.decks_questions.find_by(question_id: question_id) ||
-               personal_deck.decks_questions.create!(question_id: question_id)
+        card = personal_deck.cards.find_by(question_id: question_id) ||
+               personal_deck.cards.create!(question_id: question_id)
         if question_type == 'Multiple Choice'
           # determine when they need to see the question again
           # either add it to personal deck with newly calculated date
