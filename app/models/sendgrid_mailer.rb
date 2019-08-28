@@ -26,7 +26,7 @@ class SendgridMailer
         }
       ],
       "from": {
-        "email": 'no-reply@quizus.org'
+        "email": 'chua@houstonisd.org'
       },
       "template_id": template_id
     }
