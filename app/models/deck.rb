@@ -20,4 +20,6 @@ class Deck < ApplicationRecord
   has_many :questions, through: :cards
 
   validates :name, uniqueness: { scope: %i[owner_id owner_type] }
+
+  has_many :assignments, dependent: :destroy
 end
