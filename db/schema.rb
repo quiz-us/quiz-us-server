@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_29_144151) do
+ActiveRecord::Schema.define(version: 2019_08_29_235049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2019_08_29_144151) do
     t.integer "total_attempts", default: 0
     t.float "e_factor", default: 2.5
     t.datetime "next_due"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["deck_id", "question_id"], name: "by_deck_and_question", unique: true
     t.index ["deck_id", "question_id"], name: "index_decks_questions_on_deck_id_and_question_id"
     t.index ["question_id", "deck_id"], name: "index_decks_questions_on_question_id_and_deck_id"
