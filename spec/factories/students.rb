@@ -4,8 +4,8 @@
 #
 #  id                     :integer          not null, primary key
 #  email                  :string           not null
-#  first_name             :string
-#  last_name              :string
+#  first_name             :string           not null
+#  last_name              :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  encrypted_password     :string           default(""), not null
@@ -13,6 +13,7 @@
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  jti                    :string           not null
+#  qr_code                :string           default(""), not null
 #
 
 
