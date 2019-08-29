@@ -42,8 +42,8 @@ class Student < ApplicationRecord
   has_many :responses, dependent: :destroy
 
   # VALIDATIONS
-  validates :qr_code, :email, :first_name, :last_name, :jti, presence: true
-  validates :qr_code, :email, :jti, uniqueness: true
+  validates :qr_code, :email, :first_name, :last_name, presence: true
+  validates :qr_code, :email, uniqueness: true
 
   def generate_qr_code
     self.qr_code = SecureRandom.hex(8)

@@ -11,12 +11,13 @@ module Types
     field :delete_deck, mutation: Mutations::DeleteDeck
     field :edit_standards_chart, mutation: Mutations::EditStandardsChart
     field :enroll_student, mutation: Mutations::EnrollStudent
-    field :log_in_student, mutation: Mutations::Auth::LogInStudent
     field :log_in_teacher, mutation: Mutations::Auth::LogInTeacher
     field :sign_up_teacher, mutation: Mutations::Auth::SignUpTeacher
     field :update_deck, mutation: Mutations::UpdateDeck
-
+    
     # STUDENT MUTATIONS:
     field :create_response, mutation: Mutations::Students::CreateResponse
+    field :log_in_student, mutation: Mutations::Auth::LogInStudent
+    field :qr_log_in_student, mutation: Mutations::Auth::QrLogInStudent
   end
 end
