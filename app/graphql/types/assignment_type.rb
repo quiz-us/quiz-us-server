@@ -3,7 +3,7 @@
 module Types
   class AssignmentType < BaseObject
     description 'Assignment'
-    field :id, ID, null: false
+    field :id, ID, null: true
     field :instructions, String, null: true
     field :deck, Types::DeckType, null: false
     field :due, Types::DateTimeType, null: true

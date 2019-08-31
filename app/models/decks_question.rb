@@ -15,7 +15,11 @@
 #
 
 class DecksQuestion < ApplicationRecord
+  validates :question_id, uniqueness: { scope: :deck_id }
+
   belongs_to :deck
   belongs_to :question
-  validates :question_id, uniqueness: { scope: :deck_id }
+  delegate :responses, to: :question
+
+  # self.join(:responses).order(due: :asc)
 end

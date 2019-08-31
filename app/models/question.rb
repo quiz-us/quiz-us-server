@@ -41,4 +41,6 @@ class Question < ApplicationRecord
            dependent: :destroy
 
   has_many :cards, class_name: 'DecksQuestion', dependent: :destroy
+
+  has_many :responses, dependent: :destroy
 end
