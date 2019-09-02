@@ -10,7 +10,7 @@ module Queries
       def resolve
         personal_deck = current_student.personal_decks.first
         all_cards = personal_deck.cards
-                                 .includes(:question)
+                                 .includes(:question, question: :question_options)
                                  .order(next_due: :desc)
 
         responses = Response.includes(:question)
@@ -25,16 +25,16 @@ module Queries
           recently_responded[question.id] = true
         end
 
-        batch = []
+        questions = []
         all_cards.each do |card|
-          batch << card unless recently_responded[card.question.id]
-          break if batch.length >= 10
+          questions << card.question unless recently_responded[card.question.id]
+          break if questions.length >= 10
         end
         deck = {
           id: personal_deck.id,
           name: personal_deck.name,
           description: personal_deck.description,
-          cards: batch
+          questions: questions
         }
         {
           instructions: 'Finish all cards in this session!',

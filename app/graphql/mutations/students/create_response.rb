@@ -15,13 +15,18 @@ module Mutations
 
       type Types::ResponseType
 
-      def resolve(question_id:, assignment_id:, question_option_id:, response_text:, self_grade:, question_type:)
+      def resolve(question_id:, assignment_id: nil, question_option_id:, response_text:, self_grade:, question_type:)
         response = current_student.responses.create!(
           question_id: question_id,
           assignment_id: assignment_id,
           question_option_id: question_option_id,
           response_text: response_text,
-          self_grade: self_grade
+          self_grade: self_grade,
+          mc_correct: (
+            question_type == 'Multiple Choice' ?
+            QuestionOption.find(question_option_id).correct :
+            nil
+          )
         )
         # TODO: delegate following logic to an async job:
         personal_deck = current_student.personal_decks.first
@@ -30,7 +35,7 @@ module Mutations
 
         case question_type
         when 'Multiple Choice'
-          rating = QuestionOption.find(question_option_id).correct ? 4 : 1
+          rating = response.mc_correct ? 4 : 1
         when 'Free Response'
           rating = self_grade.to_i
         else
