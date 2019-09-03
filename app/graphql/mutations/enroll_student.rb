@@ -24,7 +24,7 @@ module Mutations
         )
         # create the student's personal deck:
         student.personal_decks.create!(
-          name: "#{first_name} #{last_name}'s Personal Deck'",
+          name: "#{first_name} #{last_name}'s Personal Deck",
           description: "The purpose of this deck is to help #{first_name} review and study throughout the year."
         )
       end
