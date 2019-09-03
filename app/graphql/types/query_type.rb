@@ -7,6 +7,7 @@ module Types
     # TEACHER TYPES
     field :deck, resolver: Queries::DeckShow
     field :decks, resolver: Queries::DeckIndex
+    field :period, resolver: Queries::PeriodShow
     field :periods, resolver: Queries::PeriodIndex
     field :standards_charts, resolver: Queries::StandardsChartIndex
     field :question, resolver: Queries::QuestionShow
