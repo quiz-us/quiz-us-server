@@ -8,6 +8,7 @@ module Types
     field :deck, resolver: Queries::DeckShow
     field :decks, resolver: Queries::DeckIndex
     field :period, resolver: Queries::PeriodShow
+    field :period_assignments, resolver: Queries::PeriodAssignmentIndex
     field :periods, resolver: Queries::PeriodIndex
     field :standards_charts, resolver: Queries::StandardsChartIndex
     field :question, resolver: Queries::QuestionShow
