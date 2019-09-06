@@ -10,10 +10,11 @@ module Types
     field :decks, resolver: Queries::DeckIndex
     field :period, resolver: Queries::PeriodShow
     field :period_assignments, resolver: Queries::PeriodAssignmentIndex
+    field :period_standards_mastery, resolver: Queries::PeriodStandardsMastery
     field :periods, resolver: Queries::PeriodIndex
-    field :standards_charts, resolver: Queries::StandardsChartIndex
     field :question, resolver: Queries::QuestionShow
     field :questions, resolver: Queries::QuestionSearch
+    field :standards_charts, resolver: Queries::StandardsChartIndex
     field :tag, resolver: Queries::TagShow
     field :tagging, resolver: Queries::TaggingShow
     field :standard, resolver: Queries::StandardShow

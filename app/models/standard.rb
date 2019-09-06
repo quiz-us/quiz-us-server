@@ -27,6 +27,8 @@ class Standard < ApplicationRecord
            through: :questions_standards,
            source: :question
 
+  has_many :responses, through: :questions
+
   validates :description, :standards_category, :title, presence: true
   validates :title, uniqueness: { scope: :standards_category_id }
 end
