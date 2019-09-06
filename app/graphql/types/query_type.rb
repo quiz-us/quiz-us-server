@@ -5,6 +5,7 @@
 module Types
   class QueryType < BaseObject
     # TEACHER TYPES
+    field :assignment_results, resolver: Queries::AssignmentResults
     field :deck, resolver: Queries::DeckShow
     field :decks, resolver: Queries::DeckIndex
     field :period, resolver: Queries::PeriodShow
@@ -21,6 +22,7 @@ module Types
     field :students, resolver: Queries::StudentIndex
     field :tags, resolver: Queries::TagIndex
     field :tag_search, resolver: Queries::TagSearch
+    field :teacher_assignment, resolver: Queries::AssignmentShow
 
     # STUDENT TYPES
     field :current_student, resolver: Queries::Students::CurrentStudent

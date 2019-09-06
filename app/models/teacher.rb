@@ -31,4 +31,5 @@ class Teacher < ApplicationRecord
   has_many :decks, as: :owner, dependent: :destroy
   has_many :periods, through: :courses
   has_many :students, through: :periods
+  has_many :assignments, through: :periods
 end
