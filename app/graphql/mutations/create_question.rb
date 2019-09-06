@@ -31,7 +31,7 @@ end
 
 # sample mutation
 # mutation {
-#   createQuestion(questionNode: """
+#   createQuestion(richText: """
 #     {
 #         "object": "block",
 #         "type": "paragraph",

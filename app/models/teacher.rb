@@ -32,4 +32,5 @@ class Teacher < ApplicationRecord
   has_many :periods, through: :courses
   has_many :students, through: :periods
   has_many :assignments, through: :periods
+  has_many :questions, through: :courses
 end
