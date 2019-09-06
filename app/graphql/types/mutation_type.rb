@@ -14,6 +14,7 @@ module Types
     field :log_in_teacher, mutation: Mutations::Auth::LogInTeacher
     field :sign_up_teacher, mutation: Mutations::Auth::SignUpTeacher
     field :update_deck, mutation: Mutations::UpdateDeck
+    field :delete_question, mutation: Mutations::DeleteQuestion
     
     # STUDENT MUTATIONS:
     field :create_response, mutation: Mutations::Students::CreateResponse
