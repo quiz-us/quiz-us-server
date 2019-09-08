@@ -15,10 +15,11 @@ module Types
     field :sign_up_teacher, mutation: Mutations::Auth::SignUpTeacher
     field :update_deck, mutation: Mutations::UpdateDeck
     field :delete_question, mutation: Mutations::DeleteQuestion
-    
+
     # STUDENT MUTATIONS:
     field :create_response, mutation: Mutations::Students::CreateResponse
     field :log_in_student, mutation: Mutations::Auth::LogInStudent
+    field :log_out_student, mutation: Mutations::Auth::LogOutStudent
     field :qr_log_in_student, mutation: Mutations::Auth::QrLogInStudent
   end
 end
