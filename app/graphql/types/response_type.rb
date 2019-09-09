@@ -6,6 +6,8 @@ module Types
     field :id, ID, null: false
     field :question_id, ID, null: false
     field :assignment_id, ID, null: true
+    field :mc_correct, Boolean, null: true
+    field :self_grade, Integer, null: true
     field :question_option_id, ID, null: true
     field :response_text, String, null: true
   end
