@@ -29,42 +29,48 @@ module Mutations
   end
 end
 
+
 # sample mutation
 # mutation {
-#   createQuestion(richText: """
-#     {
-#         "object": "block",
-#         "type": "paragraph",
-#         "nodes": [
-#           {
-#             "object": "text",
-#             "text": "A line of text in a paragraph."
-#           }
-#         ]
-#     }
-
-#     """
-#     questionType: "mc"
-#     tags: ["sci", "art"]
-#     questionPlaintext: "asdf"
-#     standardId: 1,
-#     questionOptions: ["""{
-#       "correct": "true",
-#       "richText": "{}",
-#       "optionText": "correct answer"
-# }""",
+#   createQuestion(
+#     richText: "{
+#       \"object\":\"value\",
+#       \"document\":{
+#         \"object\":\"document\",
+#         \"data\":{},
+#         \"nodes\":[{
+#           \"object\":\"block\",
+#           \"type\":\"line\",
+#           \"data\":{},
+#           \"nodes\":[{\"object\":\"text\",\"text\":\"test\",\"marks\":[]}]
+#         }]
+#       }
+#     }"
+#   	questionType: "mc"
+#   	tags: ["sci", "art"]
+#   	questionPlaintext: "asdf"
+#   	standardId: 1,
+#   	questionOptions: ["""{
+#   		"isCorrect": true,
+#   		"value": "{}",
+#   		"answerText": "correct answer"
+# }""", 
 #   """{
-#       "correct": "false",
-#       "richText": "{}",
-#       "optionText": "not correct answer"
+#   		"isCorrect": false,
+#   		"value": "{}",
+#   		"answerText": "not correct answer"
 # }"""
 # ]
 # ) {
 #     id
-#     tags {
+#   	tags {
 #       id
 #       name
 #     }
 #   questionText
+#   questionOptions {
+#     id
+#     optionText
 #   }
+#   } 
 # }
