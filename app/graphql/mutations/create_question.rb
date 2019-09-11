@@ -29,7 +29,6 @@ module Mutations
   end
 end
 
-
 # sample mutation
 # mutation {
 #   createQuestion(
