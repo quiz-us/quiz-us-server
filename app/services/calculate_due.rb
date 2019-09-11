@@ -8,6 +8,10 @@ class CalculateDue
 
   attr_reader :score, :card, :current_e_factor, :current_consecutive_correct
 
+  # When larger, the delays for a card's next_due will increase whenever
+  # answered correctly:
+  THETA = 0.5
+
   def initialize(score, card)
     @score = score
     @card = card
@@ -39,11 +43,17 @@ class CalculateDue
 
   def calculate_next_due_date(updated_e_factor)
     if current_consecutive_correct.zero? || score < 4
-      1.day.from_now
+      # when a question is missed:
+      if 1.day.from_now > card.next_due
+        # if card was already due within the next day, don't push it back more:
+        card.next_due
+      else
+        1.day.from_now
+      end
     else
       # a card is considered to have been answered "correctly" if
       # score is at least 4
-      num = 6 * updated_e_factor**current_consecutive_correct
+      num = 6 * updated_e_factor**((current_consecutive_correct - 1) * THETA)
       num = num.round
       num.days.from_now
     end
