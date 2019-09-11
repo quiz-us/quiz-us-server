@@ -49,10 +49,13 @@ class CreateQuestionService
   end
 
   def create_question_options!
+    num_answer_choices = @question_options.length
     @question_options.each do |option|
       option_obj = JSON.parse(option)
       @question.question_options.create!(
-        correct: option_obj['isCorrect'],
+        # if it's free response and has only once answer choice,
+        # then correct should always default to true:
+        correct: num_answer_choices == 1 || option_obj['isCorrect'],
         rich_text: option_obj['value'].to_json, # TODO: rename these variables on the frontend so they match our backend convention
         option_text: option_obj['answerText']
       )
