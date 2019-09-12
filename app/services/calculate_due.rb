@@ -60,7 +60,7 @@ class CalculateDue
     elsif score < 4
       # if a student is reviewing a previously seen card and misses it, then
       # it's due again immediately:
-      Time.current
+      card.next_due < Time.current ? card.next_due : Time.current
     elsif current_consecutive_correct.zero?
       # if it's a card that someone missed recently, but got right this time,
       # then show it again tomorrow:
