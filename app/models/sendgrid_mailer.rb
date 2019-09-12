@@ -15,7 +15,7 @@ class SendgridMailer
       return true
     end
 
-    to = 'lingjoshuas@gmail.com' if ENV["RAILS_ENV"] == 'staging'
+    to = 'lingjoshuas@gmail.com' if ENV['RAILS_ENV'] == 'staging'
     data = {
       "personalizations": [
         {
