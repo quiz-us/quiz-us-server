@@ -42,17 +42,31 @@ class CalculateDue
   end
 
   def calculate_next_due_date(updated_e_factor)
-    if current_consecutive_correct.zero? || score < 4
-      # when a question is missed:
-      if 1.day.from_now > card.next_due
-        # if card was already due within the next day, don't push it back more:
-        card.next_due
+    # a card is considered to have been answered "correctly" if
+    # score is at least 4
+    if !card.next_due
+      # first time seeing card: if student misses it, card is due in 12 hours.
+      # if student gets it correct, card is due in 24 hours.
+      if score < 4
+        12.hours.from_now
       else
         1.day.from_now
       end
+    elsif card.total_correct.zero?
+      # if it's a card a student has already seen but has never answered
+      # correctly before, then don't change the next_due date so that it
+      # doesn't get pushed behind cards that DID get answered correctly:
+      card.next_due
+    elsif score < 4
+      # if a student is reviewing a previously seen card and misses it, then
+      # it's due again immediately:
+      Time.current
+    elsif current_consecutive_correct.zero?
+      # if it's a card that someone missed recently, but got right this time,
+      # then show it again tomorrow:
+      1.day.from_now
     else
-      # a card is considered to have been answered "correctly" if
-      # score is at least 4
+      # if I got it right, and it's not my first time seeing the card:
       num = 6 * updated_e_factor**((current_consecutive_correct - 1) * THETA)
       num = num.round
       num.days.from_now
