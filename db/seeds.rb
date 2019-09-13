@@ -286,11 +286,11 @@ QuestionOption.create!(
 )
 
 tag1 = Tag.create!(
-  name: 'Common Core Chemistry'
+  name: 'Common Core Chemistry'.downcase
 )
 
 tag2 = Tag.create!(
-  name: 'Periodic Table'
+  name: 'Periodic Table'.downcase
 )
 
 Tagging.create!(
