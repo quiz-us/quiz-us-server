@@ -35,6 +35,7 @@ module Mutations
       question.standards = [Standard.find(standard_id)] if standard_id
       question.tags = tags.map{ |tag| Tag.find_or_create_by(name: tag) } if tags
       # question.question_options = question_options if question_options
+      # todo:to_json => extract id, update plain text and rich text
       question
     end
   end
