@@ -2,8 +2,8 @@
 
 module Mutations
   class UpdateQuestion < BaseMutation
-    graphql_name 'Edit Question'
-    description 'Edit Question'
+    graphql_name 'Update Question'
+    description 'Update Question'
 
     # arguments passed to the `resolved` method
     argument :id, ID, required: true
