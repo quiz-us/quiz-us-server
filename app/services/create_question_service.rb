@@ -49,7 +49,7 @@ class CreateQuestionService
       node
     end
     rich['document']['nodes'] = nodes
-    rich
+    rich.to_json
   end
 
   def upload_to_s3(node)
@@ -59,7 +59,8 @@ class CreateQuestionService
 
     data_uri_parts = data_url.match(regexp) || []
     extension = MIME::Types[data_uri_parts[1]].first.preferred_extension
-    file_name = "myfilename.#{extension}"
+    # TODO: figure out path and naming conventions for images on s3:
+    file_name = "#{SecureRandom.hex(8)}.#{extension}"
 
     path = "tmp/#{file_name}"
 
@@ -91,12 +92,13 @@ class CreateQuestionService
     num_answer_choices = @question_options.length
     @question_options.each do |option|
       option_obj = JSON.parse(option)
+      rich_text = process_images!(option_obj['richText'].to_json)
       @question.question_options.create!(
         # if it's free response and has only once answer choice,
         # then correct should always default to true:
-        correct: num_answer_choices == 1 || option_obj['isCorrect'],
-        rich_text: option_obj['value'].to_json, # TODO: rename these variables on the frontend so they match our backend convention
-        option_text: option_obj['answerText']
+        correct: num_answer_choices == 1 || option_obj['correct'],
+        rich_text: rich_text,
+        option_text: option_obj['optionText']
       )
     end
   end
