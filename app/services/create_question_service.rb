@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'aws-sdk-s3'
+
 # CreateQuestion processes a question and all of its associated objects (ie.
 # tags and question_options), and then creates them.
 class CreateQuestionService
@@ -12,6 +14,7 @@ class CreateQuestionService
     @question_standard_id = params[:standard_id]
     @question_type = params[:question_type]
     @tags = params[:tags]
+    @s3 = Aws::S3::Resource.new(region: 'us-west-2')
   end
 
   def call
@@ -28,11 +31,47 @@ class CreateQuestionService
   private
 
   def create_question!
+    # if there are images, then take the data:image blobs, temporarily download
+    # them, upload the file to s3, and then save that s3 url under the question's
+    # rich_text
+    rich_text = process_images!(@rich_text)
     Question.create!(
-      rich_text: @rich_text,
+      rich_text: rich_text,
       question_text: @question_plaintext,
       question_type: @question_type
     )
+  end
+
+  def process_images!(rich_text)
+    rich = JSON.parse(rich_text)
+    nodes = rich['document']['nodes'].map do |node|
+      node['data']['file'] = upload_to_s3(node) if node['type'] == 'image'
+      node
+    end
+    rich['document']['nodes'] = nodes
+    rich
+  end
+
+  def upload_to_s3(node)
+    data_url = node['data']['file']
+
+    regexp = %r{\Adata:([-\w]+/[-\w\+\.]+)?;base64,(.*)}m
+
+    data_uri_parts = data_url.match(regexp) || []
+    extension = MIME::Types[data_uri_parts[1]].first.preferred_extension
+    file_name = "myfilename.#{extension}"
+
+    path = "tmp/#{file_name}"
+
+    File.open(path, 'wb') do |file|
+      file.write(Base64.decode64(data_uri_parts[2]))
+    end
+
+    # File.open(open(url), 'rb') { |file| obj.put(body: file) }
+    obj = @s3.bucket('quiz-us').object(file_name)
+    obj.upload_file(path, acl: 'public-read')
+    File.delete(path) if File.exist?(path)
+    obj.public_url
   end
 
   def create_tags!
