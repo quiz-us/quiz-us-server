@@ -69,7 +69,7 @@ class CreateQuestionService
     end
 
     # File.open(open(url), 'rb') { |file| obj.put(body: file) }
-    obj = @s3.bucket('quiz-us').object(file_name)
+    obj = @s3.bucket('quizus').object(file_name)
     obj.upload_file(path, acl: 'public-read')
     File.delete(path) if File.exist?(path)
     obj.public_url
