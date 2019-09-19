@@ -68,8 +68,10 @@ class CreateQuestionService
       file.write(Base64.decode64(data_uri_parts[2]))
     end
 
+    bucket_name = Rails.env.production? ? 'quizus' : 'quizus-staging'
+
     # File.open(open(url), 'rb') { |file| obj.put(body: file) }
-    obj = @s3.bucket('quizus').object(file_name)
+    obj = @s3.bucket(bucket_name).object(file_name)
     obj.upload_file(path, acl: 'public-read')
     File.delete(path) if File.exist?(path)
     obj.public_url
