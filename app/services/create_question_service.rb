@@ -5,6 +5,7 @@ require 'aws-sdk-s3'
 # CreateQuestion processes a question and all of its associated objects (ie.
 # tags and question_options), and then creates them.
 class CreateQuestionService
+  class UnprocessableImageError < StandardError; end
   include Callable
 
   def initialize(params)
@@ -58,7 +59,10 @@ class CreateQuestionService
     regexp = %r{\Adata:([-\w]+/[-\w\+\.]+)?;base64,(.*)}m
 
     data_uri_parts = data_url.match(regexp) || []
-    extension = MIME::Types[data_uri_parts[1]].first.preferred_extension
+    extensions = MIME::Types[data_uri_parts[1]]
+    raise UnprocessableImageError if extensions.empty?
+
+    extension = extensions.first.preferred_extension
     # TODO: figure out path and naming conventions for images on s3:
     file_name = "#{SecureRandom.hex(8)}.#{extension}"
 
