@@ -21,6 +21,7 @@ gem 'puma', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'aws-sdk-s3', '~> 1'
 gem 'bootsnap'
 gem 'graphql'
 gem 'pg_search'
@@ -28,6 +29,7 @@ gem 'rack-cors'
 gem 'rollbar'
 gem 'search_object_graphql'
 gem 'sendgrid-ruby'
+gem 'mime-types'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
