@@ -17,13 +17,15 @@ module Mutations
     type Types::QuestionType
 
     def resolve(rich_text:, question_type:, tags:, standard_id:, question_plaintext:, question_options:)
+      teacher_signed_in?
       CreateQuestionService.call(
         rich_text: rich_text,
         question_type: question_type,
         tags: tags,
         standard_id: standard_id,
         question_plaintext: question_plaintext,
-        question_options: question_options
+        question_options: question_options,
+        teacher_id: current_teacher.id
       )
     end
   end
@@ -45,24 +47,24 @@ end
 #         }]
 #       }
 #     }"
-#   	questionType: "mc"
-#   	tags: ["sci", "art"]
-#   	questionPlaintext: "asdf"
-#   	standardId: 1,
-#   	questionOptions: ["""{
-#   		"isCorrect": true,
-#   		"value": "{}",
-#   		"answerText": "correct answer"
-# }""", 
+#     questionType: "mc"
+#     tags: ["sci", "art"]
+#     questionPlaintext: "asdf"
+#     standardId: 1,
+#     questionOptions: ["""{
+#       "isCorrect": true,
+#       "value": "{}",
+#       "answerText": "correct answer"
+# }""",
 #   """{
-#   		"isCorrect": false,
-#   		"value": "{}",
-#   		"answerText": "not correct answer"
+#       "isCorrect": false,
+#       "value": "{}",
+#       "answerText": "not correct answer"
 # }"""
 # ]
 # ) {
 #     id
-#   	tags {
+#     tags {
 #       id
 #       name
 #     }
@@ -71,5 +73,5 @@ end
 #     id
 #     optionText
 #   }
-#   } 
+#   }
 # }

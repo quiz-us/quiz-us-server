@@ -14,6 +14,8 @@ class SendgridMailer
       stub_development(to, substitutions, template_name)
       return true
     end
+
+    to = 'lingjoshuas@gmail.com' if ENV['RAILS_ENV'] == 'staging'
     data = {
       "personalizations": [
         {
@@ -26,7 +28,7 @@ class SendgridMailer
         }
       ],
       "from": {
-        "email": 'chua@houstonisd.org'
+        "email": 'no-reply@quizus.org'
       },
       "template_id": template_id
     }
