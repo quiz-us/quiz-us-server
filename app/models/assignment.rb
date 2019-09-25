@@ -17,7 +17,11 @@ class Assignment < ApplicationRecord
   belongs_to :period
   belongs_to :deck
 
-  has_many :responses, -> { order(:created_at) }, dependent: :destroy
+  has_many :responses, -> { order(:created_at) },
+           dependent: :destroy,
+           inverse_of: :assignment
+
+  validates :deck, :period, presence: true
 
   def num_correct_responses
     responses.where('mc_correct = ? OR self_grade >= ?', true, 4).length
