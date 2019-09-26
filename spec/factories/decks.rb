@@ -13,12 +13,8 @@
 #  owner_id    :bigint
 #
 
-class Deck < ApplicationRecord
-  belongs_to :owner, polymorphic: true
-
-  has_many :cards, class_name: 'DecksQuestion', dependent: :destroy
-  has_many :questions, through: :cards
-  has_many :assignments, dependent: :destroy
-
-  validates :name, uniqueness: { scope: %i[owner_id owner_type] }
+FactoryBot.define do
+  factory :deck do
+    association :owner, factory: :student
+  end
 end

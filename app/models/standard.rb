@@ -17,16 +17,8 @@ class Standard < ApplicationRecord
   belongs_to :standards_category
   delegate :standards_chart, to: :standards_category, allow_nil: false
 
-  has_many :questions_standards,
-           primary_key: :id,
-           foreign_key: :standard_id,
-           class_name: :QuestionsStandard,
-           dependent: :destroy
-
-  has_many :questions,
-           through: :questions_standards,
-           source: :question
-
+  has_many :questions_standards, dependent: :destroy
+  has_many :questions, through: :questions_standards
   has_many :responses, through: :questions
 
   validates :description, :standards_category, :title, presence: true

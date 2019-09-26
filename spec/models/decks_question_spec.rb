@@ -16,11 +16,23 @@
 #  updated_at              :datetime         not null
 #
 
-class DecksQuestion < ApplicationRecord
-  belongs_to :deck
-  belongs_to :question
-  delegate :responses, to: :question
 
-  validates :question_id, uniqueness: { scope: :deck_id }
-  validates :question, :deck, presence: true
+require 'rails_helper'
+
+RSpec.describe DecksQuestion, type: :model do
+  subject { create(:decks_question) }
+  it { should delegate_method(:responses).to(:question) }
+  describe 'associations' do
+    it { should belong_to(:deck) }
+    it { should belong_to(:question) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:deck) }
+    it { should validate_presence_of(:question) }
+    it do
+      should validate_uniqueness_of(:question_id)
+        .scoped_to(:deck_id)
+    end
+  end
 end

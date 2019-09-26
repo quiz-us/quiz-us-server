@@ -16,11 +16,9 @@
 #  updated_at              :datetime         not null
 #
 
-class DecksQuestion < ApplicationRecord
-  belongs_to :deck
-  belongs_to :question
-  delegate :responses, to: :question
-
-  validates :question_id, uniqueness: { scope: :deck_id }
-  validates :question, :deck, presence: true
+FactoryBot.define do
+  factory :decks_question do
+    association :deck
+    association :question
+  end
 end
