@@ -9,10 +9,9 @@
 #  id         :bigint           not null, primary key
 #
 
-
-class Enrollment < ApplicationRecord
-  belongs_to :period
-  belongs_to :student
-  validates :period_id, uniqueness: { scope: :student_id }
-  validates :period, :student, presence: true
+FactoryBot.define do
+  factory :enrollment do
+    association :period, factory: :period
+    association :student, factory: :student
+  end
 end
