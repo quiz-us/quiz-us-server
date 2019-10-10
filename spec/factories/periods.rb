@@ -14,5 +14,6 @@
 FactoryBot.define do
   factory :period do
     association :course, factory: :course
+    name { Faker::Educator.subject }
   end
 end
