@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Period
+  module Periods
     class DeletePeriod < BaseMutation
       graphql_name 'Delete Period'
       description 'Delete Period'

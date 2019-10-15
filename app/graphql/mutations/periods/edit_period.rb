@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Period
+  module Periods
     class EditPeriod < BaseMutation
       graphql_name 'Edit Period'
       description 'Edit Period'
 
-      argument :name, String, required: true
       argument :period_id, ID, required: true
+      argument :name, String, required: true
 
       # return type from the mutation
       type Types::PeriodType

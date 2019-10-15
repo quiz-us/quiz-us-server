@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Period
+  module Periods
     class CreatePeriod < BaseMutation
       graphql_name 'Create Period'
       description 'Create Period'
