@@ -10,12 +10,14 @@ module Queries
       def resolve
         current_student.assignments.map do |a|
           {
+            id: a.id,
             instructions: a.instructions,
             deck: a.deck,
             due: a.due,
             period: a.period,
             responses: a.responses.where(student_id: current_student.id),
-            num_questions: a.num_questions
+            num_questions: a.num_questions,
+            num_correct_responses: a.num_correct_responses(current_student.id)
           }
         end
       end
