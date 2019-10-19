@@ -15,6 +15,7 @@ module Queries
         # check that this student was actually assigned this assignment:
         assignment = current_student.assignments.find(assignment_id)
         {
+          id: assignment.id,
           instructions: assignment.instructions,
           deck: assignment.deck,
           due: assignment.due,
