@@ -37,7 +37,7 @@ gem 'mime-types'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-gem 'devise-jwt', '~> 0.5.9'
+gem 'devise-jwt', '~> 0.6.0'
 
 gem 'nokogiri', '>= 1.10.4'
 
