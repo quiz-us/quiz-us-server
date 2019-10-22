@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Periods
-    class EditPeriod < BaseMutation
+  module Teachers
+    class EditPeriod < TeacherMutation
       graphql_name 'Edit Period'
       description 'Edit Period'
 
