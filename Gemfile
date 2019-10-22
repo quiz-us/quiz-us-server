@@ -38,7 +38,7 @@ gem 'simplecov-small-badge', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-gem 'devise-jwt', '~> 0.5.9'
+gem 'devise-jwt', '~> 0.6.0'
 
 gem 'nokogiri', '>= 1.10.4'
 
@@ -59,7 +59,7 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'graphiql-rails'
   gem 'pry-rails'
