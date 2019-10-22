@@ -19,5 +19,5 @@
 # Ignore application configuration
 /config/application.yml
 
-coverage/assets
-coverage/index.html
+coverage/*
+!coverage/coverage_badge_total.svg
