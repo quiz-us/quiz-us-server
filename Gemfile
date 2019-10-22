@@ -30,7 +30,6 @@ gem 'rack-cors'
 gem 'rollbar'
 gem 'search_object_graphql'
 gem 'sendgrid-ruby'
-gem 'simplecov-small-badge', require: false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -46,6 +45,7 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'simplecov-small-badge', require: false
 end
 
 group :development, :test do
