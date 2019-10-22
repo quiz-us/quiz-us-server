@@ -16,5 +16,6 @@
 FactoryBot.define do
   factory :deck do
     association :owner, factory: :student
+    name { Faker::Educator.subject }
   end
 end
