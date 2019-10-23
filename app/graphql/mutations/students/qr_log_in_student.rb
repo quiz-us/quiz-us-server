@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Auth
+  module Students
+    # Inherits from BaseMutation because does not requrie student to be logged in:
     class QrLogInStudent < BaseMutation
       graphql_name 'Log in student with qr code'
       description 'Logs student in using qr code'

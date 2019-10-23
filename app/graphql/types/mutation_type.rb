@@ -19,9 +19,9 @@ module Types
 
     # # STUDENT MUTATIONS:
     field :create_login_link, mutation: Mutations::Students::CreateLoginLink
-    # field :create_response, mutation: Mutations::Students::CreateResponse
-    # field :log_in_student, mutation: Mutations::Auth::LogInStudent
-    # field :log_out_student, mutation: Mutations::Auth::LogOutStudent
-    # field :qr_log_in_student, mutation: Mutations::Auth::QrLogInStudent
+    field :create_response, mutation: Mutations::Students::CreateResponse
+    field :log_in_student, mutation: Mutations::Students::LogInStudent
+    field :log_out_student, mutation: Mutations::Students::LogOutStudent
+    field :qr_log_in_student, mutation: Mutations::Students::QrLogInStudent
   end
 end

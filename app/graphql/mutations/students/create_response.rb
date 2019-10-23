@@ -2,7 +2,7 @@
 
 module Mutations
   module Students
-    class CreateResponse < BaseMutation
+    class CreateResponse < StudentMutation
       graphql_name 'Create Response'
       description 'Creates a response'
 

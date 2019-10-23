@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Auth
-    class LogOutStudent < BaseMutation
+  module Students
+    class LogOutStudent < StudentMutation
       graphql_name 'Log out student'
       description 'Logs student out'
       type Boolean
