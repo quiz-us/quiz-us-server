@@ -12,6 +12,7 @@ module Types
     field :delete_question, mutation: Mutations::Teachers::DeleteQuestion
     field :edit_period, mutation: Mutations::Teachers::EditPeriod
     field :edit_standards_chart, mutation: Mutations::Teachers::EditStandardsChart
+    field :edit_student, mutation: Mutations::Teachers::EditStudent
     field :enroll_student, mutation: Mutations::Teachers::EnrollStudent
     field :log_in_teacher, mutation: Mutations::Teachers::LogInTeacher
     field :sign_up_teacher, mutation: Mutations::Teachers::SignUpTeacher
