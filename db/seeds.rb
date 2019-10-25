@@ -233,19 +233,15 @@ standard1 = standards_category1.standards.create!(
   description: 'Use the periodic table as a model to predict the relative properties of elements based on the patterns of electrons in the outermost energy level of atoms'
 )
 
+standard2 = standards_category1.standards.create!(
+  title: 'HS-PS1-2',
+  description: 'Properties of elements based on the patterns of electrons in the outermost energy level of atoms'
+)
+
 q1 = Question.create(
   question_type: 'multiple_choice',
   question_text: 'Which periodic table contains the most reactive elements?',
-  rich_text: '{
-        "object": "block",
-        "type": "paragraph",
-        "nodes": [
-          {
-            "object": "text",
-            "text": "Which periodic table contains the most reactive elements?"
-          }
-        ]
-      }'
+  rich_text: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"q1","marks":[]}]}]}}'
 )
 
 QuestionsStandard.create!(
@@ -257,32 +253,14 @@ QuestionOption.create!(
   question_id: q1.id,
   option_text: 'Halogens',
   correct: false,
-  rich_text: '{
-        "object": "block",
-        "type": "paragraph",
-        "nodes": [
-          {
-            "object": "text",
-            "text": "Halogens"
-          }
-        ]
-      }'
+  rich_text: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"a1","marks":[]}]}]}}'
 )
 
 QuestionOption.create!(
   question_id: q1.id,
   option_text: 'Noble Gases',
   correct: true,
-  rich_text: '{
-        "object": "block",
-        "type": "paragraph",
-        "nodes": [
-          {
-            "object": "text",
-            "text": "Noble Gases"
-          }
-        ]
-      }'
+  rich_text: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"a2","marks":[]}]}]}}'
 )
 
 tag1 = Tag.create!(
@@ -314,13 +292,13 @@ Course.create!(
   standards_chart: standards_chart1
 )
 
-josh = Teacher.create!(
-  email: 'joshling1919@gmail.com',
-  password: 'joshjoshjosh'
-)
+# josh = Teacher.create!(
+#   email: 'joshling1919@gmail.com',
+#   password: 'joshjoshjosh'
+# )
 
-Course.create!(
-  name: 'Texas 8th Grade Science 2',
-  teacher: josh,
-  standards_chart: StandardsChart.find_by(title: 'TEKS - 8th Grade Science')
-)
+# Course.create!(
+#   name: 'Texas 8th Grade Science 2',
+#   teacher: josh,
+#   standards_chart: StandardsChart.find_by(title: 'TEKS - 8th Grade Science')
+# )
