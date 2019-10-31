@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require './spec/helpers/teacher_authenticated_endpoint.rb'
 
 describe 'Mutations::Teachers::CreateAssignments' do
   let!(:period) { create(:period) }
@@ -40,13 +41,8 @@ describe 'Mutations::Teachers::CreateAssignments' do
       instructions: 'Please make sure you complete all cards.'
     }
   end
-  context 'when teacher is not signed in' do
-    it 'returns Unauthenticated error' do
-      errors = QuizUsServerSchema.execute(query_string, variables: variables)
-                                 .to_h['errors']
-      expect(errors[0]['message']).to eq('Unauthenticated')
-    end
-  end
+
+  it_behaves_like 'teacher_authenticated_endpoint'
 
   context 'when teacher is signed in' do
     let(:teacher) { create(:teacher) }
