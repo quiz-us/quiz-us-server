@@ -37,3 +37,19 @@ FactoryBot.define do
     end
   end
 end
+
+FactoryBot.define do
+  factory :mc_option_correct, class: 'QuestionOption' do 
+    option_text { "right" }
+    correct { true }
+    rich_text { "{\"object\":\"value\",\"document\":{\"object\":\"document\",\"data\":{},\"nodes\":[{\"object\":\"block\",\"type\":\"line\",\"data\":{},\"nodes\":[{\"object\":\"text\",\"text\":\"right\",\"marks\":[]}]}]}}" }
+    association :question
+  end 
+
+  factory :mc_option_wrong, class: 'QuestionOption' do 
+    option_text { "right" }
+    correct { false }
+    rich_text { "{\"object\":\"value\",\"document\":{\"object\":\"document\",\"data\":{},\"nodes\":[{\"object\":\"block\",\"type\":\"line\",\"data\":{},\"nodes\":[{\"object\":\"text\",\"text\":\"right\",\"marks\":[]}]}]}}" }
+    association :question
+  end 
+end 

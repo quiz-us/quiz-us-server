@@ -33,8 +33,8 @@ module Mutations
       rich_text: nil,
       question_plaintext: nil,
       standard_id: nil,
-      tags: nil,
-      question_options: nil
+      tags: [],
+      question_options: []
       )
       question = Question.find(id)
       question.question_type = question_type if question_type
