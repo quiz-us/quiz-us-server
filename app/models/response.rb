@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: responses
@@ -18,6 +20,6 @@ class Response < ApplicationRecord
   validates :student, :question, presence: true
   belongs_to :student
   belongs_to :question
-  belongs_to :question_option
+  belongs_to :question_option, optional: true
   belongs_to :assignment, optional: true
 end
