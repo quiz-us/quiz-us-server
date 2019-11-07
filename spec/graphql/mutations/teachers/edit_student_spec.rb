@@ -60,7 +60,8 @@ describe 'Mutations::Teachers::EditStudent' do
         results = QuizUsServerSchema.execute(query_string, variables: invalid)
                                     .to_h['errors']
         expect(results[0]['message']).to eq(
-          "unknown attribute 'invalid_attribute' for Student."
+          'Variable studentParams of type StudentParams! was provided invalid'\
+           ' value for invalid_attribute (Field is not defined on StudentParams)'
         )
       end
     end

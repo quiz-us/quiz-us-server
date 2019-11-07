@@ -14,7 +14,7 @@ module Mutations
 
       def resolve(student_id:, student_params:)
         student = Student.find(student_id)
-        student.update!(student_params)
+        student.update!(student_params.to_h)
 
         student
       end

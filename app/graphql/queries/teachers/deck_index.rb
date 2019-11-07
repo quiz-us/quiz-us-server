@@ -3,7 +3,7 @@
 module Queries
   module Teachers
     class DeckIndex < TeacherQuery
-      description 'Display all decks'
+      description 'Display all decks that belong to the current teacher'
 
       type [Types::DeckType], null: false
 

@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 module Types
-  class StudentParamsType < Types::BaseScalar
-    def self.coerce_input(value, _context)
-      student_params = {}
-      value.each do |k,v|
-        student_params[k.underscore] = v
-      end
-
-      student_params
-    end
+  class StudentParamsType < Types::BaseInputObject
+    description 'Attributes for creating or updating a student'
+    argument :email, String, 'student email address', required: false
+    argument :first_name, String, 'student first name', required: false
+    argument :last_name, String, 'student last name', required: false
   end
 
   class StudentType < BaseObject
