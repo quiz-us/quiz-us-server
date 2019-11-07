@@ -4,9 +4,9 @@
 #
 # Table name: questions_standards
 #
-#  question_id :integer          not null
-#  standard_id :integer          not null
 #  id          :bigint           not null, primary key
+#  question_id :integer          not null, indexed => [standard_id], indexed => [standard_id], indexed => [standard_id]
+#  standard_id :integer          not null, indexed => [question_id], indexed => [question_id], indexed => [question_id]
 #
 
 class QuestionsStandard < ApplicationRecord

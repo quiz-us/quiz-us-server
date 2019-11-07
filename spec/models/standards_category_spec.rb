@@ -5,11 +5,11 @@
 # Table name: standards_categories
 #
 #  id                 :integer          not null, primary key
-#  title              :string           not null
 #  description        :text
-#  standards_chart_id :integer          not null
+#  title              :string           not null, indexed => [standards_chart_id], indexed
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  standards_chart_id :integer          not null, indexed, indexed => [title]
 #
 
 require 'rails_helper'
