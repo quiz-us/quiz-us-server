@@ -2,7 +2,7 @@
 
 module Mutations
   module Students
-    class CreateResponse < BaseMutation
+    class CreateResponse < StudentMutation
       graphql_name 'Create Response'
       description 'Creates a response'
 
@@ -15,7 +15,14 @@ module Mutations
 
       type Types::ResponseType
 
-      def resolve(question_id:, assignment_id: nil, question_option_id:, response_text:, self_grade:, question_type:)
+      def resolve(
+        question_id:,
+        assignment_id: nil,
+        question_option_id: nil,
+        response_text: nil,
+        self_grade: nil,
+        question_type:
+      )
         response = current_student.responses.create!(
           question_id: question_id,
           assignment_id: assignment_id,

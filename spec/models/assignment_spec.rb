@@ -5,12 +5,12 @@
 # Table name: assignments
 #
 #  id           :bigint           not null, primary key
-#  deck_id      :bigint           not null
-#  due          :datetime
+#  due          :datetime         indexed
 #  instructions :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  period_id    :bigint           not null
+#  deck_id      :bigint           not null, indexed
+#  period_id    :bigint           not null, indexed
 #
 
 

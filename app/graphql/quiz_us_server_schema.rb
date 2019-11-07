@@ -11,6 +11,10 @@ class QuizUsServerSchema < GraphQL::Schema
     GraphQL::ExecutionError.new(exception.record.errors.full_messages.join("\n"))
   end
 
+  rescue_from(ActiveModel::UnknownAttributeError) do |exception|
+    GraphQL::ExecutionError.new(exception.message)
+  end
+
   #########################################
   # Definition of QueryType and MutationType
   query(Types::QueryType)

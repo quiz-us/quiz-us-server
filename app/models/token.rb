@@ -5,11 +5,11 @@
 # Table name: tokens
 #
 #  id         :bigint           not null, primary key
-#  student_id :bigint           not null
-#  value      :string           not null
 #  expired    :boolean          default(FALSE)
+#  value      :string           not null, indexed
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  student_id :bigint           not null, indexed
 #
 
 class Token < ApplicationRecord

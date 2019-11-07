@@ -4,9 +4,9 @@
 #
 # Table name: enrollments
 #
-#  period_id  :integer          not null
-#  student_id :integer          not null
 #  id         :bigint           not null, primary key
+#  period_id  :integer          not null, indexed => [student_id], indexed => [student_id], indexed => [student_id]
+#  student_id :integer          not null, indexed => [period_id], indexed => [period_id], indexed => [period_id]
 #
 
 FactoryBot.define do

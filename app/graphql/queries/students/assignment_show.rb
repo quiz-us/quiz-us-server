@@ -2,7 +2,7 @@
 
 module Queries
   module Students
-    class AssignmentShow < BaseQuery
+    class AssignmentShow < StudentQuery
       graphql_name 'Assignment show'
       description 'Return a Assignment'
 

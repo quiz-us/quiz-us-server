@@ -24,12 +24,12 @@ gem 'puma', '~> 4.2'
 gem 'aws-sdk-s3', '~> 1'
 gem 'bootsnap'
 gem 'graphql'
+gem 'mime-types'
 gem 'pg_search'
 gem 'rack-cors'
 gem 'rollbar'
 gem 'search_object_graphql'
 gem 'sendgrid-ruby'
-gem 'mime-types'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -44,6 +44,8 @@ gem 'nokogiri', '>= 1.10.4'
 group :test do
   gem 'rspec_junit_formatter'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'simplecov-small-badge', require: false
 end
 
 group :development, :test do
