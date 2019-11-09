@@ -8,7 +8,7 @@ module Queries
       type [Types::PeriodType], null: false
 
       def resolve
-        current_course.periods
+        current_course.periods.order(:name)
       end
     end
   end
