@@ -16,6 +16,7 @@ describe 'Queries::Teachers::PeriodIndex' do
     }
     GRAPHQL
   end
+  let(:variables) { nil }
   it_behaves_like 'teacher_authenticated_endpoint'
 
   context 'when logged in as teacher' do

@@ -13,8 +13,6 @@
 RSpec.shared_examples 'teacher_authenticated_endpoint' do
   context 'when teacher is not signed in' do
     it 'returns Unauthenticated error' do
-      # account for when variables don't need to be passed in:
-      variables ||= nil
       errors = QuizUsServerSchema.execute(query_string, variables: variables)
                                  .to_h['errors']
       expect(errors[0]['message']).to eq('Unauthenticated')
