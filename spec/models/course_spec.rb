@@ -6,10 +6,10 @@
 #
 #  id                 :integer          not null, primary key
 #  name               :string
-#  teacher_id         :integer
-#  standards_chart_id :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  standards_chart_id :integer          indexed
+#  teacher_id         :integer          indexed
 #
 
 

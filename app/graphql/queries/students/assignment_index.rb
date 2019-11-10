@@ -2,7 +2,7 @@
 
 module Queries
   module Students
-    class AssignmentIndex < BaseQuery
+    class AssignmentIndex < StudentQuery
       description 'Display all assignments for current student'
 
       type [Types::AssignmentType], null: false

@@ -3,12 +3,12 @@
 # Table name: question_options
 #
 #  id          :integer          not null, primary key
-#  question_id :integer
-#  option_text :string
 #  correct     :boolean
+#  option_text :string
+#  rich_text   :jsonb
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  rich_text   :jsonb
+#  question_id :integer          indexed
 #
 
 class QuestionOption < ApplicationRecord

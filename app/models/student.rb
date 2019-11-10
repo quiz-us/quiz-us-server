@@ -5,17 +5,17 @@
 # Table name: students
 #
 #  id                     :integer          not null, primary key
-#  email                  :string           not null
+#  email                  :string           not null, indexed
+#  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null
+#  jti                    :string           not null, indexed
 #  last_name              :string           not null
+#  qr_code                :string           default(""), not null
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string           indexed
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  jti                    :string           not null
-#  qr_code                :string           default(""), not null
 #
 
 class Student < ApplicationRecord

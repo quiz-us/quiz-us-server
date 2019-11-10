@@ -5,10 +5,10 @@
 # Table name: periods
 #
 #  id         :integer          not null, primary key
-#  name       :string
-#  course_id  :integer
+#  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  course_id  :integer          indexed
 #
 
 FactoryBot.define do

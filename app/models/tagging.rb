@@ -3,10 +3,10 @@
 # Table name: taggings
 #
 #  id          :integer          not null, primary key
-#  question_id :integer
-#  tag_id      :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  question_id :integer          indexed => [tag_id]
+#  tag_id      :integer          indexed => [question_id]
 #
 
 class Tagging < ApplicationRecord
