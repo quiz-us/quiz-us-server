@@ -14,7 +14,7 @@ class Enrollment < ApplicationRecord
   belongs_to :student
   validates :student, uniqueness: {
     scope: :period_id,
-    message: 'is already in this class.'
+    message: 'with this email is already in this class.'
   }
   validates :period, :student, presence: true
 end
