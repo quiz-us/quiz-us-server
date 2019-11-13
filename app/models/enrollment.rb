@@ -9,10 +9,12 @@
 #  student_id :integer          not null, indexed => [period_id], indexed => [period_id], indexed => [period_id]
 #
 
-
 class Enrollment < ApplicationRecord
   belongs_to :period
   belongs_to :student
-  validates :period_id, uniqueness: { scope: :student_id }
+  validates :student, uniqueness: {
+    scope: :period_id,
+    message: 'with this email is already in this class.'
+  }
   validates :period, :student, presence: true
 end
