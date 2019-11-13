@@ -14,6 +14,6 @@
 FactoryBot.define do
   factory :period do
     association :course, factory: :course
-    name { Faker::String.random(length: 6..12) }
+    name { Faker::Alphanumeric.alphanumeric }
   end
 end
