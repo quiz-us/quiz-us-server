@@ -12,5 +12,6 @@ def clear_staging
   Response.destroy_all
   QuestionOption.destroy_all
   Question.destroy_all
-  p 'Deleted all responses, question_options, and responses from staging database'
+  Period.where('created_at > ?', 1.day.ago).destroy_all
+  p 'Cleared staging data.'
 end
