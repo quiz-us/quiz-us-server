@@ -25,12 +25,12 @@ FactoryBot.define do
     factory :mc_question do 
       transient do 
         wrong_count { 2 }
-      end 
+      end
 
       # create one correct question option
       after(:create) do |question|
         create :mc_option_correct, question: question
-      end 
+      end
       
       # create all the other (incorrect) question options
       after(:create) do |question, evaluator|
@@ -38,5 +38,4 @@ FactoryBot.define do
       end
     end 
   end 
-end
 end
