@@ -19,7 +19,8 @@ module Queries
         students.each do |student|
           student_performance = {
             firstname: student.first_name,
-            lastname: student.last_name
+            lastname: student.last_name,
+            student_id: student.id
           }
           responses = student.responses.where(assignment_id: assignment_id)
           total_num_responses = responses.count

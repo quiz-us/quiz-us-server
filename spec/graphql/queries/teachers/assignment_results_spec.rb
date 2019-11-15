@@ -14,6 +14,7 @@ describe 'Queries::Teachers::AssignmentResults' do
         assignmentResults(assignmentId: $assignmentId) {
           firstname
           lastname
+          studentId
           result
         }
       }
@@ -65,10 +66,12 @@ describe 'Queries::Teachers::AssignmentResults' do
       second_student = res[1]
       expect(first_student['firstname']).to eq(student_a.first_name)
       expect(first_student['lastname']).to eq(student_a.last_name)
+      expect(first_student['studentId'].to_i).to eq(student_a.id)
       expect(first_student['result']).to eq('1 / 1')
 
       expect(second_student['firstname']).to eq(student_b.first_name)
       expect(second_student['lastname']).to eq(student_b.last_name)
+      expect(second_student['studentId'].to_i).to eq(student_b.id)
       expect(second_student['result']).to eq('1 / 2')
     end
   end
