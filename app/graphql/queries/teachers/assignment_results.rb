@@ -11,33 +11,22 @@ module Queries
       type [Types::AssignmentResultType], null: false
 
       def resolve(assignment_id:)
-        # teacher_signed_in?
         results = []
         students = Assignment.find(assignment_id)
-                            .period
-                            .students
-                            .includes(:responses, responses: :question)
+                             .period
+                             .students
+                             .includes(:responses, responses: :question)
         students.each do |student|
-          result = {
-            fullname: "#{student.first_name} #{student.last_name}",
-            answer: []
+          student_performance = {
+            firstname: student.first_name,
+            lastname: student.last_name
           }
-          student.responses.where(assignment_id: assignment_id).each do |response|
-            q = response.question
-            result[:answer] << {
-              questionId: q.id,
-              questionType: q.question_type,
-              questionText: q.question_text,
-              responseText: (
-                response.response_text ||
-                QuestionOption.find(response.question_option_id).option_text
-              ),
-              selfGrade: response.self_grade,
-              mcCorrect: response.mc_correct
-            }
-          end
-          result[:answer] = result[:answer].to_json
-          results << result
+          responses = student.responses.where(assignment_id: assignment_id)
+          total_num_responses = responses.count
+
+          total_correct = responses.correct.count
+          student_performance[:result] = "#{total_correct} / #{total_num_responses}"
+          results << student_performance
         end
         results
       end

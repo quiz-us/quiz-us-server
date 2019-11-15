@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_10_182556) do
+ActiveRecord::Schema.define(version: 2019_11_15_020020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,7 +115,9 @@ ActiveRecord::Schema.define(version: 2019_11_10_182556) do
     t.integer "question_id", null: false
     t.integer "self_grade"
     t.boolean "mc_correct"
+    t.index ["mc_correct"], name: "index_responses_on_mc_correct"
     t.index ["question_option_id"], name: "index_responses_on_question_option_id"
+    t.index ["self_grade"], name: "index_responses_on_self_grade"
     t.index ["student_id"], name: "index_responses_on_student_id"
   end
 
