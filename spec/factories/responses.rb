@@ -26,6 +26,11 @@ FactoryBot.define do
       mc_correct { true }
     end
 
+    trait :multiple_choice_incorrect do
+      association :question_option, factory: %i[question_option]
+      mc_correct { false }
+    end
+
     trait :free_response_correct do
       # free response is considered correct if rating is >= 4
       self_grade { 4 }
