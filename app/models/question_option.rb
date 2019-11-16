@@ -12,5 +12,8 @@
 #
 
 class QuestionOption < ApplicationRecord
-  belongs_to :question
+
+  # add documentation
+  belongs_to :question,
+  optional: true
 end
