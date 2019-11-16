@@ -9,7 +9,6 @@ module Mutations
 
     # arguments passed to the `resolved` method
     argument :id, ID, required: true
-    argument :question_type, String, required: false
     argument :standard_id, ID, required: false
     argument :tags, [String], required: false
     argument :rich_text, String, required: false
@@ -59,7 +58,6 @@ module Mutations
       obj.public_url
     end
 
-    # question_type: nil, 
     def resolve(
       id:,
       rich_text: nil,
