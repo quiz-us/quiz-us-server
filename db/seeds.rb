@@ -241,7 +241,23 @@ standard2 = standards_category1.standards.create!(
 q1 = Question.create(
   question_type: 'multiple_choice',
   question_text: 'Which periodic table contains the most reactive elements?',
-  rich_text: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"q1","marks":[]}]}]}}'
+  rich_text: {
+    object: 'value',
+    document: {
+      object: 'document',
+      data: {},
+      nodes: [{
+        object: 'block',
+        type: 'line',
+        data: {},
+        nodes: [{
+          object: 'text',
+          text: 'q1',
+          marks: []
+        }]
+      }]
+    }
+  }.to_json
 )
 
 QuestionsStandard.create!(
@@ -251,16 +267,48 @@ QuestionsStandard.create!(
 
 QuestionOption.create!(
   question_id: q1.id,
-  option_text: 'Halogens',
-  correct: false,
-  rich_text: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"a1","marks":[]}]}]}}'
+  option_text: 'Noble Gases',
+  correct: true,
+  rich_text: {
+    object: 'value',
+    document: {
+      object: 'document',
+      data: {},
+      nodes: [{
+        object: 'block',
+        type: 'line',
+        data: {},
+        nodes: [{
+          object: 'text',
+          text: 'a1',
+          marks: []
+        }]
+      }]
+    }
+  }.to_json
 )
 
 QuestionOption.create!(
   question_id: q1.id,
   option_text: 'Noble Gases',
-  correct: true,
-  rich_text: '{"object":"value","document":{"object":"document","data":{},"nodes":[{"object":"block","type":"line","data":{},"nodes":[{"object":"text","text":"a2","marks":[]}]}]}}'
+  correct: false,
+  rich_text: {
+    object: 'value',
+    document: {
+      object: 'document',
+      data: {},
+      nodes: [{
+        object: 'block',
+        type: 'line',
+        data: {},
+        nodes: [{
+          object: 'text',
+          text: 'a2',
+          marks: []
+        }]
+      }]
+    }
+  }.to_json
 )
 
 tag1 = Tag.create!(
@@ -292,13 +340,13 @@ Course.create!(
   standards_chart: standards_chart1
 )
 
-# josh = Teacher.create!(
-#   email: 'joshling1919@gmail.com',
-#   password: 'joshjoshjosh'
-# )
+josh = Teacher.create!(
+  email: 'joshling1919@gmail.com',
+  password: 'joshjoshjosh'
+)
 
-# Course.create!(
-#   name: 'Texas 8th Grade Science 2',
-#   teacher: josh,
-#   standards_chart: StandardsChart.find_by(title: 'TEKS - 8th Grade Science')
-# )
+Course.create!(
+  name: 'Texas 8th Grade Science 2',
+  teacher: josh,
+  standards_chart: StandardsChart.find_by(title: 'TEKS - 8th Grade Science')
+)
