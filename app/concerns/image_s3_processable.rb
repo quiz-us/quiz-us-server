@@ -7,6 +7,8 @@ module ImageS3Processable
   extend ActiveSupport::Concern
   # if there are images, then take the data:image blobs, temporarily download
   # them, upload the file to s3, and then save that s3 url under the question's
+  class UnprocessableImageError < StandardError;
+  end
 
   def process_images!(rich_text)
     rich = JSON.parse(rich_text)

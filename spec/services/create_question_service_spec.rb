@@ -63,7 +63,7 @@ RSpec.describe CreateQuestionService do
       it 'throws UnprocessableImageError when base 64 encoding is invalid' do
         expect do
           CreateQuestionService.new(params_with_unprocessable_images).call
-        end.to raise_error(CreateQuestionService::UnprocessableImageError)
+        end.to raise_error(ImageS3Processable::UnprocessableImageError)
       end
       it 'downloads the base64 image encoding and uploads the image to s3' do
         CreateQuestionService.new(params_with_images).call

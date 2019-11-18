@@ -3,10 +3,8 @@
 # CreateQuestion processes a question and all of its associated objects (ie.
 # tags and question_options), and then creates them.
 class CreateQuestionService
-  include ImageS3Processable
-
-  class UnprocessableImageError < StandardError; end
   include Callable
+  include ImageS3Processable
 
   def initialize(params)
     @rich_text = params[:rich_text]
