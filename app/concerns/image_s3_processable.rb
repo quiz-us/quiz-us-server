@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require 'active_support/concern'
 require 'aws-sdk-s3'
 
-module ImageS3Processing
+module ImageS3Processable
   extend ActiveSupport::Concern
+  # if there are images, then take the data:image blobs, temporarily download
+  # them, upload the file to s3, and then save that s3 url under the question's
 
   def process_images!(rich_text)
     rich = JSON.parse(rich_text)
