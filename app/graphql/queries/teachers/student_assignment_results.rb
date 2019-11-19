@@ -19,32 +19,37 @@ module Queries
       argument :assignment_id, ID, required: true
       argument :student_id, ID, required: true
 
-      type [Types::ResponseType], null: false
+      type [Types::QuestionType], null: false
 
       def resolve(assignment_id:, student_id:)
         questions = Assignment.find(assignment_id).deck.questions
+        student_responses = find_student_responses(assignment_id, student_id)
+        questions_with_responses = []
+        questions.each do |q|
+          questions_with_responses << q.as_json.merge(
+            responses: student_responses[q.id]
+          )
+        end
+        questions_with_responses
+      end
+
+      private
+
+      def find_student_responses(assignment_id, student_id)
         student_responses = Hash.new { |h, k| h[k] = [] }
         Response.includes(:question_option).where(
           assignment_id: assignment_id,
           student_id: student_id
-        ).each { |r| student_responses[r.question_id] << r.as_json.merge(question_option: r.question_option.rich_text) }
-        res = []
-        questions.each do |q|
-          responses = student_responses[q.id].map do |r|
-            byebug
-            answer = r[:question_option] || r[:response_text]
-            {
-              answer: answer,
-              correct: r.mc_correct,
-              self_grade: r.self_grade
-            }
-          end
-          res << {
-            question: q,
-            responses: responses
-          }
+        ).each do |r|
+          student_responses[r.question_id] << r.as_json.merge(
+            created_at: r.created_at,
+            question_option: r.question_option,
+            response_text: r.response_text,
+            correct: r.mc_correct,
+            self_grade: r.self_grade
+          )
         end
-        byebug
+        student_responses
       end
     end
   end
