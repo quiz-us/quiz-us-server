@@ -8,7 +8,8 @@ describe 'Queries::Teachers::StudentAssignmentResults' do
   let(:student) { create(:student) }
   let(:course) { create(:course, teacher: teacher) }
   let(:period) { create(:period, course: course) }
-  let(:assignment) { create(:assignment, period: period) }
+  let(:deck) { create(:deck) }
+  let(:assignment) { create(:assignment, period: period, deck: deck) }
   let(:query_string) do
     <<-GRAPHQL
       query($studentId: ID!, $assignmentId: ID!) {
@@ -40,4 +41,26 @@ describe 'Queries::Teachers::StudentAssignmentResults' do
     }
   end
   it_behaves_like 'teacher_authenticated_endpoint'
+
+  context 'when logged in as teacher' do
+    let(:question_1) { create(:question) }
+    before(:each) do
+      allow_any_instance_of(Queries::BaseQuery)
+        .to receive(:current_teacher).and_return(teacher)
+
+      create(:decks_question, question: question_1, deck: deck)
+    end
+
+    it 'returns an array of questions in that assignment' do
+      res = QuizUsServerSchema.execute(query_string, variables: variables)
+                              .to_h['data']['studentAssignmentResults']
+      expect(res.length).to eq(1)
+      expect(res[0]).to include(
+        'id' => question_1.id.to_s,
+        'questionType' => question_1.question_type,
+        'richText' => question_1.rich_text,
+        'responses' => question_1.responses
+      )
+    end
+  end
 end
