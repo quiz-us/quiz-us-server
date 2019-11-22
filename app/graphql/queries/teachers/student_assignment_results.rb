@@ -26,18 +26,20 @@ module Queries
         student_responses = find_student_responses(assignment_id, student_id)
         questions_with_responses = []
         questions.each do |q|
+          num_responses = student_responses[q.id].length
           questions_with_responses << q.as_json.merge(
-            responses: student_responses[q.id]
+            responses: student_responses[q.id],
+            num_responses: num_responses
           )
         end
-        questions_with_responses
+        questions_with_responses.sort! { |a, b| b[:num_responses] <=> a[:num_responses] }
       end
 
       private
 
       def find_student_responses(assignment_id, student_id)
         student_responses = Hash.new { |h, k| h[k] = [] }
-        Response.includes(:question_option).where(
+        Response.includes(:question_option).order(created_at: :asc).where(
           assignment_id: assignment_id,
           student_id: student_id
         ).each do |r|
