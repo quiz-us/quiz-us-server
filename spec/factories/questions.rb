@@ -14,5 +14,21 @@
 
 FactoryBot.define do
   factory :question do
+    question_type { 'Free Response' }
+    rich_text do
+      {
+        object: 'value',
+        document: {
+          object: 'document',
+          data: {},
+          nodes: [{
+            object: 'block',
+            type: 'line',
+            data: {},
+            nodes: [{ object: 'text', text: 'here is a question', marks: [] }]
+          }]
+        }
+      }.to_json
+    end
   end
 end
