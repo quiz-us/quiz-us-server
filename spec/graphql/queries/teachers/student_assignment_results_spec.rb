@@ -44,6 +44,8 @@ describe 'Queries::Teachers::StudentAssignmentResults' do
 
   context 'when logged in as teacher' do
     let(:question_1) { create(:question) }
+    let(:question_2) { create(:question) }
+    let(:question_3) { create(:question) }
     before(:each) do
       allow_any_instance_of(Queries::BaseQuery)
         .to receive(:current_teacher).and_return(teacher)
@@ -61,6 +63,25 @@ describe 'Queries::Teachers::StudentAssignmentResults' do
         'richText' => question_1.rich_text,
         'responses' => question_1.responses
       )
+    end
+
+    it 'sorts questions by number of responses in descending order' do
+      create(:decks_question, question: question_2, deck: deck)
+      create(:decks_question, question: question_3, deck: deck)
+      create(:response,
+             student: student,
+             question: question_2,
+             assignment: assignment)
+
+      res = QuizUsServerSchema.execute(query_string, variables: variables)
+                              .to_h['data']['studentAssignmentResults']
+      expect(res.length).to eq(3)
+      expect(res[0]).to include(
+        'id' => question_2.id.to_s,
+        'questionType' => question_2.question_type,
+        'richText' => question_2.rich_text
+      )
+      expect(res[0]['responses'].length).to eq(1)
     end
   end
 end

@@ -32,7 +32,9 @@ module Queries
             num_responses: num_responses
           )
         end
-        questions_with_responses.sort! { |a, b| b[:num_responses] <=> a[:num_responses] }
+        questions_with_responses.sort! do |a, b|
+          b[:num_responses] <=> a[:num_responses]
+        end
       end
 
       private
@@ -44,11 +46,7 @@ module Queries
           student_id: student_id
         ).each do |r|
           student_responses[r.question_id] << r.as_json.merge(
-            created_at: r.created_at,
-            question_option: r.question_option,
-            response_text: r.response_text,
-            correct: r.mc_correct,
-            self_grade: r.self_grade
+            question_option: r.question_option
           )
         end
         student_responses
