@@ -72,6 +72,14 @@ describe 'Queries::Teachers::StudentAssignmentResults' do
              student: student,
              question: question_2,
              assignment: assignment)
+      create(:response,
+             student: student,
+             question: question_2,
+             assignment: assignment)
+      create(:response,
+             student: student,
+             question: question_1,
+             assignment: assignment)
 
       res = QuizUsServerSchema.execute(query_string, variables: variables)
                               .to_h['data']['studentAssignmentResults']
@@ -81,7 +89,8 @@ describe 'Queries::Teachers::StudentAssignmentResults' do
         'questionType' => question_2.question_type,
         'richText' => question_2.rich_text
       )
-      expect(res[0]['responses'].length).to eq(1)
+      expect(res[0]['responses'].length).to eq(2)
+      expect(res[2]['id'].to_i).to eq(question_3.id)
     end
   end
 end
