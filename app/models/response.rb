@@ -5,9 +5,9 @@
 # Table name: responses
 #
 #  id                 :integer          not null, primary key
-#  mc_correct         :boolean
+#  mc_correct         :boolean          indexed
 #  response_text      :text
-#  self_grade         :integer
+#  self_grade         :integer          indexed
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  assignment_id      :integer
@@ -22,4 +22,6 @@ class Response < ApplicationRecord
   belongs_to :question
   belongs_to :question_option, optional: true
   belongs_to :assignment, optional: true
+
+  scope :correct, -> { where('mc_correct = ? OR self_grade >= ?', true, 4) }
 end

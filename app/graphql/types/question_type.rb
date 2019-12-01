@@ -11,7 +11,6 @@ module Types
     field :tags, [Types::TagType], null: true
     field :taggings, [Types::TaggingType], null: true
     field :question_options, [Types::QuestionOptionType], null: true
-    # TODO: investigate if we can delete this field. It isnt being used in the create question form
-    # field :question_plaintext, String, null: true
+    field :responses, [Types::ResponseType], null: true
   end
 end
