@@ -1,15 +1,5 @@
 # frozen_string_literal: true
 
-# Question number 1: what is an atom?
-#
-# Attempt number 1: 'it is a molecule'
-# self-assessment: 3
-# answered at: timestamp
-#
-# Attempt number 2: 'it is the basic building block of life'
-# self-assessment: 4
-# answered at: timestamp
-
 module Queries
   module Teachers
     class StudentAssignmentResults < TeacherQuery
