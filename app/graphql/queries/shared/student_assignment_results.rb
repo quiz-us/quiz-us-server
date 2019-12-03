@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Queries
-  module Teachers
-    class StudentAssignmentResults < TeacherQuery
+  module Shared
+    class StudentAssignmentResults < SharedQuery
       graphql_name 'Student Assignment Results'
       description 'Given an assignment id and student id, show how students did on that specific assignment'
 
