@@ -18,7 +18,6 @@ module Types
     field :questions, resolver: Queries::Teachers::QuestionSearch
     field :standard, resolver: Queries::Teachers::StandardShow
     field :standards_charts, resolver: Queries::Teachers::StandardsChartIndex
-    field :student_assignment_results, resolver: Queries::Teachers::StudentAssignmentResults
     field :students, resolver: Queries::Teachers::StudentIndex
     field :tag_search, resolver: Queries::Teachers::TagSearch
     field :tag, resolver: Queries::Teachers::TagShow
@@ -31,5 +30,8 @@ module Types
     field :current_student, resolver: Queries::Students::CurrentStudent
     field :personal_assignment, resolver: Queries::Students::PersonalAssignment
     field :student_assignments, resolver: Queries::Students::AssignmentIndex
+
+    # SHARED TYPES`
+    field :student_assignment_results, resolver: Queries::Shared::StudentAssignmentResults
   end
 end

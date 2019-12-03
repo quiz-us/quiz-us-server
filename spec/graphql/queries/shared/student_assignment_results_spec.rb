@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require './spec/helpers/teacher_authenticated_endpoint.rb'
+require './spec/helpers/shared_authenticated_endpoint.rb'
 
-describe 'Queries::Teachers::StudentAssignmentResults' do
+describe 'Queries::Shared::StudentAssignmentResults' do
   let(:teacher) { create(:teacher) }
   let(:student) { create(:student) }
   let(:course) { create(:course, teacher: teacher) }
@@ -40,7 +40,7 @@ describe 'Queries::Teachers::StudentAssignmentResults' do
       studentId: student.id
     }
   end
-  it_behaves_like 'teacher_authenticated_endpoint'
+  it_behaves_like 'shared_authenticated_endpoint'
 
   context 'when logged in as teacher' do
     let(:question_1) { create(:question) }

@@ -18,6 +18,14 @@ module Authenticable
       true
     end
 
+    def teacher_or_student_signed_in?
+      unless current_student || current_teacher
+        raise GraphQL::ExecutionError, 'Unauthenticated'
+      end
+
+      true
+    end
+
     def current_course
       # @todo: in the future, if a teacher has more than one course, we would
       # need to add a course switching interface in the frontend and pass
