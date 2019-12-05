@@ -29,6 +29,7 @@ module Types
     field :assignment, resolver: Queries::Students::AssignmentShow
     field :current_student, resolver: Queries::Students::CurrentStudent
     field :personal_assignment, resolver: Queries::Students::PersonalAssignment
+    field :standards_mastery, resolver: Queries::Students::StandardsMastery
     field :student_assignments, resolver: Queries::Students::AssignmentIndex
 
     # SHARED TYPES`
