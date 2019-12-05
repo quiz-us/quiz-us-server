@@ -48,7 +48,7 @@ module Mutations
         else
           raise StandardError('That Question Type is not currently supported!')
         end
-        CalculateDue.new(rating, card).call
+        CalculateDue.call(rating, card)
         response
       end
     end
