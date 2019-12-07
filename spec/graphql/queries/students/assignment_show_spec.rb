@@ -30,7 +30,6 @@ describe 'Queries::Students::AssignmentShow' do
   it_behaves_like 'student_authenticated_endpoint'
 
   context 'when logged in as student' do
-    let(:student) { create(:student) }
     before(:each) do
       allow_any_instance_of(Queries::BaseQuery)
         .to receive(:current_student).and_return(student)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# http://weblog.jamisbuck.org/2007/1/17/concerns-in-activerecord
+# https://medium.com/selleo/essential-rubyonrails-patterns-part-1-service-objects-1af9f9573ca1
 module Callable
   extend ActiveSupport::Concern
 

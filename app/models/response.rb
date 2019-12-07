@@ -22,6 +22,11 @@ class Response < ApplicationRecord
   belongs_to :question
   belongs_to :question_option, optional: true
   belongs_to :assignment, optional: true
+  has_many :standards, through: :question
 
   scope :correct, -> { where('mc_correct = ? OR self_grade >= ?', true, 4) }
+
+  def correct
+    mc_correct || (self_grade.present? && self_grade >= 4)
+  end
 end
