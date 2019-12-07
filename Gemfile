@@ -23,6 +23,7 @@ gem 'puma', '~> 4.3'
 
 gem 'aws-sdk-s3', '~> 1'
 gem 'bootsnap'
+gem 'google-cloud-translate'
 gem 'graphql'
 gem 'mime-types'
 gem 'pg_search'
