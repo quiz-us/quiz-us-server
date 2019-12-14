@@ -29,7 +29,7 @@ gem 'mime-types'
 gem 'pg_search'
 gem 'rack-cors'
 gem 'rollbar'
-gem 'search_object_graphql', '>= 0.3.1'
+gem 'search_object'
 gem 'sendgrid-ruby'
 
 # Use Capistrano for deployment

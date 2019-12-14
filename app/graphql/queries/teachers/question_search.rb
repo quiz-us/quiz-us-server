@@ -1,35 +1,25 @@
 # frozen_string_literal: true
 
-require 'search_object'
-require 'search_object/plugin/graphql'
-
 module Queries
   module Teachers
-    class QuestionSearch < TeacherQuery
-      # https://github.com/rstankov/SearchObjectGraphQL:
-      include SearchObject.module(:graphql)
-
+    class QuestionSearch < BaseQuery
       description 'Search for questions'
+
+      argument :standard_id, ID, required: false
+      argument :key_words, String, required: false
 
       type [Types::QuestionType], null: false
 
-      scope { current_course.questions }
-
-      option(:empty_query, type: Boolean) do |scope, value|
-        # return empty object if all other query parameters
-        # are empty
-        scope.none if value
-      end
-
-      option(:standard_id, type: ID) do |scope, value|
-        unless value.empty?
-          scope.joins(:questions_standards)
-               .where(questions_standards: { standard_id: value })
+      def resolve(filters = {})
+        scope = Question.none
+        filters.each do |_, v|
+          if v.present?
+            scope = Question.all
+            break
+          end
         end
-      end
 
-      option(:key_words, type: String) do |scope, value|
-        scope.search_for(value) unless value.empty?
+        Questions::SearchQuestions.new(scope: scope, filters: filters).results
       end
     end
   end
