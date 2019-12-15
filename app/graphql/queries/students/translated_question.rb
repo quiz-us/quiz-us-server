@@ -2,7 +2,7 @@
 
 module Queries
   module Students
-    class TranslatedQuestion < BaseQuery
+    class TranslatedQuestion < StudentQuery
       description 'Display one question'
 
       argument :question_id, ID, required: true
