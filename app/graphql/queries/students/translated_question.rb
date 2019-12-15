@@ -15,13 +15,13 @@ module Queries
         translated = q.as_json.merge(
           translated_question_text: g_translate.translate(q.question_text)
         )
-
-        translated[:question_options] = q.question_options.map do |qo|
-          qo.as_json.merge(
-            translated_option_text: g_translate.translate(qo.option_text)
-          )
+        if q.question_type == 'Multiple Choice'
+          translated[:question_options] = q.question_options.map do |qo|
+            qo.as_json.merge(
+              translated_option_text: g_translate.translate(qo.option_text)
+            )
+          end
         end
-
         translated
       end
     end
