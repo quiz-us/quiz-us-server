@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_020020) do
+ActiveRecord::Schema.define(version: 2019_12_15_184255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,16 @@ ActiveRecord::Schema.define(version: 2019_11_15_020020) do
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_tokens_on_student_id"
     t.index ["value"], name: "index_tokens_on_value"
+  end
+
+  create_table "translations", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "question_id", null: false
+    t.integer "count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_translations_on_question_id"
+    t.index ["student_id"], name: "index_translations_on_student_id"
   end
 
   add_foreign_key "courses", "standards_charts"

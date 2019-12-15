@@ -53,5 +53,19 @@ describe 'Queries::Students::TranslateQuestion' do
         'translatedQuestionText' => 'hola'
       )
     end
+
+    it 'finds or creates a translation and increments the count by 1' do
+      expect(Translation.find_by(student: student, question: question)).to be_nil
+
+      QuizUsServerSchema.execute(query_string, variables: variables)
+      expect(
+        Translation.find_by(student: student, question: question).count
+      ).to eq(1)
+
+      QuizUsServerSchema.execute(query_string, variables: variables)
+      expect(
+        Translation.find_by(student: student, question: question).count
+      ).to eq(2)
+    end
   end
 end

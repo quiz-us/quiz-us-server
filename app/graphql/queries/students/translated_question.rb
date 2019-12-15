@@ -22,6 +22,11 @@ module Queries
             )
           end
         end
+        translation = Translation.find_or_create_by!(
+          student: current_student,
+          question: q
+        )
+        translation.update!(count: translation.count + 1)
         translated
       end
     end
