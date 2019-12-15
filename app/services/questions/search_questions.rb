@@ -12,6 +12,8 @@ module Questions
     end
 
     option(:key_words) do |scope, value|
+      # searches questions' question_text because of the pg_search_scope set on
+      # the Question model:
       scope.search_for(value) unless value.empty?
     end
   end

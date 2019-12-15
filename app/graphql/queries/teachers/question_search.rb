@@ -2,7 +2,7 @@
 
 module Queries
   module Teachers
-    class QuestionSearch < BaseQuery
+    class QuestionSearch < TeacherQuery
       description 'Search for questions'
 
       argument :standard_id, ID, required: false
@@ -14,11 +14,10 @@ module Queries
         scope = Question.none
         filters.each do |_, v|
           if v.present?
-            scope = Question.all
+            scope = current_course.questions
             break
           end
         end
-
         Questions::SearchQuestions.new(scope: scope, filters: filters).results
       end
     end

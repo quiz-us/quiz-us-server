@@ -15,6 +15,7 @@
 FactoryBot.define do
   factory :question do
     question_type { 'Free Response' }
+    question_text { 'here is a question' }
     rich_text do
       {
         object: 'value',
