@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-
 class SendgridMailer
   def self.send(to:, substitutions:, template_name:)
     template_id = TEMPLATES[template_name.to_sym]
@@ -43,6 +41,21 @@ class SendgridMailer
   end
 
   def self.stub_development(to, substitutions, template_name)
+    substitutions_html = '<ul>'
+    substitutions.each do |k, v|
+      value = if v.start_with?('http')
+                "<a href=#{v} target_blank>#{v}</a>"
+              else
+                "<span>#{v}</span>"
+              end
+      substitutions_html += <<-HTML
+        <li>
+          <strong>#{k}</strong>: #{value}
+        </li>
+      HTML
+    end
+    substitutions_html += '</ul>'
+
     File.open(Rails.root.join('tmp', 'mailer.html'), 'w') do |f|
       f.write(
         <<-HTML
@@ -55,9 +68,7 @@ class SendgridMailer
         <<-HTML
         <div>
           <strong>Substitutions: </strong>
-          <pre>
-            #{JSON.pretty_generate(substitutions)}
-          </pre>
+          #{substitutions_html}
         </div>
         HTML
       )

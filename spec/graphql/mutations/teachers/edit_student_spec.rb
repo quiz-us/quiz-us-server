@@ -5,8 +5,10 @@ require './spec/helpers/teacher_authenticated_endpoint.rb'
 
 describe 'Mutations::Teachers::EditStudent' do
   let(:student) { create(:student) }
-  let(:updated_first_name) { Faker::Name.first_name }
-  let(:updated_last_name) { Faker::Name.last_name }
+  # using SecureRandom.hex to avoid the chance of faker generating the same
+  # updated name as the original:
+  let(:updated_first_name) { SecureRandom.hex }
+  let(:updated_last_name) { SecureRandom.hex }
   let(:query_string) do
     <<-GRAPHQL
       mutation editStudent($studentId: ID!, $studentParams: StudentParams!) {
