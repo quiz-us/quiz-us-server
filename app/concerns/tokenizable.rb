@@ -5,6 +5,7 @@ require 'active_support/concern'
 module Tokenizable
   extend ActiveSupport::Concern
 
+  # anything that keeps token based auth such as students or teachers
   included do
     def token
       token, payload = user_encoder.call(
