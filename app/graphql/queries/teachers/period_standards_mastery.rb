@@ -12,8 +12,18 @@ module Queries
 
       def resolve(period_id:)
         period = Period.find(period_id)
-        standards = period.standards_chart.standards.includes(:responses)
         results = []
+        standards = current_course.standards
+        masteries = StandardMastery.where(
+          student: period.students,
+          standard: standards
+        )
+
+        m_cache = {}
+        masteries.each do |m|
+          m_cache["#{m.student_id}-#{m.standard_id}"] = m
+        end
+
         standards.each do |standard|
           result = {
             standard: {
@@ -22,30 +32,21 @@ module Queries
             },
             student_performance: {}
           }
-          period.students.each do |student|
-            responses = standard.responses.includes(
-              :question, question: :questions_standards
-            ).where(student_id: student.id)
-            num_responses = responses.count
-            next unless num_responses.positive?
 
-            num_correct = 0
-            responses.each do |response|
-              if !response.mc_correct.nil?
-                # question is multiple choice
-                num_correct += 1 if response.mc_correct
-              elsif !response.self_grade.nil?
-                # question is free response
-                num_correct += 1 if response.self_grade >= 4
-              end
+          period.students.each do |student|
+            mastery = m_cache["#{student.id}-#{standard.id}"]
+
+            if mastery
+              result[:student_performance][student.id] = "#{mastery.num_correct} / #{mastery.num_attempts}"
+            else
+              result[:student_performance][student.id] = ''
             end
-            result[:student_performance][student.id] = (
-              num_correct.to_f / num_responses * 100
-            ).round
           end
+
           result[:student_performance] = result[:student_performance].to_json
           results << result
         end
+
         results
       end
     end
