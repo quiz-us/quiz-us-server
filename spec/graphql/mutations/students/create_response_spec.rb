@@ -52,9 +52,22 @@ describe 'Mutations::Students::CreateResponse' do
       expect(Response.count).to eq(initial_count + 1)
       expect(student.responses.last.id).to eq(res['id'].to_i)
     end
+
     it 'calls CalculateDue' do
       expect(CalculateDue).to receive_message_chain(:new, :call)
       QuizUsServerSchema.execute(query_string, variables: variables)
+    end
+
+    let(:standard) { create(:standard) }
+    it 'calculates the mastery for the associated standards' do
+      create(:questions_standard, question: question, standard: standard)
+      QuizUsServerSchema.execute(query_string, variables: variables)
+      expect(
+        StandardMastery.find_by(
+          student: student,
+          standard: standard
+        ).num_attempts
+      ).to eq(1)
     end
   end
 end

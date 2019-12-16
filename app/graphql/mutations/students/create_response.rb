@@ -48,6 +48,7 @@ module Mutations
         else
           raise StandardError('That Question Type is not currently supported!')
         end
+        response.calculate_mastery!(current_student)
         CalculateDue.call(rating, card)
         response
       end

@@ -10,19 +10,13 @@ module Queries
 
       def resolve
         result = {}
-        current_student.responses.each do |response|
-          response.standards.each do |standard|
-            if result[standard.id]
-              result[standard.id][:num_attempted] += 1
-              result[standard.id][:num_correct] += 1 if response.correct
-            else
-              result[standard.id] = {
-                standard: standard,
-                num_attempted: 1,
-                num_correct: response.correct ? 1 : 0
-              }
-            end
-          end
+        current_student.standard_masteries.includes(:standard).each do |mastery|
+          standard = mastery.standard
+          result[standard.id] = {
+            standard: standard,
+            num_attempted: mastery.num_attempts,
+            num_correct: mastery.num_correct
+          }
         end
 
         results = []
