@@ -29,23 +29,24 @@ describe 'Queries::Students::StandardsMastery' do
   context 'when logged in as student' do
     let(:standard_1) { create(:standard) }
     let(:standard_2) { create(:standard) }
-    let(:mc_question) { create(:question, question_type: 'Multiple Choice') }
-    let(:fr_question) { create(:question, question_type: 'Free Response') }
     before(:each) do
       allow_any_instance_of(Queries::BaseQuery)
         .to receive(:current_student).and_return(student)
-      create(:questions_standard, question: mc_question, standard: standard_1)
-      create(:questions_standard, question: fr_question, standard: standard_2)
     end
     it 'returns the student performance on each encountered standard' do
-      create(:response, question: mc_question, mc_correct: true, student: student)
-      create(:response, question: mc_question, mc_correct: false, student: student)
       create(
-        :response,
-        question: fr_question,
+        :standard_mastery,
+        standard: standard_1,
         student: student,
-        mc_correct: nil,
-        self_grade: 4
+        num_attempts: 2,
+        num_correct: 1
+      )
+      create(
+        :standard_mastery,
+        standard: standard_2,
+        student: student,
+        num_attempts: 1,
+        num_correct: 1
       )
       res = QuizUsServerSchema.execute(query_string, variables: variables)
                               .to_h['data']['standardsMastery']

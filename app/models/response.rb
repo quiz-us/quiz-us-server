@@ -29,4 +29,20 @@ class Response < ApplicationRecord
   def correct
     mc_correct || (self_grade.present? && self_grade >= 4)
   end
+
+  def calculate_mastery!(student)
+    standards.each do |standard|
+      mastery = StandardMastery.find_or_create_by!(
+        standard: standard,
+        student: student
+      )
+
+      num_correct = mastery.num_correct
+      num_correct += 1 if correct
+      mastery.update!(
+        num_attempts: mastery.num_attempts + 1,
+        num_correct: num_correct
+      )
+    end
+  end
 end

@@ -60,4 +60,27 @@ RSpec.describe Response, type: :model do
       expect(failing_self_grade.correct).to eq(false)
     end
   end
+
+  describe '#calculate_mastery!' do
+    let(:question) { create(:question) }
+    let(:student) { create(:student) }
+    let(:standard) { create(:standard) }
+    let!(:questions_standard) do
+      create(:questions_standard, question: question, standard: standard)
+    end
+    let(:response) do
+      create(
+        :response,
+        question: question,
+        student: student,
+        self_grade: 4
+      )
+    end
+    it 'calculates the mastery for all associated standards' do
+      response.calculate_mastery!(student)
+      mastery = StandardMastery.find_by(student: student, standard: standard)
+      expect(mastery.num_attempts).to eq(1)
+      expect(mastery.num_correct).to eq(1)
+    end
+  end
 end

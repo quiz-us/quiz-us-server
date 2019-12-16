@@ -40,6 +40,7 @@ class Student < ApplicationRecord
   has_many :personal_decks, as: :owner, dependent: :destroy, class_name: 'Deck'
 
   has_many :responses, dependent: :destroy
+  has_many :standard_masteries, dependent: :destroy
 
   # VALIDATIONS
   validates :qr_code, :email, :first_name, :last_name, presence: true
