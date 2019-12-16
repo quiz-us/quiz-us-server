@@ -9,6 +9,9 @@ def clear_staging
   p 'Checking rails env...'
   return unless ENV['RAILS_ENV'] == 'staging'
 
+  Response.destroy_all
+  QuestionOption.destroy_all
   Question.destroy_all
-  p 'Cleared all questions from staging database'
+  Period.where('created_at > ?', 1.day.ago).destroy_all
+  p 'Cleared staging data.'
 end

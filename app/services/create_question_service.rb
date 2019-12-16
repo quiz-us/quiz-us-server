@@ -15,6 +15,7 @@ class CreateQuestionService
     @question_standard_id = params[:standard_id]
     @question_type = params[:question_type]
     @tags = params[:tags]
+    @teacher_id = params[:teacher_id]
     @s3 = Aws::S3::Resource.new(region: 'us-west-2')
   end
 
@@ -63,8 +64,8 @@ class CreateQuestionService
     raise UnprocessableImageError if extensions.empty?
 
     extension = extensions.first.preferred_extension
-    # TODO: figure out path and naming conventions for images on s3:
     file_name = "#{SecureRandom.hex(8)}.#{extension}"
+    s3_file_name = "teachers/#{@teacher_id}/#{file_name}"
 
     path = "tmp/#{file_name}"
 
@@ -75,7 +76,7 @@ class CreateQuestionService
     bucket_name = Rails.env.production? ? 'quizus' : 'quizus-staging'
 
     # File.open(open(url), 'rb') { |file| obj.put(body: file) }
-    obj = @s3.bucket(bucket_name).object(file_name)
+    obj = @s3.bucket(bucket_name).object(s3_file_name)
     obj.upload_file(path, acl: 'public-read')
     File.delete(path) if File.exist?(path)
     obj.public_url

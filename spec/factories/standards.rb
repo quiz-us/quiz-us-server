@@ -6,11 +6,11 @@
 #
 #  id                    :integer          not null, primary key
 #  description           :string           not null
+#  meta                  :string
+#  title                 :string           not null, indexed => [standards_category_id], indexed
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  standards_category_id :integer          not null
-#  title                 :string           not null
-#  meta                  :string
+#  standards_category_id :integer          not null, indexed, indexed => [title]
 #
 
 FactoryBot.define do

@@ -2,7 +2,7 @@
 
 module Queries
   module Students
-    class PersonalAssignment < BaseQuery
+    class PersonalAssignment < StudentQuery
       description 'Displays next batch of cards that should appear in personal deck'
 
       type Types::AssignmentType, null: false

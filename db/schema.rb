@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_29_235049) do
+ActiveRecord::Schema.define(version: 2019_12_15_234509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,10 +71,11 @@ ActiveRecord::Schema.define(version: 2019_08_29_235049) do
   end
 
   create_table "periods", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id", "name"], name: "index_periods_on_course_id_and_name", unique: true
     t.index ["course_id"], name: "index_periods_on_course_id"
   end
 
@@ -114,8 +115,22 @@ ActiveRecord::Schema.define(version: 2019_08_29_235049) do
     t.integer "question_id", null: false
     t.integer "self_grade"
     t.boolean "mc_correct"
+    t.index ["mc_correct"], name: "index_responses_on_mc_correct"
     t.index ["question_option_id"], name: "index_responses_on_question_option_id"
+    t.index ["self_grade"], name: "index_responses_on_self_grade"
     t.index ["student_id"], name: "index_responses_on_student_id"
+  end
+
+  create_table "standard_masteries", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "standard_id", null: false
+    t.integer "num_attempts", default: 0, null: false
+    t.integer "num_correct", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["standard_id"], name: "index_standard_masteries_on_standard_id"
+    t.index ["student_id", "standard_id"], name: "index_standard_masteries_on_student_id_and_standard_id", unique: true
+    t.index ["student_id"], name: "index_standard_masteries_on_student_id"
   end
 
   create_table "standards", id: :serial, force: :cascade do |t|
@@ -203,12 +218,25 @@ ActiveRecord::Schema.define(version: 2019_08_29_235049) do
     t.index ["value"], name: "index_tokens_on_value"
   end
 
+  create_table "translations", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "question_id", null: false
+    t.integer "count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_translations_on_question_id"
+    t.index ["student_id", "question_id"], name: "index_translations_on_student_id_and_question_id", unique: true
+    t.index ["student_id"], name: "index_translations_on_student_id"
+  end
+
   add_foreign_key "courses", "standards_charts"
   add_foreign_key "courses", "teachers"
   add_foreign_key "periods", "courses"
   add_foreign_key "question_options", "questions"
   add_foreign_key "responses", "question_options"
   add_foreign_key "responses", "students"
+  add_foreign_key "standard_masteries", "standards"
+  add_foreign_key "standard_masteries", "students"
   add_foreign_key "standards", "standards_categories"
   add_foreign_key "standards_categories", "standards_charts"
 end

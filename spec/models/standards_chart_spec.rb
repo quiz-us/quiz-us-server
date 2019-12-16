@@ -15,6 +15,7 @@ require 'rails_helper'
 RSpec.describe StandardsChart, type: :model do
   describe 'associations' do
     it { should have_many(:standards_categories).dependent(:destroy) }
+    it { should have_many(:courses).dependent(:destroy) }
     it { should have_many(:standards).through(:standards_categories) }
   end
 end

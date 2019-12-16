@@ -3,7 +3,9 @@
 module Types
   class AssignmentResultType < BaseObject
     description 'Assignment Result'
-    field :fullname, String, null: false
-    field :answer, String, null: false
+    field :firstname, String, null: false
+    field :lastname, String, null: false
+    field :student_id, ID, null: false
+    field :result, String, null: false
   end
 end
