@@ -8,8 +8,8 @@
 #  count       :integer          default(0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  question_id :bigint           not null, indexed
-#  student_id  :bigint           not null, indexed
+#  question_id :bigint           not null, indexed, indexed => [student_id]
+#  student_id  :bigint           not null, indexed, indexed => [question_id]
 #
 
 FactoryBot.define do
