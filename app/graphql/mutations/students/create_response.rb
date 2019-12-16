@@ -48,8 +48,25 @@ module Mutations
         else
           raise StandardError('That Question Type is not currently supported!')
         end
+        calculate_mastery(response)
         CalculateDue.call(rating, card)
         response
+      end
+
+      def calculate_mastery(response)
+        response.standards.each do |standard|
+          mastery = StandardMastery.find_or_create_by!(
+            standard: standard,
+            student: current_student
+          )
+
+          num_correct = mastery.num_correct
+          num_correct += 1 if response.correct
+          mastery.update!(
+            num_attempts: mastery.num_attempts + 1,
+            num_correct: num_correct
+          )
+        end
       end
     end
   end
