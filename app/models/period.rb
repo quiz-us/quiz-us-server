@@ -17,6 +17,7 @@ class Period < ApplicationRecord
 
   belongs_to :course
   delegate :standards_chart, to: :course
+  has_many :standards, through: :course
   has_many :enrollments, dependent: :destroy
   has_many :students, through: :enrollments
   has_many :assignments, dependent: :destroy
