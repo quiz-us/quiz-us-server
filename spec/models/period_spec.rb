@@ -22,6 +22,7 @@ RSpec.describe Period, type: :model do
   end
   describe 'associations' do
     it { should belong_to(:course) }
+    it { should have_many(:standards).through(:course) }
     it { should have_many(:students).through(:enrollments) }
     it { should have_many(:enrollments).dependent(:destroy) }
     it { should have_many(:assignments).dependent(:destroy) }

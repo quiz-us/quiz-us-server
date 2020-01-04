@@ -11,6 +11,7 @@ module Types
     field :decks, resolver: Queries::Teachers::DeckIndex
     field :period_assignments, resolver: Queries::Teachers::PeriodAssignmentIndex
     field :period_standards_mastery, resolver: Queries::Teachers::PeriodStandardsMastery
+    field :period_standards_summary, resolver: Queries::Teachers::PeriodStandardsSummary
     field :period, resolver: Queries::Teachers::PeriodShow
     field :periods, resolver: Queries::Teachers::PeriodIndex
     field :question_option, resolver: Queries::Teachers::QuestionOptionShow
