@@ -28,11 +28,11 @@ module Mutations
         question_options: []
       )
         question = Question.find(id)
-        question.question_text = question_plaintext
-        question.rich_text = process_images!(rich_text)
+        question.question_text = question_plaintext if question_plaintext
+        question.rich_text = process_images!(rich_text) if rich_text
 
         # update standards and tags associations
-        question.standards = [Standard.find(standard_id)]
+        question.standards = [Standard.find(standard_id)] if standard_id
         question.tags = tags.map { |tag| Tag.find_or_create_by(name: tag) }
 
         orphan_old_answer_choices!(question, question_options)
@@ -47,6 +47,7 @@ module Mutations
       def orphan_old_answer_choices!(question, question_options)
         # ex: [4, 5] - [5] = [4]
         old_question_options_ids = question.question_options.pluck(:id)
+
         updated_question_options_ids = question_options.map do |option|
           JSON.parse(option)['id'].to_i
         end
