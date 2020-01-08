@@ -22,12 +22,6 @@ describe 'Mutations::Teachers::UpdateQuestion' do
 
   let!(:teacher) { create(:teacher) }
   let(:question) { create(:question) }
-  let(:standard) { create(:standard) }
-  let!(:questions_standard) do
-    create(:questions_standard, question: question, standard: standard)
-  end
-
-  let!(:question_option) { create(:question_option, question: question) }
   let(:query_string) do
     <<~GRAPHQL
       mutation updateQuestion(
@@ -71,18 +65,8 @@ describe 'Mutations::Teachers::UpdateQuestion' do
   let(:variables) do
     {
       id: question.id,
-      standardId: question.standards.first.id,
-      tags: %w[new tag],
       richText: generate_rich_text('this is the new question'),
-      questionPlaintext: 'this is the new question',
-      questionOptions: [
-        {
-          id: question.question_options.first.id,
-          richText: generate_rich_text('new question option'),
-          optionText: 'new question option',
-          correct: true
-        }.to_json
-      ]
+      questionPlaintext: 'this is the new question'
     }
   end
 
@@ -108,6 +92,7 @@ describe 'Mutations::Teachers::UpdateQuestion' do
     end
 
     context 'when updating the question options' do
+      let!(:question_option) { create(:question_option, question: question) }
       let!(:question_option_2) { create(:question_option, question: question) }
       it 'orphans old answer choices that no longer exist' do
         expect(
@@ -175,8 +160,46 @@ describe 'Mutations::Teachers::UpdateQuestion' do
       end
     end
 
-    it 'updates the tags'
+    context 'when a new tag is passed in' do
+      let(:original_tag) { create(:tag, name: 'original') }
+      it 'updates the tags' do
+        create(:tagging, tag: original_tag, question: question)
+        expect(question.tags.first.name).to eq('original')
+        QuizUsServerSchema.execute(
+          query_string,
+          variables: {
+            id: question.id,
+            tags: ['new tag']
+          }
+        )
+        updated_question = Question.find(question.id)
+        expect(updated_question.tags.first.name).to eq('new tag')
+        expect(updated_question.tags.count).to eq(1)
+      end
+    end
 
-    it 'updates the standards'
+    context 'when a new standard is passed in' do
+      let(:original_standard) { create(:standard, title: 'Old Standard') }
+      let!(:new_standard) { create(:standard, title: 'New Standard') }
+
+      it 'updates the standards' do
+        create(
+          :questions_standard,
+          standard: original_standard,
+          question: question
+        )
+        expect(question.standards.first.title).to eq('Old Standard')
+        QuizUsServerSchema.execute(
+          query_string,
+          variables: {
+            id: question.id,
+            standardId: new_standard.id
+          }
+        )
+        updated_question = Question.find(question.id)
+        expect(updated_question.standards.first.title).to eq('New Standard')
+        expect(updated_question.standards.count).to eq(1)
+      end
+    end
   end
 end

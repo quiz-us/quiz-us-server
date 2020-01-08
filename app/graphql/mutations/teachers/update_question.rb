@@ -30,7 +30,6 @@ module Mutations
         question = Question.find(id)
         question.question_text = question_plaintext if question_plaintext
         question.rich_text = process_images!(rich_text) if rich_text
-
         # update standards and tags associations
         question.standards = [Standard.find(standard_id)] if standard_id
         question.tags = tags.map { |tag| Tag.find_or_create_by(name: tag) }
