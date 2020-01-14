@@ -11,7 +11,7 @@ module ImageS3Processable
   end
 
   def process_images!(rich_text)
-    rich = JSON.parse(rich_text)
+    rich = rich_text.class == Hash ? rich_text : JSON.parse(rich_text)
     nodes = rich['document']['nodes'].map do |node|
       node['data']['file'] = upload_to_s3(node) if node['type'] == 'image'
       node
