@@ -2,24 +2,9 @@
 
 require 'rails_helper'
 require './spec/helpers/teacher_authenticated_endpoint.rb'
+require './spec/helpers/rich_text.rb'
 
 describe 'Mutations::Teachers::UpdateQuestion' do
-  def generate_rich_text(text)
-    {
-      object: 'value',
-      document: {
-        object: 'document',
-        data: {},
-        nodes: [{
-          object: 'block',
-          type: 'line',
-          data: {},
-          nodes: [{ object: 'text', text: text, marks: [] }]
-        }]
-      }
-    }.to_json
-  end
-
   let!(:teacher) { create(:teacher) }
   let(:question) { create(:question) }
   let(:query_string) do

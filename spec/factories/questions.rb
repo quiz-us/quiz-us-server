@@ -10,7 +10,7 @@
 #  updated_at    :datetime         not null
 #  rich_text     :jsonb
 #
-require_relative './helpers/rich_text.rb'
+require './spec/helpers/rich_text.rb'
 
 
 FactoryBot.define do

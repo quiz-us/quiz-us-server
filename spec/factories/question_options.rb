@@ -12,7 +12,7 @@
 #  updated_at  :datetime         not null
 #  question_id :integer          indexed
 #
-require_relative './helpers/rich_text.rb'
+require './spec/helpers/rich_text.rb'
 
 FactoryBot.define do
   text = Faker::Lorem.sentence
