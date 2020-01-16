@@ -18,6 +18,7 @@ module Types
     field :sign_up_teacher, mutation: Mutations::Teachers::SignUpTeacher
     field :unenroll_student, mutation: Mutations::Teachers::UnenrollStudent
     field :update_deck, mutation: Mutations::Teachers::UpdateDeck
+    field :update_question, mutation: Mutations::Teachers::UpdateQuestion
 
     # # STUDENT MUTATIONS:
     field :create_login_link, mutation: Mutations::Students::CreateLoginLink
