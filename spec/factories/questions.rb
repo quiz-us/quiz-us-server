@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: questions
@@ -11,47 +10,21 @@
 #  updated_at    :datetime         not null
 #  rich_text     :jsonb
 #
+require_relative './helpers/rich_text.rb'
+
 
 FactoryBot.define do
+  text = Faker::Lorem.sentence
   factory :question do
     question_type { 'Free Response' }
-    question_text { 'here is a question' }
-    rich_text do
-      {
-        object: 'value',
-        document: {
-          object: 'document',
-          data: {},
-          nodes: [{
-            object: 'block',
-            type: 'line',
-            data: {},
-            nodes: [{ object: 'text', text: 'here is a question', marks: [] }]
-          }]
-        }
-      }.to_json
-    end
+    question_text { text }
+    rich_text { generate_rich_text(text) }
   end
 
   factory :question_with_no_options, class: 'Question' do
-    text = Faker::Lorem.sentence
     question_text { text }
     question_type { 'Multiple Choice' }
-    rich_text do
-      {
-        object: 'value',
-        document: {
-          object: 'document',
-          data: {},
-          nodes: [{
-            object: 'block',
-            type: 'line',
-            data: {},
-            nodes: [{ object: 'text', text: text, marks: [] }]
-          }]
-        }
-      }.to_json
-    end
+    rich_text { generate_rich_text(text) }
 
     factory :mc_question do
       transient do

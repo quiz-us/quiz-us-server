@@ -12,26 +12,14 @@
 #  updated_at  :datetime         not null
 #  question_id :integer          indexed
 #
+require_relative './helpers/rich_text.rb'
 
 FactoryBot.define do
+  text = Faker::Lorem.sentence
   factory :question_option do
     association :question
     correct { false }
-    rich_text do
-      {
-        object: 'value',
-        document: {
-          object: 'document',
-          data: {},
-          nodes: [{
-            object: 'block',
-            type: 'line',
-            data: {},
-            nodes: [{ object: 'text', text: 'dummy text', marks: [] }]
-          }]
-        }
-      }.to_json
-    end
+    rich_text { generate_rich_text(text)}
     trait :correct do
       correct { true }
     end
@@ -39,17 +27,17 @@ FactoryBot.define do
 end
 
 FactoryBot.define do
-  factory :mc_option_correct, class: 'QuestionOption' do 
-    option_text { "right" }
+  factory :mc_option_correct, class: 'QuestionOption' do
+    option_text { 'right' }
     correct { true }
-    rich_text { "{\"object\":\"value\",\"document\":{\"object\":\"document\",\"data\":{},\"nodes\":[{\"object\":\"block\",\"type\":\"line\",\"data\":{},\"nodes\":[{\"object\":\"text\",\"text\":\"right\",\"marks\":[]}]}]}}" }
+    rich_text { generate_rich_text(text)}
     association :question
-  end 
+  end
 
-  factory :mc_option_wrong, class: 'QuestionOption' do 
-    option_text { "right" }
+  factory :mc_option_wrong, class: 'QuestionOption' do
+    option_text { 'right' }
     correct { false }
-    rich_text { "{\"object\":\"value\",\"document\":{\"object\":\"document\",\"data\":{},\"nodes\":[{\"object\":\"block\",\"type\":\"line\",\"data\":{},\"nodes\":[{\"object\":\"text\",\"text\":\"right\",\"marks\":[]}]}]}}" }
+    rich_text { generate_rich_text(text)}
     association :question
-  end 
-end 
+  end
+end

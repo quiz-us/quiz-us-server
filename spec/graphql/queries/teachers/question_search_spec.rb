@@ -92,8 +92,8 @@ describe 'Queries::Teachers::QuestionSearch' do
 
     context 'when no filter fields are passed in' do
       it 'does not return any questions' do
-        res = QuizUsServerSchema.execute(query_string,variables: {  })
-          .to_h['data']['questions']
+        res = QuizUsServerSchema.execute(query_string, variables: {})
+                                .to_h['data']['questions']
         expect(res.length).to eq(0)
       end
     end
