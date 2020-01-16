@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: question_options
@@ -12,8 +14,5 @@
 #
 
 class QuestionOption < ApplicationRecord
-
-  # add documentation
-  belongs_to :question,
-  optional: true
+  belongs_to :question
 end
