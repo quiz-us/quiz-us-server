@@ -13,7 +13,6 @@
 #  period_id    :bigint           not null, indexed
 #
 
-
 require 'rails_helper'
 
 RSpec.describe Assignment, type: :model do

@@ -16,7 +16,6 @@
 #  question_id             :integer          not null, indexed => [deck_id], indexed => [deck_id], indexed => [deck_id]
 #
 
-
 require 'rails_helper'
 
 RSpec.describe DecksQuestion, type: :model do
