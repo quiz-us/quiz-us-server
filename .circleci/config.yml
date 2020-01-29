@@ -15,7 +15,7 @@ jobs:
       - image: circleci/postgres:10
         environment:
           POSTGRES_USER: quiz-us-server
-          POSTGRES_DB: uiz-us-server_test
+          POSTGRES_DB: quiz-us-server_test
           POSTGRES_PASSWORD: ''
 
     working_directory: ~/repo
