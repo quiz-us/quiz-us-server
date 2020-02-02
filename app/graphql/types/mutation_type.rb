@@ -3,6 +3,7 @@
 module Types
   class MutationType < BaseObject
     # TEACHER MUTATIONS:
+    field :add_question_to_deck, mutation: Mutations::Teachers::AddQuestionToDeck
     field :create_assignments, mutation: Mutations::Teachers::CreateAssignments
     field :create_deck, mutation: Mutations::Teachers::CreateDeck
     field :create_period, mutation: Mutations::Teachers::CreatePeriod
@@ -15,6 +16,7 @@ module Types
     field :edit_student, mutation: Mutations::Teachers::EditStudent
     field :enroll_student, mutation: Mutations::Teachers::EnrollStudent
     field :log_in_teacher, mutation: Mutations::Teachers::LogInTeacher
+    field :remove_question_from_deck, mutation: Mutations::Teachers::RemoveQuestionFromDeck
     field :sign_up_teacher, mutation: Mutations::Teachers::SignUpTeacher
     field :unenroll_student, mutation: Mutations::Teachers::UnenrollStudent
     field :update_deck, mutation: Mutations::Teachers::UpdateDeck
