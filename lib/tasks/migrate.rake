@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 namespace :migrate do
-  # WARNING: This rake task is NOT idempotent and it should be a ONE TIME rake
-  # task to create standard_masteries records from student responses.
   task card_performance: :environment do
+    # Influenced by https://thoughtbot.com/blog/data-migrations-in-rails
+
     p 'Migrating card performance from decks_questions to students_questions'
     # Querying for next_due.not nil to filter out decks_questions that are part
     # of a teacher's deck:
