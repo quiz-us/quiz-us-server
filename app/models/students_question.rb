@@ -15,7 +15,6 @@
 #  question_id             :bigint           not null, indexed
 #  student_id              :bigint           not null, indexed
 #
-# StudentsQuestion tracks a student's performance on a question
 class StudentsQuestion < ApplicationRecord
   belongs_to :student
   belongs_to :question

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_152441) do
+ActiveRecord::Schema.define(version: 2020_02_05_155656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 2020_02_05_152441) do
     t.integer "total_correct", default: 0, null: false
     t.integer "total_attempts", default: 0, null: false
     t.float "e_factor", default: 2.5, null: false
-    t.datetime "next_due", null: false
+    t.datetime "next_due", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "student_id", null: false
     t.bigint "question_id", null: false
     t.datetime "created_at", null: false
