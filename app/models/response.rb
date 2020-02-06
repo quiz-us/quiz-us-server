@@ -17,6 +17,8 @@
 #
 
 class Response < ApplicationRecord
+  MIN_CORRECT_SCORE = 4
+
   validates :student, :question, presence: true
   belongs_to :student
   belongs_to :question
@@ -24,10 +26,12 @@ class Response < ApplicationRecord
   belongs_to :assignment, optional: true
   has_many :standards, through: :question
 
-  scope :correct, -> { where('mc_correct = ? OR self_grade >= ?', true, 4) }
+  scope :correct, lambda {
+    where('mc_correct = ? OR self_grade >= ?', true, MIN_CORRECT_SCORE)
+  }
 
   def correct
-    mc_correct || (self_grade.present? && self_grade >= 4)
+    mc_correct || (self_grade.present? && self_grade >= MIN_CORRECT_SCORE)
   end
 
   def calculate_mastery!(student)
