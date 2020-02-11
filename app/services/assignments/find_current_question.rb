@@ -7,7 +7,7 @@ module Assignments
 
     attr_reader :assignment_id, :student_id
 
-    def initialize(student_id:, assignment_id:)
+    def initialize(student_id, assignment_id)
       @student_id = student_id
       @assignment_id = assignment_id
     end
@@ -32,7 +32,7 @@ module Assignments
 
     def all_responses
       all_responses = {}
-      Response.find_by(
+      Response.where(
         assignment_id: assignment_id,
         student_id: student_id
       ).includes(:question_option).each do |response|
