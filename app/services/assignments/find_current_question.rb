@@ -35,8 +35,8 @@ module Assignments
       Response.where(
         assignment_id: assignment_id,
         student_id: student_id
-      ).includes(:question_option).each do |response|
-        question_id = response.question_option.question_id
+      ).each do |response|
+        question_id = response.question_id
         # Once a response has been toggled to correct, leave it alone:
         unless all_responses[question_id]
           all_responses[question_id] = response.correct

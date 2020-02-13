@@ -34,6 +34,15 @@ class Response < ApplicationRecord
     mc_correct || (self_grade.present? && self_grade >= MIN_CORRECT_SCORE)
   end
 
+  def unfinished
+    case question.question_type
+    when 'Multiple Choice'
+      question_option_id.nil? # unfinished because no answer choice selected yet
+    when 'Free Response'
+      self_grade.nil? || response_text.nil?
+    end
+  end
+
   def calculate_mastery!(student)
     standards.each do |standard|
       mastery = StandardMastery.find_or_create_by!(

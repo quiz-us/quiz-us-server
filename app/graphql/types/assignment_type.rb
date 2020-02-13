@@ -12,5 +12,6 @@ module Types
     field :current_question, Types::QuestionType, null: true
     field :num_questions, Integer, null: true
     field :num_correct_responses, Integer, null: true
+    field :current_response, Types::ResponseType, null: true
   end
 end
