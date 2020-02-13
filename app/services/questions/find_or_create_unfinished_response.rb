@@ -16,6 +16,8 @@ module Questions
     end
 
     def call
+      return nil if response_params[:question_id].nil?
+
       responses = Response.where(response_params)
 
       responses.find(&:unfinished) || Response.create!(response_params)

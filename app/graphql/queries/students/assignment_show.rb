@@ -18,11 +18,13 @@ module Queries
           student_id,
           assignment_id
         )
-        current_response = Questions::FindOrCreateUnfinishedResponse.call(
-          current_question&.id,
-          student_id,
-          assignment_id
-        )
+        if current_question
+          current_response = Questions::FindOrCreateUnfinishedResponse.call(
+            current_question&.id,
+            student_id,
+            assignment_id
+          )
+        end
         {
           id: assignment.id,
           instructions: assignment.instructions,

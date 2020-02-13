@@ -15,7 +15,9 @@ module Assignments
     def call
       id = current_question_id
 
-      id ? Question.find(id) : nil
+      Question.find(id)
+    rescue ActiveRecord::RecordNotFound
+      nil
     end
 
     private
