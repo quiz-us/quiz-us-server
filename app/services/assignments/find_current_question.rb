@@ -29,7 +29,12 @@ module Assignments
 
       return unanswered.first unless unanswered.empty?
 
-      responses.key(false)
+      incorrect_responses = responses.reject { |_, v| v[:correct] }
+      sorted_responses = incorrect_responses.sort_by { |_, v| v[:timestamp] }
+
+      return sorted_responses[0][0] unless sorted_responses.empty?
+
+      nil
     end
 
     def all_responses
@@ -37,12 +42,17 @@ module Assignments
       Response.where(
         assignment_id: assignment_id,
         student_id: student_id
-      ).each do |response|
+      ).order(updated_at: :asc).each do |response|
         question_id = response.question_id
         # Once a response has been toggled to correct, leave it alone:
-        unless all_responses[question_id]
-          all_responses[question_id] = response.correct
+        if all_responses[question_id] && all_responses[question_id][:correct]
+          next
         end
+
+        all_responses[question_id] = {
+          correct: response.correct,
+          timestamp: response.updated_at
+        }
       end
 
       all_responses
