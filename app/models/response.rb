@@ -30,17 +30,26 @@ class Response < ApplicationRecord
     where('mc_correct = ? OR self_grade >= ?', true, MIN_CORRECT_SCORE)
   }
 
+  scope :unfinished, lambda {
+    unfinished_mc.or(unfinished_fr)
+  }
+
+  scope :unfinished_mc, lambda {
+    joins(:question).where(
+      questions: { question_type: 'Multiple Choice' },
+      question_option_id: nil # unfinished because no answer choice selected yet
+    )
+  }
+
+  scope :unfinished_fr, lambda {
+    joins(:question).where(
+      questions: { question_type: 'Free Response' },
+      self_grade: nil
+    )
+  }
+
   def correct
     mc_correct || (self_grade.present? && self_grade >= MIN_CORRECT_SCORE)
-  end
-
-  def unfinished
-    case question.question_type
-    when 'Multiple Choice'
-      question_option_id.nil? # unfinished because no answer choice selected yet
-    when 'Free Response'
-      self_grade.nil? || response_text.nil?
-    end
   end
 
   def calculate_mastery!(student)

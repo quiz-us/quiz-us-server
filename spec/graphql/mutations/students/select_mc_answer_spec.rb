@@ -5,7 +5,9 @@ require './spec/helpers/student_authenticated_endpoint.rb'
 
 describe 'Mutations::Students::SelectMcAnswer' do
   let(:question_option) { create(:mc_option_correct) }
-  let(:unfinished_response) { create(:unfinished_mc_response) }
+  let(:unfinished_response) do
+    create(:unfinished_mc_response, question: question_option.question)
+  end
   let(:query_string) do
     <<-GRAPHQL
       mutation (
@@ -47,21 +49,25 @@ describe 'Mutations::Students::SelectMcAnswer' do
       expect(res['mcCorrect']).to eq(true)
     end
 
-    # it 'calls CalculateDue' do
-    #   expect(CalculateDue).to receive_message_chain(:new, :call)
-    #   QuizUsServerSchema.execute(query_string, variables: variables)
-    # end
+    it 'calls CalculateDue' do
+      expect(CalculateDue).to receive_message_chain(:new, :call)
+      QuizUsServerSchema.execute(query_string, variables: variables)
+    end
 
-    # let(:standard) { create(:standard) }
-    # it 'calculates the mastery for the associated standards' do
-    #   create(:questions_standard, question: question, standard: standard)
-    #   QuizUsServerSchema.execute(query_string, variables: variables)
-    #   expect(
-    #     StandardMastery.find_by(
-    #       student: student,
-    #       standard: standard
-    #     ).num_attempts
-    #   ).to eq(1)
-    # end
+    let(:standard) { create(:standard) }
+    it 'calculates the mastery for the associated standards' do
+      create(
+        :questions_standard,
+        question: question_option.question,
+        standard: standard
+      )
+      QuizUsServerSchema.execute(query_string, variables: variables)
+      expect(
+        StandardMastery.find_by(
+          student: student,
+          standard: standard
+        ).num_attempts
+      ).to eq(1)
+    end
   end
 end

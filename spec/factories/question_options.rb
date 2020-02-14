@@ -31,13 +31,13 @@ FactoryBot.define do
     option_text { 'right' }
     correct { true }
     rich_text { generate_rich_text(text) }
-    association :question
+    association :question, factory: :mc_question
   end
 
   factory :mc_option_wrong, class: 'QuestionOption' do
     option_text { 'right' }
     correct { false }
     rich_text { generate_rich_text(text) }
-    association :question
+    association :question, factory: :mc_question
   end
 end

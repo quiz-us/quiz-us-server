@@ -18,9 +18,9 @@ module Questions
     def call
       return nil if response_params[:question_id].nil?
 
-      responses = Response.where(response_params)
+      responses = Response.where(response_params).unfinished
 
-      responses.find(&:unfinished) || Response.create!(response_params)
+      responses.first || Response.create!(response_params)
     end
   end
 end
