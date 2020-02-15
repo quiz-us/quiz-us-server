@@ -9,7 +9,9 @@ module Types
     field :due, Types::DateTimeType, null: true
     field :period, Types::PeriodType, null: false
     field :responses, [Types::ResponseType], null: true
+    field :current_question, Types::QuestionType, null: true
     field :num_questions, Integer, null: true
     field :num_correct_responses, Integer, null: true
+    field :current_response, Types::ResponseType, null: true
   end
 end

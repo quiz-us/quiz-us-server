@@ -14,12 +14,12 @@
 #
 require './spec/helpers/rich_text.rb'
 
+text = Faker::Lorem.sentence
 FactoryBot.define do
-  text = Faker::Lorem.sentence
   factory :question_option do
     association :question
     correct { false }
-    rich_text { generate_rich_text(text)}
+    rich_text { generate_rich_text(text) }
     trait :correct do
       correct { true }
     end
@@ -30,14 +30,14 @@ FactoryBot.define do
   factory :mc_option_correct, class: 'QuestionOption' do
     option_text { 'right' }
     correct { true }
-    rich_text { generate_rich_text(text)}
-    association :question
+    rich_text { generate_rich_text(text) }
+    association :question, factory: :mc_question
   end
 
   factory :mc_option_wrong, class: 'QuestionOption' do
     option_text { 'right' }
     correct { false }
-    rich_text { generate_rich_text(text)}
-    association :question
+    rich_text { generate_rich_text(text) }
+    association :question, factory: :mc_question
   end
 end

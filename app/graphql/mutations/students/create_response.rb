@@ -37,19 +37,18 @@ module Mutations
         )
         # TODO: delegate following logic to an async job:
         personal_deck = current_student.personal_decks.first
-        card = personal_deck.cards.find_by(question_id: question_id) ||
-               personal_deck.cards.create!(question_id: question_id)
+        personal_deck.cards.find_or_create_by!(question_id: question_id)
 
         case question_type
         when 'Multiple Choice'
-          rating = response.mc_correct ? 4 : 1
+          rating = response.mc_correct ? Response::MIN_CORRECT_SCORE : 1
         when 'Free Response'
           rating = self_grade.to_i
         else
           raise StandardError('That Question Type is not currently supported!')
         end
         response.calculate_mastery!(current_student)
-        CalculateDue.call(rating, card)
+        CalculateDue.call(rating, current_student.id, question_id)
         response
       end
     end

@@ -21,6 +21,11 @@ FactoryBot.define do
     association :question, factory: :question
     association :student, factory: :student
 
+    factory :unfinished_mc_response do
+      question_option_id { nil }
+      mc_correct { nil }
+    end
+
     trait :multiple_choice_correct do
       association :question_option, factory: %i[question_option correct]
       mc_correct { true }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_234509) do
+ActiveRecord::Schema.define(version: 2020_02_05_155656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,21 @@ ActiveRecord::Schema.define(version: 2019_12_15_234509) do
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
+  create_table "students_questions", force: :cascade do |t|
+    t.integer "num_consecutive_correct", default: 0, null: false
+    t.integer "total_correct", default: 0, null: false
+    t.integer "total_attempts", default: 0, null: false
+    t.float "e_factor", default: 2.5, null: false
+    t.datetime "next_due", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.bigint "student_id", null: false
+    t.bigint "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["next_due"], name: "index_students_questions_on_next_due"
+    t.index ["question_id"], name: "index_students_questions_on_question_id"
+    t.index ["student_id"], name: "index_students_questions_on_student_id"
+  end
+
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "question_id"
     t.integer "tag_id"
@@ -239,4 +254,6 @@ ActiveRecord::Schema.define(version: 2019_12_15_234509) do
   add_foreign_key "standard_masteries", "students"
   add_foreign_key "standards", "standards_categories"
   add_foreign_key "standards_categories", "standards_charts"
+  add_foreign_key "students_questions", "questions"
+  add_foreign_key "students_questions", "students"
 end
