@@ -28,5 +28,8 @@ module Types
     field :log_in_student, mutation: Mutations::Students::LogInStudent
     field :log_out_student, mutation: Mutations::Students::LogOutStudent
     field :qr_log_in_student, mutation: Mutations::Students::QrLogInStudent
+    field :rate_fr_answer, mutation: Mutations::Students::RateFrAnswer
+    field :select_mc_answer, mutation: Mutations::Students::SelectMcAnswer
+    field :submit_fr_answer, mutation: Mutations::Students::SubmitFrAnswer
   end
 end
