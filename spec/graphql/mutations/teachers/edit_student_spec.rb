@@ -62,7 +62,7 @@ describe 'Mutations::Teachers::EditStudent' do
         results = QuizUsServerSchema.execute(query_string, variables: invalid)
                                     .to_h['errors']
         expect(results[0]['message']).to eq(
-          'Variable studentParams of type StudentParams! was provided invalid'\
+          'Variable $studentParams of type StudentParams! was provided invalid'\
            ' value for invalid_attribute (Field is not defined on StudentParams)'
         )
       end
