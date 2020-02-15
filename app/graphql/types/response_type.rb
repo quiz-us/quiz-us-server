@@ -12,6 +12,6 @@ module Types
     field :question_option, Types::QuestionOptionType, null: true
     field :response_text, String, null: true
     field :self_grade, Integer, null: true
-    field :correct_question_option_id, ID, null: true
+    field :correct_question_option, Types::QuestionOptionType, null: true
   end
 end

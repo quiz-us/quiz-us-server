@@ -25,13 +25,13 @@ module Mutations
         rating = response.mc_correct ? Response::MIN_CORRECT_SCORE : 1
         response.calculate_mastery!(current_student)
         CalculateDue.call(rating, current_student.id, question_id)
-        correct_answer_choice_id = response
-                                   .question.question_options.find(&:correct).id
+        correct_answer_choice = response
+                                .question.question_options.find(&:correct)
         {
           id: response.id,
           question_option_id: response.question_option_id,
           mc_correct: response.mc_correct,
-          correct_question_option_id: correct_answer_choice_id
+          correct_question_option: correct_answer_choice
         }
       end
     end
