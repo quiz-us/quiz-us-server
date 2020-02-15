@@ -16,7 +16,7 @@ jobs:
         environment:
           POSTGRES_USER: quiz-us-server
           POSTGRES_DB: quiz-us-server_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: "quiz-us"
 
     working_directory: ~/repo
 
