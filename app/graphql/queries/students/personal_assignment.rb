@@ -12,23 +12,24 @@ module Queries
 
         questions = Question.joins(
           <<-SQL
+            INNER JOIN decks_questions
+            ON questions.id = decks_questions.question_id
             INNER JOIN students_questions
-            ON students_questions.question_id = questions.id
-            INNER JOIN decks
-            ON decks.owner_id = students_questions.student_id
-            AND decks.owner_type = 'Student'
+            ON students_questions.question_id = decks_questions.question_id
           SQL
         ).where(
-          'students_questions.next_due < ? AND decks.id = ?',
+          'students_questions.next_due < ? AND decks_questions.deck_id = ?',
           Time.current,
           personal_deck.id
         ).order('students_questions.next_due' => :asc)
 
         current_question = questions.first
-        current_response = Questions::FindOrCreateUnfinishedResponse.call(
-          current_question.id,
-          current_student.id
-        )
+        if current_question
+          current_response = Questions::FindOrCreateUnfinishedResponse.call(
+            current_question.id,
+            current_student.id
+          )
+        end
 
         {
           id: personal_deck.id,
