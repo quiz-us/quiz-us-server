@@ -7,7 +7,7 @@ module Questions
 
     attr_reader :response_params
 
-    def initialize(question_id, student_id, assignment_id)
+    def initialize(question_id, student_id, assignment_id = nil)
       @response_params = {
         question_id: question_id,
         student_id: student_id,
