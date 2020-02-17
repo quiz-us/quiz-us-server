@@ -238,7 +238,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rly (0.2.3)
-    rollbar (2.23.2)
+    rollbar (2.24.0)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
     rspec-expectations (3.9.0)
