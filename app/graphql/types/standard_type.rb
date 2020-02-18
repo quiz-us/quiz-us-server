@@ -7,6 +7,7 @@ module Types
     field :description, String, null: false
     field :title, String, null: false
     field :questions, [Types::QuestionType], null: true
+    field :standardsCategory, Types::StandardsCategoryType, null: true
   end
 end
 
