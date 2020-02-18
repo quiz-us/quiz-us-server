@@ -8,7 +8,7 @@ module Queries
       type [Types::StandardType], null: false
 
       def resolve
-        current_course.standards
+        current_course.standards.includes(:standards_category)
       end
     end
   end
