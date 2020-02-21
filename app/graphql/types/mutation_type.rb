@@ -8,6 +8,7 @@ module Types
     field :create_deck, mutation: Mutations::Teachers::CreateDeck
     field :create_period, mutation: Mutations::Teachers::CreatePeriod
     field :create_question, mutation: Mutations::Teachers::CreateQuestion
+    field :create_standard, mutation: Mutations::Teachers::CreateStandard
     field :create_standards_category, mutation: Mutations::Teachers::CreateStandardsCategory
     field :delete_deck, mutation: Mutations::Teachers::DeleteDeck
     field :delete_period, mutation: Mutations::Teachers::DeletePeriod
