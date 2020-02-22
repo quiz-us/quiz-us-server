@@ -14,7 +14,7 @@
 
 FactoryBot.define do
   factory :standards_category do
-    title { Faker::Educator.subject }
+    title { Faker::Name.name }
     description { Faker::Lorem.paragraph }
     association :standards_chart, factory: :standards_chart
   end

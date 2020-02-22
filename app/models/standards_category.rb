@@ -12,7 +12,6 @@
 #  standards_chart_id :integer          not null, indexed, indexed => [title]
 #
 
-
 class StandardsCategory < ApplicationRecord
   belongs_to :standards_chart
   has_many :standards, dependent: :destroy

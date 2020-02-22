@@ -18,6 +18,7 @@ module Types
     field :question, resolver: Queries::Teachers::QuestionShow
     field :questions, resolver: Queries::Teachers::QuestionSearch
     field :standard, resolver: Queries::Teachers::StandardShow
+    field :standards_category_index, resolver: Queries::Teachers::StandardsCategoryIndex
     field :standards_charts, resolver: Queries::Teachers::StandardsChartIndex
     field :students, resolver: Queries::Teachers::StudentIndex
     field :tag_search, resolver: Queries::Teachers::TagSearch
