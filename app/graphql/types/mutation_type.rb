@@ -22,6 +22,7 @@ module Types
     field :edit_student, mutation: Mutations::Teachers::EditStudent
     field :enroll_student, mutation: Mutations::Teachers::EnrollStudent
     field :log_in_teacher, mutation: Mutations::Teachers::LogInTeacher
+    field :log_out_teacher, mutation: Mutations::Teachers::LogOutTeacher
     field :remove_question_from_deck, mutation: Mutations::Teachers::RemoveQuestionFromDeck
     field :sign_up_teacher, mutation: Mutations::Teachers::SignUpTeacher
     field :unenroll_student, mutation: Mutations::Teachers::UnenrollStudent
