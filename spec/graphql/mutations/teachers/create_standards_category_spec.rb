@@ -18,7 +18,7 @@ describe 'Mutations::Teachers::CreateStandardsCategory' do
     GRAPHQL
   end
   let(:variables) do
-    { title: Faker::Educator.subject, description: Faker::String.random }
+    { title: Faker::Educator.subject, description: Faker::Lorem.sentence }
   end
 
   it_behaves_like 'teacher_authenticated_endpoint'
