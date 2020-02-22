@@ -13,8 +13,10 @@ module Types
     field :delete_deck, mutation: Mutations::Teachers::DeleteDeck
     field :delete_period, mutation: Mutations::Teachers::DeletePeriod
     field :delete_question, mutation: Mutations::Teachers::DeleteQuestion
+    field :delete_standard, mutation: Mutations::Teachers::DeleteStandard
     field :delete_standards_category, mutation: Mutations::Teachers::DeleteStandardsCategory
     field :edit_period, mutation: Mutations::Teachers::EditPeriod
+    field :edit_standard, mutation: Mutations::Teachers::EditStandard
     field :edit_standards_category, mutation: Mutations::Teachers::EditStandardsCategory
     field :edit_standards_chart, mutation: Mutations::Teachers::EditStandardsChart
     field :edit_student, mutation: Mutations::Teachers::EditStudent
