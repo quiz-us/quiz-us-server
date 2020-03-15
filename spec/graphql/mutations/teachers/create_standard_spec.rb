@@ -36,7 +36,7 @@ describe 'Mutations::Teachers::CreateStandard' do
     {
       categoryId: standards_category.id,
       title: Faker::Educator.subject,
-      description: Faker::String.random
+      description: Faker::Lorem.sentence
     }
   end
 
