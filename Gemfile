@@ -39,6 +39,7 @@ gem 'sendgrid-ruby'
 # gem 'rack-cors'
 
 gem 'devise-jwt', '~> 0.6.0'
+gem 'jwt'
 
 gem 'nokogiri', '>= 1.10.4'
 

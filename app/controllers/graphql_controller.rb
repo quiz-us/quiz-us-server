@@ -25,6 +25,20 @@ class GraphqlController < ApplicationController
 
   private
 
+  def current_teacher
+    byebug
+  end
+
+  def http_token
+    if request.headers['Authorization'].present?
+      request.headers['Authorization'].split(' ').last
+    end
+  end
+
+  def auth_token
+    JsonWebToken.verify(http_token)
+  end
+
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
     case ambiguous_param
