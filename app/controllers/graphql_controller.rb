@@ -28,6 +28,8 @@ class GraphqlController < ApplicationController
   def current_teacher
     email = auth_token[0]['https://quizushq.org/email']
     Teacher.find_by(email: email)
+  rescue JWT::DecodeError
+    nil
   end
 
   def http_token
