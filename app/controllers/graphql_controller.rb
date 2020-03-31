@@ -26,7 +26,8 @@ class GraphqlController < ApplicationController
   private
 
   def current_teacher
-    byebug
+    email = auth_token[0]['https://quizushq.org/email']
+    Teacher.find_by(email: email)
   end
 
   def http_token

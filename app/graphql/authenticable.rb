@@ -7,11 +7,10 @@ module Authenticable
 
   included do
     def teacher_signed_in?
-      auth_token
+      raise GraphQL::ExecutionError, 'Unauthenticated' unless current_teacher
+
       true
-    rescue JWT::VerificationError, JWT::DecodeError
-      raise GraphQL::ExecutionError, 'Unauthenticated'
-  end
+    end
 
     def student_signed_in?
       raise GraphQL::ExecutionError, 'Unauthenticated' unless current_student
@@ -41,18 +40,6 @@ module Authenticable
 
     def current_student
       context[:current_student]
-    end
-
-    private
-
-    def http_token
-      if request.headers['Authorization'].present?
-        request.headers['Authorization'].split(' ').last
-      end
-    end
-
-    def auth_token
-      JsonWebToken.verify(http_token)
     end
   end
 end

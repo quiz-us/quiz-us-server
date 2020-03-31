@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'net/http'
 require 'uri'
 
@@ -7,7 +8,7 @@ class JsonWebToken
     JWT.decode(token, nil,
                true, # Verify the signature of this token
                algorithm: 'RS256',
-               iss: 'https://quizus.auth0.com/',
+               iss: ENV['AUTH0_TENANT'],
                verify_iss: true,
                aud: ENV['AUTH0_API_AUDIENCE'],
                verify_aud: true) do |header|
@@ -16,7 +17,7 @@ class JsonWebToken
   end
 
   def self.jwks_hash
-    jwks_raw = Net::HTTP.get URI("https://quizus.auth0.com/.well-known/jwks.json")
+    jwks_raw = Net::HTTP.get URI("#{ENV['AUTH0_TENANT']}.well-known/jwks.json")
     jwks_keys = Array(JSON.parse(jwks_raw)['keys'])
     Hash[
       jwks_keys
