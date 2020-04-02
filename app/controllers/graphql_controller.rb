@@ -27,7 +27,7 @@ class GraphqlController < ApplicationController
 
   def current_teacher
     email = auth_token[0]['https://quizushq.org/email']
-    Teacher.find_by(email: email)
+    Teacher.find_by(email: email) || create_teacher(email)
   rescue JWT::DecodeError
     nil
   end
@@ -40,6 +40,13 @@ class GraphqlController < ApplicationController
 
   def auth_token
     JsonWebToken.verify(http_token)
+  end
+
+  def create_teacher(email)
+    Teacher.create!(
+      email: email,
+      password: SecureRandom.hex(8)
+    )
   end
 
   # Handle form data, JSON body, or a blank value
