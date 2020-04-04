@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# GetCurrentTeacher parses the email out of the request's access token and finds
+# GetCurrentTeacher parses the email out of the access token and finds
 # or creates the teacher by email
 class GetCurrentTeacher
   include Callable
