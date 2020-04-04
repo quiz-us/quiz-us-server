@@ -5,6 +5,7 @@
 # Table name: decks_questions
 #
 #  id                      :bigint           not null, primary key
+#  active                  :boolean          default(TRUE), not null
 #  e_factor                :float            default(2.5)
 #  next_due                :datetime
 #  num_consecutive_correct :integer          default(0)
@@ -22,5 +23,5 @@ class DecksQuestion < ApplicationRecord
   delegate :responses, to: :question
 
   validates :question_id, uniqueness: { scope: :deck_id }
-  validates :question, :deck, presence: true
+  validates :question, :deck, :active, presence: true
 end

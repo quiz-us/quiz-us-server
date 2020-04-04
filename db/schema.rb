@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_155656) do
+ActiveRecord::Schema.define(version: 2020_04_04_225154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_02_05_155656) do
     t.datetime "next_due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
     t.index ["deck_id", "question_id"], name: "by_deck_and_question", unique: true
     t.index ["deck_id", "question_id"], name: "index_decks_questions_on_deck_id_and_question_id"
     t.index ["question_id", "deck_id"], name: "index_decks_questions_on_question_id_and_deck_id"
