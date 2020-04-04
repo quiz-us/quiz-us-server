@@ -5,6 +5,7 @@ module Types
     # TEACHER MUTATIONS:
     field :add_question_to_deck, mutation: Mutations::Teachers::AddQuestionToDeck
     field :create_assignments, mutation: Mutations::Teachers::CreateAssignments
+    field :create_course, mutation: Mutations::Teachers::CreateCourse
     field :create_deck, mutation: Mutations::Teachers::CreateDeck
     field :create_period, mutation: Mutations::Teachers::CreatePeriod
     field :create_question, mutation: Mutations::Teachers::CreateQuestion
