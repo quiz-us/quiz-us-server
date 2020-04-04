@@ -25,6 +25,10 @@ class GraphqlController < ApplicationController
 
   private
 
+  def current_teacher
+    GetCurrentTeacher.call(request)
+  end
+
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
     case ambiguous_param

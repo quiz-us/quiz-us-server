@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'boot'
+require './lib/json_web_token'
 
 require 'rails'
 # Pick the frameworks you want:
