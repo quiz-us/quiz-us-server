@@ -7,6 +7,7 @@ module Types
     # TEACHER TYPES
     field :all_standards, resolver: Queries::Teachers::StandardIndex
     field :assignment_results, resolver: Queries::Teachers::AssignmentResults
+    field :courses, resolver: Queries::Teachers::CourseIndex
     field :deck, resolver: Queries::Teachers::DeckShow
     field :decks, resolver: Queries::Teachers::DeckIndex
     field :period_assignments, resolver: Queries::Teachers::PeriodAssignmentIndex

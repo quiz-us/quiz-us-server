@@ -18,4 +18,7 @@ RSpec.describe StandardsChart, type: :model do
     it { should have_many(:courses).dependent(:destroy) }
     it { should have_many(:standards).through(:standards_categories) }
   end
+  describe 'validations' do
+    it { should validate_presence_of(:title) }
+  end
 end
