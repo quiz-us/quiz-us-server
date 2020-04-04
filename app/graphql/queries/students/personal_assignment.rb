@@ -18,9 +18,10 @@ module Queries
             ON students_questions.question_id = decks_questions.question_id
           SQL
         ).where(
-          'students_questions.next_due < ? AND decks_questions.deck_id = ?',
+          'students_questions.next_due < ? AND decks_questions.deck_id = ? AND decks_questions.active = ?',
           Time.current,
-          personal_deck.id
+          personal_deck.id,
+          true
         ).order('students_questions.next_due' => :asc)
 
         current_question = questions.first
