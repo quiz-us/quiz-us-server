@@ -28,5 +28,19 @@ RSpec.describe GetCurrentTeacher do
         Teacher.find_by(email: new_teacher_email)
       )
     end
+    it 'autocreates the first course' do
+      teacher = GetCurrentTeacher.call(request)
+      expect(teacher.courses.length).to eq(1)
+    end
+    it 'autocreates the first category' do
+      teacher = GetCurrentTeacher.call(request)
+      expect(teacher.courses.first.standards_chart.standards_categories.length)
+        .to eq(1)
+    end
+
+    it 'autocreates the first period' do
+      teacher = GetCurrentTeacher.call(request)
+      expect(teacher.courses.first.periods.length).to eq(1)
+    end
   end
 end

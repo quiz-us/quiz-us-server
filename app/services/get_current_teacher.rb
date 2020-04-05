@@ -31,9 +31,26 @@ class GetCurrentTeacher
   end
 
   def create_teacher(email)
-    Teacher.create!(
+    teacher = Teacher.create!(
       email: email,
       password: SecureRandom.hex(8)
     )
+    title = "#{email}'s course"
+    standards_chart = StandardsChart.create!(title: title)
+    course = Course.create(
+      name: "#{email}'s course",
+      standards_chart: standards_chart,
+      teacher: teacher
+    )
+    StandardsCategory.create!(
+      title: 'General',
+      description: 'All-Purpose Category: Everything can go in here!',
+      standards_chart: standards_chart
+    )
+    Period.create!(
+      name: 'Your First Class',
+      course: course
+    )
+    teacher
   end
 end
