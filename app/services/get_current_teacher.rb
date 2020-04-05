@@ -33,7 +33,8 @@ class GetCurrentTeacher
   def create_teacher(email)
     teacher = Teacher.create!(
       email: email,
-      password: SecureRandom.hex(8)
+      password: SecureRandom.hex(8),
+      onboarded: false
     )
     title = "#{email}'s course"
     standards_chart = StandardsChart.create!(title: title)

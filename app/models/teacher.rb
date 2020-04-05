@@ -35,5 +35,5 @@ class Teacher < ApplicationRecord
   has_many :assignments, through: :periods
   has_many :questions, through: :courses
 
-  validates :onboarded, :email, presence: true
+  validates :email, presence: true
 end

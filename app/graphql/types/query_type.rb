@@ -27,6 +27,7 @@ module Types
     field :tagging, resolver: Queries::Teachers::TaggingShow
     field :tags, resolver: Queries::Teachers::TagIndex
     field :teacher_assignment, resolver: Queries::Teachers::AssignmentShow
+    field :teacher, resolver: Queries::Teachers::TeacherShow
 
     # STUDENT TYPES
     field :assignment, resolver: Queries::Students::AssignmentShow
