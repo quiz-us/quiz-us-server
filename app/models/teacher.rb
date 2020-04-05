@@ -8,6 +8,7 @@
 #  email                  :string           default(""), not null, indexed
 #  encrypted_password     :string           default(""), not null
 #  jti                    :string           not null, indexed
+#  onboarded              :boolean          default(FALSE), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string           indexed
@@ -33,4 +34,6 @@ class Teacher < ApplicationRecord
   has_many :students, through: :periods
   has_many :assignments, through: :periods
   has_many :questions, through: :courses
+
+  validates :onboarded, :email, presence: true
 end
