@@ -12,7 +12,7 @@ class CreateQuestionService
     @question_plaintext = params[:question_plaintext]
     @question_standard_id = params[:standard_id]
     @question_type = params[:question_type]
-    @tags = params[:tags]
+    @tags = params[:tags] || []
     @teacher_id = params[:teacher_id]
   end
 
@@ -30,7 +30,6 @@ class CreateQuestionService
   private
 
   def create_question!
-
     rich_text = process_images!(@rich_text)
     Question.create!(
       rich_text: rich_text,
