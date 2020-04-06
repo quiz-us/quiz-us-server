@@ -9,22 +9,17 @@ module Queries
 
       def resolve
         personal_deck = current_student.personal_decks.first
-
-        questions = Question.joins(
-          <<-SQL
-            INNER JOIN decks_questions
-            ON questions.id = decks_questions.question_id
-            INNER JOIN students_questions
-            ON students_questions.question_id = decks_questions.question_id
-          SQL
+        qids = personal_deck.cards.where(active: true).pluck(:question_id)
+        student_questions = StudentsQuestion.where(
+          student: current_student,
+          question_id: qids
         ).where(
-          'students_questions.next_due < ? AND decks_questions.deck_id = ? AND decks_questions.active = ?',
-          Time.current,
-          personal_deck.id,
-          true
-        ).order('students_questions.next_due' => :asc)
+          'next_due < ?',
+          Time.current
+        ).order(next_due: :asc).pluck(:question_id)
 
-        current_question = questions.first
+        current_question = Question.find_by(id: student_questions.first)
+
         if current_question
           current_response = Questions::FindOrCreateUnfinishedResponse.call(
             current_question.id,
@@ -37,7 +32,7 @@ module Queries
           instructions: 'These are all the cards that are due today.',
           deck: personal_deck,
           current_question: current_question,
-          num_questions: questions.length,
+          num_questions: student_questions.length,
           current_response: current_response
         }
       end
