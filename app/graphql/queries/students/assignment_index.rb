@@ -19,6 +19,10 @@ module Queries
             num_questions: a.num_questions,
             num_correct_responses: a.num_correct_responses(current_student.id)
           }
+        end.sort do |a, b|
+          a_percentage = a[:num_correct_responses] / a[:num_questions]
+          b_percentage = b[:num_correct_responses] / b[:num_questions]
+          a_percentage <=> b_percentage
         end
       end
     end
