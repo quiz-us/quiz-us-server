@@ -21,6 +21,7 @@ gem 'puma', '~> 4.3'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'ancestry'
 gem 'aws-sdk-s3', '~> 1'
 gem 'bootsnap'
 gem 'google-cloud-translate'

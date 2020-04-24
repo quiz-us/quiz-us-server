@@ -5,11 +5,12 @@
 # Table name: questions
 #
 #  id            :integer          not null, primary key
+#  ancestry      :string           indexed
 #  question_text :text
 #  question_type :string
+#  rich_text     :jsonb
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  rich_text     :jsonb
 #
 require './spec/helpers/rich_text.rb'
 
