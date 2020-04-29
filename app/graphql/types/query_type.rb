@@ -31,6 +31,7 @@ module Types
 
     # STUDENT TYPES
     field :assignment, resolver: Queries::Students::AssignmentShow
+    field :evaluate_response, resolver: Queries::Students::EvaluateResponse
     field :correct_fr_answer, resolver: Queries::Students::CorrectFrAnswer
     field :current_student, resolver: Queries::Students::CurrentStudent
     field :personal_assignment, resolver: Queries::Students::PersonalAssignment

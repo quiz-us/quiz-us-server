@@ -10,9 +10,9 @@ class CompareText
   def initialize(solution_text, submitted_text)
     url = URI('https://api.twinword.com/api/v6/text/similarity/')
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    @http = Net::HTTP.new(url.host, url.port)
+    @http.use_ssl = true
+    @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     @request = Net::HTTP::Post.new(url)
     @request['x-rapidapi-host'] = 'twinword-text-similarity-v1.p.rapidapi.com'
@@ -22,9 +22,11 @@ class CompareText
       [['text1', solution_text], ['text2', submitted_text]]
     )
     @request.body = body
-    response = http.request(@request)
-    puts response.body
+
   end
 
-  def call; end
+  def call
+    response = @http.request(@request)
+    response.body
+  end
 end
