@@ -43,4 +43,8 @@ class Question < ApplicationRecord
   has_many :cards, class_name: 'DecksQuestion', dependent: :destroy
 
   has_many :responses, dependent: :destroy
+
+  def correct_answer
+    question_options.find_by(correct: true)
+  end
 end
