@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 module Queries
   module Students
     class EvaluateResponse < StudentQuery
@@ -15,8 +17,8 @@ module Queries
                                 .question.correct_answer
                                 .option_text
         res = CompareText.call(solution_text, response_text)
-        byebug
-        90
+        res = JSON.parse(res)
+        { percent: (res['similarity'] * 100).round(1) }
       end
     end
   end
