@@ -39,7 +39,7 @@ gem 'sendgrid-ruby'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-gem 'devise-jwt', '~> 0.6.0'
+gem 'devise-jwt', '~> 0.7.0'
 gem 'jwt'
 
 gem 'nokogiri', '>= 1.10.4'
