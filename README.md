@@ -1,4 +1,6 @@
-# Quiz Us Server
+# Quiz Us Server (DEPRECATED) 
+
+Quiz Us was the very first version of [podsie](https://www.github.com/podsie) when it was a personal side project.
 
 ![Coverage](coverage/coverage_badge_total.svg)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=quiz-us/quiz-us-server&identifier=191788787)](https://dependabot.com)
